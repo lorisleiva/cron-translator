@@ -48,12 +48,16 @@ class CronTranslator
             return $field->hasType('Once');
         });
 
-        foreach (array_slice($everys, 1) as $field) {
+        $firstEvery = reset($everys)->position ?? null;
+        $firstIncrementOrMultiple = reset($incrementsAndMultiples)->position ?? null;
+        $numberOfEverysKept = ! is_null($firstIncrementOrMultiple) && $firstIncrementOrMultiple < $firstEvery ? 0 : 1;
+
+        foreach (array_slice($everys, $numberOfEverysKept) as $field) {
             $field->dropped = true;
         }
 
         return array_merge(
-            array_slice($everys, 0, 1),
+            array_slice($everys, 0, $numberOfEverysKept),
             $incrementsAndMultiples,
             array_reverse($onces)
         );

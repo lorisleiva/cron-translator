@@ -56,7 +56,10 @@ class CronType
 
         // Parse ranges of selected values like "1-5".
         if (preg_match("/^([0-9]+)\-([0-9]+)$/", $expression, $matches)) {
-            return static::multiple($matches[2] - $matches[1] + 1);
+            $count = $matches[2] - $matches[1] + 1;
+            return $count > 1 
+                ? static::multiple($count) 
+                : static::once((int) $matches[1]);
         }
 
         // Parse incremental expressions like "*/2", "1-4/10" or "1,3/4".

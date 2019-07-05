@@ -4,6 +4,8 @@ namespace Lorisleiva\CronTranslator;
 
 class HoursField extends Field
 {
+    public $position = 1;
+
     public function translateEvery()
     {
         return 'every hour';
@@ -14,9 +16,15 @@ class HoursField extends Field
         return 'TODO';
     }
     
-    public function translateMultiple()
+    public function translateMultiple($fields)
     {
-        return 'TODO';
+        $minute = $fields[0];
+
+        if ($minute->hasType('Once')) {
+            return $this->count === 2 ? "twice a day" : "{$this->count} times a day";
+        }
+
+        return "{$this->count} hours a day";
     }
     
     public function translateOnce($fields)

@@ -4,8 +4,16 @@ namespace Lorisleiva\CronTranslator;
 
 class DaysOfMonthField extends Field
 {
-    public function translateEvery()
+    public $position = 2;
+
+    public function translateEvery($fields)
     {
+        $weekday = $fields[4];
+
+        if ($weekday->hasType('Once')) {
+            return "every {$weekday->format()}";
+        }
+
         return 'every day';
     }
 
@@ -16,12 +24,16 @@ class DaysOfMonthField extends Field
     
     public function translateMultiple()
     {
-        return 'TODO';
+        return "{$this->count} days a month";
     }
     
     public function translateOnce($fields)
     {
         $month = $fields[3];
+
+        if ($month->hasType('Once')) {
+            return;
+        }
         
         if ($month->hasType('Every') && ! $month->dropped) {
             return;
@@ -42,6 +54,10 @@ class DaysOfMonthField extends Field
 
         if (in_array($this->value, [2, 22])) {
             return $this->value . 'nd';
+        }
+
+        if (in_array($this->value, [3, 23])) {
+            return $this->value . 'rd';
         }
 
         return $this->value . 'th';

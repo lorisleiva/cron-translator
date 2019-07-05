@@ -10,6 +10,7 @@ abstract class Field
     public $count;
     public $increment;
     public $dropped = false;
+    public $position;
 
     public function __construct($expression)
     {
