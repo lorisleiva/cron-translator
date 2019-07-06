@@ -6,14 +6,34 @@ class HoursField extends Field
 {
     public $position = 1;
 
-    public function translateEvery()
+    public function translateEvery($fields)
     {
+        $minute = $fields[0];
+
+        if ($minute->hasType('Once')) {
+            return 'once an hour';
+        }
+
         return 'every hour';
     }
 
-    public function translateIncrement()
+    public function translateIncrement($fields)
     {
-        return 'TODO';
+        $minute = $fields[0];
+
+        if ($minute->hasType('Once')) {
+            return $this->times($this->count) . " every {$this->increment} hours";
+        }
+
+        if ($this->count > 1) {
+            return "{$this->count} hours out of {$this->increment}";
+        }
+
+        if ($minute->hasType('Every')) {
+            return "of every {$this->increment} hours";
+        }
+
+        return "every {$this->increment} hours";
     }
     
     public function translateMultiple($fields)
@@ -21,7 +41,7 @@ class HoursField extends Field
         $minute = $fields[0];
 
         if ($minute->hasType('Once')) {
-            return $this->count === 2 ? "twice a day" : "{$this->count} times a day";
+            return $this->times($this->count) . " a day";
         }
 
         return "{$this->count} hours a day";

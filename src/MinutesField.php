@@ -13,12 +13,16 @@ class MinutesField extends Field
 
     public function translateIncrement()
     {
-        return 'TODO';
+        if ($this->count > 1) {
+            return $this->times($this->count) . " every {$this->increment} minutes";
+        }
+
+        return "every {$this->increment} minutes";
     }
 
     public function translateMultiple()
     {
-        return $this->count === 2 ? "twice an hour" : "{$this->count} times an hour";
+        return $this->times($this->count) . " an hour";
     }
 
     public function format()

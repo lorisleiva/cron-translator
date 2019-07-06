@@ -42,4 +42,13 @@ abstract class Field
     {
         return in_array($this->type, func_get_args());
     }
+
+    public function times($count)
+    {
+        switch ($count) {
+            case 1: return 'once';
+            case 2: return 'twice';
+            default: return "{$count} times";
+        }
+    }
 }

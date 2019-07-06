@@ -13,7 +13,11 @@ class DaysOfWeekField extends Field
 
     public function translateIncrement()
     {
-        return 'TODO';
+        if ($this->count > 1) {
+            return "{$this->count} days of the week out of {$this->increment}";
+        }
+
+        return "every {$this->increment} days of the week";
     }
     
     public function translateMultiple()

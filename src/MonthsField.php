@@ -19,7 +19,11 @@ class MonthsField extends Field
 
     public function translateIncrement()
     {
-        return 'TODO';
+        if ($this->count > 1) {
+            return "{$this->count} months out of {$this->increment}";
+        }
+
+        return "every {$this->increment} months";
     }
     
     public function translateMultiple()

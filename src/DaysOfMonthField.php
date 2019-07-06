@@ -19,7 +19,11 @@ class DaysOfMonthField extends Field
 
     public function translateIncrement()
     {
-        return 'TODO';
+        if ($this->count > 1) {
+            return "{$this->count} days out of {$this->increment}";
+        }
+
+        return "every {$this->increment} days";
     }
     
     public function translateMultiple()
