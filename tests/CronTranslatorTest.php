@@ -102,6 +102,18 @@ class CronTranslatorTest extends TestCase
         $this->assertCronTranslateTo('Every minute on January', '* * * 1-1 *');
     }
 
+    /** @test */
+    public function it_returns_parsing_errors_when_something_goes_wrong()
+    {
+        $this->assertCronThrowsParsingError('I_AM_NOT_A_CRON_EXPRESSION');
+        $this->assertCronThrowsParsingError('A * * * *');
+        $this->assertCronThrowsParsingError('1,2-3 * * * *');
+        $this->assertCronThrowsParsingError('1/2/3 * * * *');
+        $this->assertCronThrowsParsingError('* * * 0 *');
+        $this->assertCronThrowsParsingError('* * * 13 *');
+        $this->assertCronThrowsParsingError('* * * * 8');
+    }
+
     /**
      * @skip
      * @doesNotPerformAssertions

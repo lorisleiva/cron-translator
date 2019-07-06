@@ -75,11 +75,10 @@ class CronType
             if ($range->hasType('Multiple')) {
                 return static::Increment($matches[2], $range->count);
             }
-            throw new \Exception('Parsing error');
         }
 
         // Unsupported expressions throw exceptions.
-        throw new \Exception('Parsing error');
+        throw new CronParsingException($expression);
     }
 
     public function hasType()

@@ -6,15 +6,19 @@ class CronTranslator
 {
     public static function translate($cron)
     {
-        $fields = static::parseFields($cron);
-        $orderedFields = static::orderFields($fields);
-        $fieldsAsObject = static::getFieldsAsObject($fields);
-
-        $translations = array_map(function ($field) use ($fieldsAsObject) {
-            return $field->translate($fieldsAsObject);
-        }, $orderedFields);
+        try {
+            $fields = static::parseFields($cron);
+            $orderedFields = static::orderFields($fields);
+            $fieldsAsObject = static::getFieldsAsObject($fields);
     
-        return ucfirst(implode(' ', array_filter($translations)));
+            $translations = array_map(function ($field) use ($fieldsAsObject) {
+                return $field->translate($fieldsAsObject);
+            }, $orderedFields);
+        
+            return ucfirst(implode(' ', array_filter($translations)));
+        } catch (\Throwable $th) {
+            throw new CronParsingException($cron);
+        }
     }
 
     protected static function parseFields($cron)
