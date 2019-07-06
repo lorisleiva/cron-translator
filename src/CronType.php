@@ -4,6 +4,10 @@ namespace Lorisleiva\CronTranslator;
 
 class CronType
 {
+    const TYPES = [
+        'Every', 'Increment', 'Multiple', 'Once',
+    ];
+
     public $type;
     public $value;
     public $count;
@@ -22,12 +26,12 @@ class CronType
         return new static('Every');
     }
 
-    public static function Increment($increment, $count = 1)
+    public static function increment($increment, $count = 1)
     {
         return new static('Increment', null, $count, $increment);
     }
 
-    public static function Multiple($count)
+    public static function multiple($count)
     {
         return new static('Multiple', null, $count);
     }

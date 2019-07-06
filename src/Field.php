@@ -22,19 +22,12 @@ abstract class Field
         $this->increment = $cronType->increment;
     }
 
-    public function translate($fields, $prev, $next)
+    public function translate($fields)
     {
-        if ($this->hasType('Every') && method_exists($this, 'translateEvery')) {
-            return $this->translateEvery($fields, $prev, $next);
-        }
-        if ($this->hasType('Increment') && method_exists($this, 'translateIncrement')) {
-            return $this->translateIncrement($fields, $prev, $next);
-        }
-        if ($this->hasType('Multiple') && method_exists($this, 'translateMultiple')) {
-            return $this->translateMultiple($fields, $prev, $next);
-        }
-        if ($this->hasType('Once') && method_exists($this, 'translateOnce')) {
-            return $this->translateOnce($fields, $prev, $next);
+        foreach (CronType::TYPES as $type) {
+            if ($this->hasType($type) && method_exists($this, "translate{$type}")) {
+                return $this->{"translate{$type}"}($fields);
+            }
         }
     }
 

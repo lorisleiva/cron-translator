@@ -27,10 +27,8 @@ class DaysOfWeekField extends Field
     
     public function translateOnce($fields)
     {
-        $day = $fields[2];
-
-        if ($day->hasType('Every') && ! $day->dropped) {
-            return;
+        if ($fields->day->hasType('Every') && ! $fields->day->dropped) {
+            return; // DaysOfMonthField adapts to "Every Sunday".
         }
 
         return "on {$this->format()}s";

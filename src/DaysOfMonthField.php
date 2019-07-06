@@ -8,10 +8,8 @@ class DaysOfMonthField extends Field
 
     public function translateEvery($fields)
     {
-        $weekday = $fields[4];
-
-        if ($weekday->hasType('Once')) {
-            return "every {$weekday->format()}";
+        if ($fields->weekday->hasType('Once')) {
+            return "every {$fields->weekday->format()}";
         }
 
         return 'every day';
@@ -33,17 +31,15 @@ class DaysOfMonthField extends Field
     
     public function translateOnce($fields)
     {
-        $month = $fields[3];
-
-        if ($month->hasType('Once')) {
-            return;
+        if ($fields->month->hasType('Once')) {
+            return; // MonthsField adapts to "On January the 1st".
         }
         
-        if ($month->hasType('Every') && ! $month->dropped) {
-            return;
+        if ($fields->month->hasType('Every') && ! $fields->month->dropped) {
+            return; // MonthsField adapts to "The 1st of every month".
         }
 
-        if ($month->hasType('Every') && $month->dropped) {
+        if ($fields->month->hasType('Every') && $fields->month->dropped) {
             return 'on the ' . $this->format() . ' of every month';
         }
 
