@@ -15,9 +15,6 @@
             "homepage": "https://lorisleiva.com"
         }
     ],
-    "require": {
-        "illuminate/support": "5.7.*|5.8.*"
-    },
     "require-dev": {
         "phpunit/phpunit" : "^8.0"
     },
