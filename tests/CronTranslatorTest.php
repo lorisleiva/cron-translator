@@ -47,6 +47,13 @@ class CronTranslatorTest extends TestCase
         $this->assertCronTranslateTo('Every minute on January the 3rd', '* * 3 1 *');
         $this->assertCronTranslateTo('Every minute on Mondays on April', '* * * 4 1');
         $this->assertCronTranslateTo('On Mondays on April the 22nd at 3:10pm', '10 15 22 4 1');
+
+        // Paparazzi examples.
+        $this->assertCronTranslateTo('Every day at 10:00pm', '0 22 * * *');
+        $this->assertCronTranslateTo('Every day at 9:00am', '0 9 * * *');
+        $this->assertCronTranslateTo('Every Monday at 4:00pm', '0 16 * * 1');
+        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '0 0 1 1 *');
+        $this->assertCronTranslateTo('The 1st of every month at 12:00am', '0 0 1 * *');
     }
 
     /** @test */
@@ -63,9 +70,6 @@ class CronTranslatorTest extends TestCase
         $this->assertCronTranslateTo('5 days a month 2 months a year at 1:00am', '0 1 1-5 5,6 *');
         $this->assertCronTranslateTo('2 months a year on the 5th at 1:00am', '0 1 5 5,6 *');
         $this->assertCronTranslateTo('The 5th of every month 4 days a week at 1:00am', '0 1 5 * 1-4');
-
-        // Ranges of 1 are converted into "Once"s.
-        $this->assertCronTranslateTo('Every minute at 8am', '* 8-8 * * *');
     }
 
     /** @test */
@@ -88,8 +92,15 @@ class CronTranslatorTest extends TestCase
     public function it_adds_junctions_to_certain_combinations_of_cron_types()
     {
         $this->assertCronTranslateTo('Every minute of every 2 hours', '* */2 * * *');
+        $this->assertCronTranslateTo('Every minute of every 3 hours on the 2nd of every month', '* 1/3 2 * *');
     }
 
+    /** @test */
+    public function it_converts_ranges_of_one_into_once_cron_types()
+    {
+        $this->assertCronTranslateTo('Every minute at 8am', '* 8-8 * * *');
+        $this->assertCronTranslateTo('Every minute on January', '* * * 1-1 *');
+    }
 
     /**
      * @skip
