@@ -1,6 +1,8 @@
 # CRON Translator
 ⏰️ Makes CRON expressions human-readable
 
+![intro-rounded](https://user-images.githubusercontent.com/3642397/60768671-7d6c7100-a0be-11e9-8cee-8a8d2780d76f.png)
+
 ## Installation
 
 ```sh
