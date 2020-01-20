@@ -103,6 +103,17 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
+    public function it_handles_extended_cron_syntax()
+    {
+        $this->assertCronTranslateTo('Once an hour', '@hourly');
+        $this->assertCronTranslateTo('Every day at 12:00am', '@daily');
+        $this->assertCronTranslateTo('Every Sunday at 12:00am', '@weekly');
+        $this->assertCronTranslateTo('The 1st of every month at 12:00am', '@monthly');
+        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '@yearly');
+        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '@annually');
+    }
+
+    /** @test */
     public function it_returns_parsing_errors_when_something_goes_wrong()
     {
         $this->assertCronThrowsParsingError('I_AM_NOT_A_CRON_EXPRESSION');

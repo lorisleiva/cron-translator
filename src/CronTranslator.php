@@ -4,17 +4,30 @@ namespace Lorisleiva\CronTranslator;
 
 class CronTranslator
 {
+    private static $extendedMap = [
+        '@yearly' => '0 0 1 1 *',
+        '@annually' => '0 0 1 1 *',
+        '@monthly' => '0 0 1 * *',
+        '@weekly' => '0 0 * * 0',
+        '@daily' => '0 0 * * *',
+        '@hourly' => '0 * * * *'
+    ];
+
     public static function translate($cron)
     {
+        if (isset(self::$extendedMap[$cron])) {
+            $cron = self::$extendedMap[$cron];
+        }
+
         try {
             $fields = static::parseFields($cron);
             $orderedFields = static::orderFields($fields);
             $fieldsAsObject = static::getFieldsAsObject($fields);
-    
+
             $translations = array_map(function ($field) use ($fieldsAsObject) {
                 return $field->translate($fieldsAsObject);
             }, $orderedFields);
-        
+
             return ucfirst(implode(' ', array_filter($translations)));
         } catch (\Throwable $th) {
             throw new CronParsingException($cron);
