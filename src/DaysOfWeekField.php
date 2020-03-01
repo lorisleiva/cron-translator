@@ -36,6 +36,10 @@ class DaysOfWeekField extends Field
 
     public function format()
     {
+        if ($this->value < 0 || $this->value > 7) {
+            throw new \Exception();
+        }
+
         return [
             0 => 'Sunday',
             1 => 'Monday',
