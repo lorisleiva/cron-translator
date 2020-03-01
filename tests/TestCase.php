@@ -21,7 +21,7 @@ class TestCase extends BaseTestCase
             return $this->addToAssertionCount(1);
         }
 
-        $this->fail('Expected CronParsingError exception');
+        $this->fail("Expected CronParsingError exception for [$cron]");
     }
 
     public function generateCombinationsFromMatrix($matrix)
