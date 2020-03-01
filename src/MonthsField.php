@@ -40,7 +40,7 @@ class MonthsField extends Field
 
     public function format()
     {
-        if ($this->value < 1) {
+        if ($this->value < 1 || $this->value > 12) {
             throw new \Exception();
         }
 
