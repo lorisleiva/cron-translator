@@ -9,33 +9,47 @@ class MonthsField extends Field
     public function translateEvery($fields)
     {
         if ($fields->day->hasType('Once')) {
-            return 'the ' . $fields->day->format() . ' of every month';
+            return $this->lang('months.every_once_on_day', [
+                'day' => $fields->day->format()
+            ]);
         }
 
-        return 'every month';
+        return $this->lang('months.every_month');
     }
 
     public function translateIncrement()
     {
         if ($this->count > 1) {
-            return "{$this->count} months out of {$this->increment}";
+            return $this->lang('months.multiple_months_out_of_few', [
+                'count' => $this->count,
+                'increment' => $this->increment
+            ]);
         }
 
-        return "every {$this->increment} months";
+        return $this->lang('months.every_few_months', [
+            'increment' => $this->increment
+        ]);
     }
-    
+
     public function translateMultiple()
     {
-        return "{$this->count} months a year";
+        return $this->lang('months.multiple_months_a_year', [
+            'count' => $this->count
+        ]);
     }
-    
+
     public function translateOnce($fields)
     {
         if ($fields->day->hasType('Once')) {
-            return "on {$this->format()} the {$fields->day->format()}";
+            return $this->lang('months.once_on_day_of_month', [
+                'month' => $this->format(),
+                'day' => $fields->day->format(),
+            ]);
         }
 
-        return "on {$this->format()}";
+        return $this->lang('months.once_on_month', [
+            'month' => $this->format()
+        ]);
     }
 
     public function format()
@@ -44,19 +58,6 @@ class MonthsField extends Field
             throw new \Exception();
         }
 
-        return [
-            1 => 'January',
-            2 => 'February',
-            3 => 'March',
-            4 => 'April',
-            5 => 'May',
-            6 => 'June',
-            7 => 'July',
-            8 => 'August',
-            9 => 'September',
-            10 => 'October',
-            11 => 'November',
-            12 => 'December',
-        ][$this->value];
+        return $this->months[$this->value];
     }
 }

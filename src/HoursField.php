@@ -9,43 +9,59 @@ class HoursField extends Field
     public function translateEvery($fields)
     {
         if ($fields->minute->hasType('Once')) {
-            return 'once an hour';
+            return $this->lang('hours.once_an_hour');
         }
 
-        return 'every hour';
+        return $this->lang('hours.every_hour');
     }
 
     public function translateIncrement($fields)
     {
         if ($fields->minute->hasType('Once')) {
-            return $this->times($this->count) . " every {$this->increment} hours";
+            return $this->lang('hours.multiple_times_every_few_hours', [
+                'count' => $this->times($this->count),
+                'increment' => $this->increment,
+            ]);
         }
 
         if ($this->count > 1) {
-            return "{$this->count} hours out of {$this->increment}";
+            return $this->lang('hours.multiple_hours_out_of_few', [
+                'count' => $this->count,
+                'increment' => $this->increment,
+            ]);
         }
 
         if ($fields->minute->hasType('Every')) {
-            return "of every {$this->increment} hours";
+            return $this->lang('hours.multiple_every_few_hours', [
+                'increment' => $this->increment
+            ]);
         }
 
-        return "every {$this->increment} hours";
+        return $this->lang('hours.every_few_hours', [
+            'increment' => $this->increment
+        ]);
     }
-    
+
     public function translateMultiple($fields)
     {
         if ($fields->minute->hasType('Once')) {
-            return $this->times($this->count) . " a day";
+            return $this->lang('hours.multiple_times_a_day', [
+                'times' => $this->times($this->count)
+            ]);
         }
 
-        return "{$this->count} hours a day";
+        return $this->lang('hours.multiple_hours_a_day', [
+            'count' => $this->count
+        ]);
     }
-    
+
     public function translateOnce($fields)
     {
-        return 'at ' . $this->format(
-            $fields->minute->hasType('Once') ? $fields->minute : null
-        );
+        return $this->lang('hours.once_an_hour_at_time', [
+            'time' => $this->format(
+                $fields->minute->hasType('Once') ? $fields->minute : null
+            )
+        ]);
     }
 
     public function format($minute = null)
@@ -54,8 +70,14 @@ class HoursField extends Field
         $hour = $this->value === 0 ? 12 : $this->value;
         $hour = $hour > 12 ? $hour - 12 : $hour;
 
-        return $minute 
-            ? "{$hour}:{$minute->format()}{$amOrPm}" 
+        if ($this->clock24Hour()) {
+            return $minute
+                ? date("H:i", strtotime("{$hour}:{$minute->format()} {$amOrPm}"))
+                : date("H:i", strtotime("{$hour} {$amOrPm}"));
+        }
+
+        return $minute
+            ? "{$hour}:{$minute->format()}{$amOrPm}"
             : "{$hour}{$amOrPm}";
     }
 }
