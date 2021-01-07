@@ -64,9 +64,12 @@ class HoursField extends Field
         ]);
     }
 
-    public function format($minute = null)
+    public function format($minute = null, $clock = '12hour')
     {
-        $amOrPm = $this->value < 12 ? 'am' : 'pm';
+        $amOrPm = '';
+        if ('12hour' === $clock) {
+            $amOrPm = $this->value < 12 ? 'am' : 'pm';
+        }
         $hour = $this->value === 0 ? 12 : $this->value;
         $hour = $hour > 12 ? $hour - 12 : $hour;
 
