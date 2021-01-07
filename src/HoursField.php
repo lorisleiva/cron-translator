@@ -55,11 +55,12 @@ class HoursField extends Field
         ]);
     }
 
-    public function translateOnce($fields)
+    public function translateOnce($fields, $clock = '12hour')
     {
         return $this->lang('hours.once_an_hour_at_time', [
             'time' => $this->format(
-                $fields->minute->hasType('Once') ? $fields->minute : null
+                $fields->minute->hasType('Once') ? $fields->minute : null,
+                $clock
             )
         ]);
     }
