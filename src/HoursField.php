@@ -55,18 +55,22 @@ class HoursField extends Field
         ]);
     }
 
-    public function translateOnce($fields)
+    public function translateOnce($fields, $clock = '12hour')
     {
         return $this->lang('hours.once_an_hour_at_time', [
             'time' => $this->format(
-                $fields->minute->hasType('Once') ? $fields->minute : null
+                $fields->minute->hasType('Once') ? $fields->minute : null,
+                $clock
             )
         ]);
     }
 
-    public function format($minute = null)
+    public function format($minute = null, $clock = '12hour')
     {
-        $amOrPm = $this->value < 12 ? 'am' : 'pm';
+        $amOrPm = '';
+        if ('12hour' === $clock) {
+            $amOrPm = $this->value < 12 ? 'am' : 'pm';
+        }
         $hour = $this->value === 0 ? 12 : $this->value;
         $hour = $hour > 12 ? $hour - 12 : $hour;
 
