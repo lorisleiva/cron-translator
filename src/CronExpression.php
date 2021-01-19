@@ -76,6 +76,24 @@ class CronExpression
 
     public function lang(string $key, array $replacements = [])
     {
-        //
+        $translation = $this->getLangValue($key);
+
+        foreach ($replacements as $key => $value) {
+            $translation = str_replace(':' . $key, $value, $translation);
+        }
+
+        return $translation;
+    }
+
+    protected function getLangValue($key)
+    {
+        $keys = explode('.', $key);
+        $translation = $this->translations;
+
+        foreach ($keys as $key) {
+            $translation = $translation[$key];
+        }
+
+        return $translation;
     }
 }
