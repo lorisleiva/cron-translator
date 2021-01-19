@@ -125,6 +125,15 @@ class CronTranslatorTest extends TestCase
         $this->assertCronThrowsParsingError('* * * * 8');
     }
 
+    /** @test */
+    public function it_can_translate_in_different_languages()
+    {
+        $this->assertCronTranslateTo('Chaque minute', '* * * * *', 'fr');
+        $this->assertCronTranslateTo('Chaque minute les Dimanches', '* * * * 0', 'fr');
+        $this->assertCronTranslateTo('Chaque minute toutes les 2 heures', '* */2 * * *', 'fr');
+        $this->assertCronTranslateTo('Chaque minute toutes les 3 heures le 2 de chaque mois', '* 1/3 2 * *', 'fr');
+    }
+
     /**
      * @skip
      * @doesNotPerformAssertions

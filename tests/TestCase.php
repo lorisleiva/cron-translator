@@ -8,9 +8,9 @@ use Lorisleiva\CronTranslator\CronParsingException;
 
 class TestCase extends BaseTestCase
 {
-    public function assertCronTranslateTo($expected, $actual)
+    public function assertCronTranslateTo($expected, $actual, $locale = 'en', $timeFormat24hours = false)
     {
-        $this->assertEquals($expected, CronTranslator::translate($actual));
+        $this->assertEquals($expected, CronTranslator::translate($actual, $locale, $timeFormat24hours));
     }
 
     public function assertCronThrowsParsingError($cron)
