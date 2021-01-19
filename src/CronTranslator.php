@@ -13,16 +13,15 @@ class CronTranslator
         '@hourly' => '0 * * * *'
     ];
 
-    public static function translate($cron, $locale = 'en', $clock = '12hour')
+    public static function translate(string $cron, string $locale, bool $timeFormat24hours = false)
     {
         if (isset(self::$extendedMap[$cron])) {
             $cron = self::$extendedMap[$cron];
         }
 
         try {
-            $fields = static::parseFields($cron, $locale, $clock);
+            $expression = new CronExpression($cron, $locale, $timeFormat24hours);
             $orderedFields = static::orderFields($fields);
-            $fieldsAsObject = static::getFieldsAsObject($fields);
 
             $translations = array_map(function ($field) use ($fieldsAsObject) {
                 return $field->translate($fieldsAsObject);
@@ -32,19 +31,6 @@ class CronTranslator
         } catch (\Throwable $th) {
             throw new CronParsingException($cron);
         }
-    }
-
-    protected static function parseFields($cron, $locale, $clock)
-    {
-        $fields = explode(' ', $cron);
-
-        return [
-            new MinutesField($fields[0], $locale, $clock),
-            new HoursField($fields[1], $locale, $clock),
-            new DaysOfMonthField($fields[2], $locale, $clock),
-            new MonthsField($fields[3], $locale, $clock),
-            new DaysOfWeekField($fields[4], $locale, $clock),
-        ];
     }
 
     protected static function orderFields($fields)
@@ -83,16 +69,5 @@ class CronTranslator
         return array_filter($fields, function ($field) use ($types) {
             return $field->hasType(...$types);
         });
-    }
-
-    protected static function getFieldsAsObject($fields)
-    {
-        return (object) [
-            'minute' => $fields[0],
-            'hour' => $fields[1],
-            'day' => $fields[2],
-            'month' => $fields[3],
-            'weekday' => $fields[4],
-        ];
     }
 }

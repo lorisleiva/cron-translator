@@ -4,32 +4,26 @@ namespace Lorisleiva\CronTranslator;
 
 abstract class Field
 {
+    /** @var CronExpression */
     public $expression;
-    public $type;
-    public $value;
-    public $count;
-    public $increment;
-    public $dropped = false;
-    public $position;
-    public $locale;
-    public $clock;
-    public $translations;
-    public $months;
-    public $days;
 
-    public function __construct($expression, $locale, $clock)
+    /** @var string */
+    public $rawField;
+
+    /** @var CronType */
+    public $type;
+
+    /** @var bool */
+    public $dropped = false;
+
+    /** @var int */
+    public $position;
+
+    public function __construct(CronExpression $expression, string $rawField)
     {
         $this->expression = $expression;
-        $cronType = CronType::parse($expression);
-        $this->type = $cronType->type;
-        $this->value = $cronType->value;
-        $this->count = $cronType->count;
-        $this->increment = $cronType->increment;
-        $this->locale = $locale;
-        $this->clock = $clock;
-        $this->translations = $this->loadTranslations();
-        $this->months = $this->loadMonths();
-        $this->days = $this->loadDays();
+        $this->rawField = $rawField;
+        $this->type = CronType::parse($expression);
     }
 
     public function translate($fields)
