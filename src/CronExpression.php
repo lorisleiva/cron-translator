@@ -53,9 +53,10 @@ class CronExpression
     {
         $this->translations = [
             'days' => $this->loadTranslationFile('days'),
+            'fields' => $this->loadTranslationFile('fields'),
             'months' => $this->loadTranslationFile('months'),
             'ordinals' => $this->loadTranslationFile('ordinals'),
-            'translations' => $this->loadTranslationFile('translations'),
+            'times' => $this->loadTranslationFile('times'),
         ];
     }
 
