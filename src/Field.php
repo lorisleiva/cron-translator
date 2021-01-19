@@ -40,8 +40,13 @@ abstract class Field
         return in_array($this->type, func_get_args());
     }
 
-    protected function lang(string $key, $value)
+    protected function langCountable(string $key, int $value)
     {
-        return $this->expression->lang($key, $value);
+        return $this->expression->langCountable($key, $value);
+    }
+
+    protected function lang(string $key, array $replacements = [])
+    {
+        return $this->expression->lang($key, $replacements);
     }
 }

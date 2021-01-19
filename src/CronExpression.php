@@ -87,14 +87,9 @@ class CronExpression
         return $array['default'] ?: '';
     }
 
-    public function lang(string $key, $value)
+    public function lang(string $key, array $replacements = [])
     {
-        if ($key !== 'fields') {
-            return $this->langCountable($key, $value);
-        }
-
-        $translation = $this->getArrayDot($this->translations, $key);
-        $replacements = is_array($value) ? $value : [];
+        $translation = $this->getArrayDot($this->translations['fields'], $key);
 
         foreach ($replacements as $key => $value) {
             $translation = str_replace(':' . $key, $value, $translation);
