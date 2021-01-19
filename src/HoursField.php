@@ -12,7 +12,7 @@ class HoursField extends Field
             return $this->lang('hours.once_an_hour');
         }
 
-        return $this->lang('hours.every_hour');
+        return $this->lang('hours.every');
     }
 
     public function translateIncrement($fields)

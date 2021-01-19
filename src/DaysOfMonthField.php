@@ -14,7 +14,7 @@ class DaysOfMonthField extends Field
             ]);
         }
 
-        return $this->lang('days_of_month.every_day');
+        return $this->lang('days_of_month.every');
     }
 
     public function translateIncrement()
@@ -49,7 +49,7 @@ class DaysOfMonthField extends Field
         }
 
         if ($fields->month->hasType('Every') && $fields->month->dropped) {
-            return $this->lang('days_of_month.once_on_day_of_every_month', [
+            return $this->lang('days_of_month.once_on_day_of_every', [
                 'day' => $this->format()
             ]);
         }

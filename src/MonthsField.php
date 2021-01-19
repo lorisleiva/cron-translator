@@ -14,7 +14,7 @@ class MonthsField extends Field
             ]);
         }
 
-        return $this->lang('months.every_month');
+        return $this->lang('months.every');
     }
 
     public function translateIncrement()

@@ -8,7 +8,7 @@ return [
         'multiple' => ':times an hour',
     ],
     'hours' => [
-        'every_hour' => 'every hour',
+        'every' => 'every hour',
         'once_an_hour' => 'once an hour',
         'every_few_hours' => 'every :increment hours',
         'multiple_hours_out_of_few' => ':count hours out of :increment',
@@ -19,23 +19,23 @@ return [
         'once_an_hour_at_time' => 'at :time'
     ],
     'days_of_week' => [
-        'every_year' => 'every year',
+        'every' => 'every year',
         'every_few_days_of_the_week' => 'every :increment days of the week',
         'multiple_days_out_of_few' => ':count days of the week out of :increment',
         'multiple_days_a_week' => ':count days a week',
         'once_on_day' => 'on :days'
     ],
     'days_of_month' => [
-        'every_day' => 'every day',
+        'every' => 'every day',
         'every_once_on_day' => 'every :weekday',
         'every_few_days' => 'every :increment days',
         'multiple_days_out_of_few' => ':count days out of :increment',
         'multiple_days_a_month' => ':count days a month',
         'once_on_day' => 'on the :day',
-        'once_on_day_of_every_month' => 'on the :day of every month'
+        'once_on_day_of_every' => 'on the :day of every month'
     ],
     'months' => [
-        'every_month' => 'every month',
+        'every' => 'every month',
         'every_once_on_day' => 'the :day of every month',
         'every_few_months' => 'every :increment months',
         'multiple_months_out_of_few' => ':count months out of :increment',

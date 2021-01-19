@@ -8,7 +8,7 @@ class DaysOfWeekField extends Field
 
     public function translateEvery()
     {
-        return $this->lang('days_of_week.every_year');
+        return $this->lang('days_of_week.every');
     }
 
     public function translateIncrement()
