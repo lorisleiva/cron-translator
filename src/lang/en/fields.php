@@ -12,7 +12,7 @@ return [
         'once_an_hour' => 'once an hour',
         'every_few_hours' => 'every :increment hours',
         'multiple_hours_out_of_few' => ':count hours out of :increment',
-        'multiple_times_every_few_hours' => ':count every :increment hours',
+        'times_per_increment' => ':times every :increment hours',
         'multiple_every_few_hours' => 'of every :increment hours',
         'multiple_hours_a_day' => ':count hours a day',
         'multiple_times_a_day' => ':times a day',
@@ -30,7 +30,7 @@ return [
     'months' => [
         'every' => 'every month',
         'every_on_day' => 'the :day of every month',
-        'every_few_months' => 'every :increment months',
+        'increment' => 'every :increment months',
         'multiple_months_out_of_few' => ':count months out of :increment',
         'multiple_months_a_year' => ':count months a year',
         'once_on_month' => 'on :month',

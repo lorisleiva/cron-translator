@@ -12,7 +12,7 @@ return [
         'once_an_hour' => 'vienreiz stundā',
         'every_few_hours' => 'katras :increment stundas',
         'multiple_hours_out_of_few' => ':count no :increment stundām',
-        'multiple_times_every_few_hours' => ':count katras :increment stundas',
+        'times_per_increment' => ':times katras :increment stundas',
         'multiple_every_few_hours' => 'ik pēc :increment stundām',
         'multiple_hours_a_day' => ':count stundas dienā',
         'multiple_times_a_day' => ':times dienā',
@@ -30,7 +30,7 @@ return [
     'months' => [
         'every' => 'katru mēnesi',
         'every_on_day' => 'katra mēneša :day. datumā',
-        'every_few_months' => 'katrus :increment mēnešus',
+        'increment' => 'katrus :increment mēnešus',
         'multiple_months_out_of_few' => ':count mēnešus no :increment',
         'multiple_months_a_year' => ':count mēnešus gadā',
         'once_on_month' => ':month',

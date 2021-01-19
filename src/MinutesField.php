@@ -28,7 +28,7 @@ class MinutesField extends Field
     public function translateMultiple()
     {
         return $this->lang('minutes.multiple', [
-            'times' => $this->times($this->count)
+            'times' => $this->langCountable('times', $this->count),
         ]);
     }
 

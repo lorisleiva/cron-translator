@@ -18,8 +18,8 @@ class HoursField extends Field
     public function translateIncrement()
     {
         if ($this->expression->minute->hasType('Once')) {
-            return $this->lang('hours.multiple_times_every_few_hours', [
-                'count' => $this->times($this->count),
+            return $this->lang('hours.times_per_increment', [
+                'times' => $this->langCountable('times', $this->count),
                 'increment' => $this->increment,
             ]);
         }

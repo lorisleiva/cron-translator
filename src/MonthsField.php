@@ -26,7 +26,7 @@ class MonthsField extends Field
             ]);
         }
 
-        return $this->lang('months.every_few_months', [
+        return $this->lang('months.increment', [
             'increment' => $this->increment
         ]);
     }
