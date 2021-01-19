@@ -49,7 +49,7 @@ class DaysOfMonthField extends Field
         }
 
         if ($fields->month->hasType('Every') && $fields->month->dropped) {
-            return $this->lang('days_of_month.once_on_day_of_every', [
+            return $this->lang('days_of_month.every_on_day', [
                 'day' => $this->format()
             ]);
         }
@@ -61,22 +61,6 @@ class DaysOfMonthField extends Field
 
     public function format()
     {
-        if (! $this->isEnglishLocale()) {
-            return $this->value;
-        }
-
-        if (in_array($this->value, [1, 21, 31])) {
-            return $this->value . 'st';
-        }
-
-        if (in_array($this->value, [2, 22])) {
-            return $this->value . 'nd';
-        }
-
-        if (in_array($this->value, [3, 23])) {
-            return $this->value . 'rd';
-        }
-
-        return $this->value . 'th';
+        return $this->langCountable('ordinals', $this->value);
     }
 }

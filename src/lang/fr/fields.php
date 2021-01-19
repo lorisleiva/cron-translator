@@ -16,14 +16,7 @@ return [
         'multiple_every_few_hours' => 'toutes les :increment heures',
         'multiple_hours_a_day' => ':count heures par jour',
         'multiple_times_a_day' => ':times fois par jour',
-        'once_at_time' => 'à :time'
-    ],
-    'days_of_week' => [
-        'every' => 'chaque année',
-        'every_few_days_of_the_week' => 'tous les :increment jours de la semaine',
-        'multiple_days_out_of_few' => ':count jours de la semaine sur :increment',
-        'multiple_days_a_week' => ':count jours par semaine',
-        'once_on_day' => 'les :days'
+        'once_at_time' => 'à :time',
     ],
     'days_of_month' => [
         'every' => 'tous les jours',
@@ -32,15 +25,25 @@ return [
         'multiple_days_out_of_few' => ':count jours sur :increment',
         'multiple_days_a_month' => ':count jours par mois',
         'once_on_day' => 'le :day',
-        'once_on_day_of_every' => 'le :day de chaque mois'
+        'every_on_day' => 'le :day de chaque mois',
     ],
     'months' => [
         'every' => 'chaque mois',
-        'every_once_on_day' => 'le :day de chaque mois',
+        'every_on_day' => 'le :day de chaque mois',
         'every_few_months' => 'tous les :increment mois',
         'multiple_months_out_of_few' => ':count mois sur :increment',
         'multiple_months_a_year' => ':count mois par an',
         'once_on_month' => 'en :month',
-        'once_on_day_of_month' => 'en :month le :day'
-    ]
+        'once_on_day' => 'en :month le :day',
+    ],
+    'days_of_week' => [
+        'every' => 'chaque année',
+        'every_few_days_of_the_week' => 'tous les :increment jours de la semaine',
+        'multiple_days_out_of_few' => ':count jours de la semaine sur :increment',
+        'multiple_days_a_week' => ':count jours par semaine',
+        'once_on_day' => 'les :days',
+    ],
+    'years' => [
+        'every' => 'chaque année',
+    ],
 ];

@@ -6,11 +6,11 @@ class MonthsField extends Field
 {
     public $position = 3;
 
-    public function translateEvery($fields)
+    public function translateEvery()
     {
-        if ($fields->day->hasType('Once')) {
-            return $this->lang('months.every_once_on_day', [
-                'day' => $fields->day->format()
+        if ($this->expression->day->hasType('Once')) {
+            return $this->lang('months.every_on_day', [
+                'day' => $this->expression->day->format()
             ]);
         }
 
@@ -41,7 +41,7 @@ class MonthsField extends Field
     public function translateOnce($fields)
     {
         if ($fields->day->hasType('Once')) {
-            return $this->lang('months.once_on_day_of_month', [
+            return $this->lang('months.once_on_day', [
                 'month' => $this->format(),
                 'day' => $fields->day->format(),
             ]);
