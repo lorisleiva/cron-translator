@@ -13,27 +13,27 @@ class MinutesField extends Field
 
     public function translateIncrement()
     {
-        if ($this->count > 1) {
+        if ($this->getCount() > 1) {
             return $this->lang('minutes.times_per_increment', [
-                'times' => $this->langCountable('times', $this->count),
-                'increment' => $this->increment,
+                'times' => $this->getTimes(),
+                'increment' => $this->getIncrement(),
             ]);
         }
 
         return $this->lang('minutes.increment', [
-            'increment' => $this->increment
+            'increment' => $this->getIncrement(),
         ]);
     }
 
     public function translateMultiple()
     {
         return $this->lang('minutes.multiple', [
-            'times' => $this->langCountable('times', $this->count),
+            'times' => $this->getTimes(),
         ]);
     }
 
     public function format()
     {
-        return ($this->value < 10 ? '0' : '') . $this->value;
+        return ($this->getValue() < 10 ? '0' : '') . $this->getValue();
     }
 }

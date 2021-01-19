@@ -10,7 +10,7 @@ class DaysOfMonthField extends Field
     {
         if ($this->expression->weekday->hasType('Once')) {
             return $this->lang('days_of_week.every', [
-                'weekday' => $this->expression->weekday->format()
+                'weekday' => $this->expression->weekday->format(),
             ]);
         }
 
@@ -19,15 +19,15 @@ class DaysOfMonthField extends Field
 
     public function translateIncrement()
     {
-        if ($this->count > 1) {
+        if ($this->getCount() > 1) {
             return $this->lang('days_of_month.multiple_days_ot_of_few', [
-                'count' => $this->count,
-                'increment' => $this->increment
+                'count' => $this->getCount(),
+                'increment' => $this->getIncrement(),
             ]);
         }
 
         return $this->lang('days_of_month.every_few_days', [
-            'increment' => $this->increment
+            'increment' => $this->getIncrement(),
         ]);
     }
 
@@ -63,6 +63,6 @@ class DaysOfMonthField extends Field
 
     public function format()
     {
-        return $this->langCountable('ordinals', $this->value);
+        return $this->langCountable('ordinals', $this->getValue());
     }
 }

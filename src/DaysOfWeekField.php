@@ -13,22 +13,22 @@ class DaysOfWeekField extends Field
 
     public function translateIncrement()
     {
-        if ($this->count > 1) {
+        if ($this->getCount() > 1) {
             return $this->lang('days_of_week.multiple_days_out_of_few', [
-                'count' => $this->count,
-                'increment' => $this->increment
+                'count' => $this->getCount(),
+                'increment' => $this->getIncrement(),
             ]);
         }
 
         return $this->lang('days_of_week.every_few_days_of_the_week', [
-            'increment' => $this->increment
+            'increment' => $this->getIncrement(),
         ]);
     }
 
     public function translateMultiple()
     {
         return $this->lang('days_of_week.multiple_days_a_week', [
-            'count' => $this->count
+            'count' => $this->getCount(),
         ]);
     }
 
@@ -45,10 +45,10 @@ class DaysOfWeekField extends Field
 
     public function format()
     {
-        if ($this->value < 0 || $this->value > 7) {
-            throw new \Exception();
+        if ($this->getValue() < 0 || $this->getValue() > 7) {
+            throw new CronParsingException($this->expression->raw);
         }
 
-        return $this->days[$this->value];
+        return $this->langCountable('days', $this->getValue());
     }
 }

@@ -19,26 +19,26 @@ class HoursField extends Field
     {
         if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.times_per_increment', [
-                'times' => $this->langCountable('times', $this->count),
-                'increment' => $this->increment,
+                'times' => $this->getTimes(),
+                'increment' => $this->getIncrement(),
             ]);
         }
 
-        if ($this->count > 1) {
+        if ($this->getCount() > 1) {
             return $this->lang('hours.multiple_per_increment', [
-                'count' => $this->count,
-                'increment' => $this->increment,
+                'count' => $this->getCount(),
+                'increment' => $this->getIncrement(),
             ]);
         }
 
         if ($this->expression->minute->hasType('Every')) {
             return $this->lang('hours.increment_chained', [
-                'increment' => $this->increment
+                'increment' => $this->getIncrement(),
             ]);
         }
 
         return $this->lang('hours.increment', [
-            'increment' => $this->increment
+            'increment' => $this->getIncrement(),
         ]);
     }
 
@@ -46,12 +46,12 @@ class HoursField extends Field
     {
         if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.times_per_day', [
-                'times' => $this->times($this->count)
+                'times' => $this->getTimes(),
             ]);
         }
 
         return $this->lang('hours.multiple_per_day', [
-            'count' => $this->count
+            'count' => $this->getCount(),
         ]);
     }
 
@@ -66,13 +66,13 @@ class HoursField extends Field
         ]);
     }
 
-    public function format($minute = null, $clock = '12hour')
+    public function format(?MinutesField $minute = null)
     {
         $amOrPm = '';
-        if ('12hour' === $clock) {
-            $amOrPm = $this->value < 12 ? 'am' : 'pm';
+        if (! $this->expression->timeFormat24hours) {
+            $amOrPm = $this->getValue() < 12 ? 'am' : 'pm';
         }
-        $hour = $this->value === 0 ? 12 : $this->value;
+        $hour = $this->getValue() === 0 ? 12 : $this->getValue();
         $hour = $hour > 12 ? $hour - 12 : $hour;
 
         if ($this->expression->timeFormat24hours) {

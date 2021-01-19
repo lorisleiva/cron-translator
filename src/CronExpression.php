@@ -4,6 +4,9 @@ namespace Lorisleiva\CronTranslator;
 
 class CronExpression
 {
+    /** @var string */
+    public $raw;
+
     /** @var MinutesField */
     public $minute;
 
@@ -30,6 +33,7 @@ class CronExpression
 
     public function __construct(string $cron, string $locale, bool $timeFormat24hours = false)
     {
+        $this->raw = $cron;
         $fields = explode(' ', $cron);
         $this->minute = new MinutesField($this, $fields[0]);
         $this->hour = new HoursField($this, $fields[1]);

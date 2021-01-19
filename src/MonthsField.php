@@ -10,7 +10,7 @@ class MonthsField extends Field
     {
         if ($this->expression->day->hasType('Once')) {
             return $this->lang('months.every_on_day', [
-                'day' => $this->expression->day->format()
+                'day' => $this->expression->day->format(),
             ]);
         }
 
@@ -19,31 +19,31 @@ class MonthsField extends Field
 
     public function translateIncrement()
     {
-        if ($this->count > 1) {
+        if ($this->getCount() > 1) {
             return $this->lang('months.multiple_months_out_of_few', [
-                'count' => $this->count,
-                'increment' => $this->increment
+                'count' => $this->getCount(),
+                'increment' => $this->getCount(),
             ]);
         }
 
         return $this->lang('months.increment', [
-            'increment' => $this->increment
+            'increment' => $this->getIncrement(),
         ]);
     }
 
     public function translateMultiple()
     {
         return $this->lang('months.multiple_months_a_year', [
-            'count' => $this->count
+            'count' => $this->getCount(),
         ]);
     }
 
-    public function translateOnce($fields)
+    public function translateOnce()
     {
-        if ($fields->day->hasType('Once')) {
+        if ($this->expression->day->hasType('Once')) {
             return $this->lang('months.once_on_day', [
                 'month' => $this->format(),
-                'day' => $fields->day->format(),
+                'day' => $this->expression->day->format(),
             ]);
         }
 
@@ -54,10 +54,10 @@ class MonthsField extends Field
 
     public function format()
     {
-        if ($this->value < 1 || $this->value > 12) {
-            throw new \Exception();
+        if ($this->getValue() < 1 || $this->getValue() > 12) {
+            throw new CronParsingException($this->expression->raw);
         }
 
-        return $this->months[$this->value];
+        return $this->langCountable('months', $this->getValue());
     }
 }

@@ -40,6 +40,26 @@ abstract class Field
         return in_array($this->type, func_get_args());
     }
 
+    public function getValue()
+    {
+        return $this->type->value;
+    }
+
+    public function getCount()
+    {
+        return $this->type->count;
+    }
+
+    public function getIncrement()
+    {
+        return $this->type->increment;
+    }
+
+    public function getTimes()
+    {
+        return $this->langCountable('times', $this->getCount());
+    }
+
     protected function langCountable(string $key, int $value)
     {
         return $this->expression->langCountable($key, $value);
