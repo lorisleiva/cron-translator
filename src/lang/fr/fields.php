@@ -16,7 +16,7 @@ return [
         'multiple_every_few_hours' => 'toutes les :increment heures',
         'multiple_hours_a_day' => ':count heures par jour',
         'multiple_times_a_day' => ':times fois par jour',
-        'once_an_hour_at_time' => 'à :time'
+        'once_at_time' => 'à :time'
     ],
     'days_of_week' => [
         'every' => 'chaque année',

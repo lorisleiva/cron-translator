@@ -16,7 +16,7 @@ return [
         'multiple_every_few_hours' => 'ik pēc :increment stundām',
         'multiple_hours_a_day' => ':count stundas dienā',
         'multiple_times_a_day' => ':times dienā',
-        'once_an_hour_at_time' => 'plkst. :time'
+        'once_at_time' => 'plkst. :time'
     ],
     'days_of_week' => [
         'every' => 'katru gadu',

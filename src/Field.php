@@ -26,12 +26,12 @@ abstract class Field
         $this->type = CronType::parse($expression);
     }
 
-    public function translate($fields)
+    public function translate()
     {
-        foreach (CronType::TYPES as $type) {
-            if ($this->hasType($type) && method_exists($this, "translate{$type}")) {
-                return $this->{"translate{$type}"}($fields);
-            }
+        $method = 'translate' . $this->type->type;
+
+        if (method_exists($this, $method)) {
+            return $this->{$method}();
         }
     }
 

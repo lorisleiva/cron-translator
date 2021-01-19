@@ -6,18 +6,18 @@ class HoursField extends Field
 {
     public $position = 1;
 
-    public function translateEvery($fields)
+    public function translateEvery()
     {
-        if ($fields->minute->hasType('Once')) {
+        if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.once_an_hour');
         }
 
         return $this->lang('hours.every');
     }
 
-    public function translateIncrement($fields)
+    public function translateIncrement()
     {
-        if ($fields->minute->hasType('Once')) {
+        if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.multiple_times_every_few_hours', [
                 'count' => $this->times($this->count),
                 'increment' => $this->increment,
@@ -31,7 +31,7 @@ class HoursField extends Field
             ]);
         }
 
-        if ($fields->minute->hasType('Every')) {
+        if ($this->expression->minute->hasType('Every')) {
             return $this->lang('hours.multiple_every_few_hours', [
                 'increment' => $this->increment
             ]);
@@ -42,9 +42,9 @@ class HoursField extends Field
         ]);
     }
 
-    public function translateMultiple($fields)
+    public function translateMultiple()
     {
-        if ($fields->minute->hasType('Once')) {
+        if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.multiple_times_a_day', [
                 'times' => $this->times($this->count)
             ]);
@@ -55,13 +55,14 @@ class HoursField extends Field
         ]);
     }
 
-    public function translateOnce($fields, $clock = '12hour')
+    public function translateOnce()
     {
-        return $this->lang('hours.once_an_hour_at_time', [
-            'time' => $this->format(
-                $fields->minute->hasType('Once') ? $fields->minute : null,
-                $clock
-            )
+        $minute = $this->expression->minute->hasType('Once')
+            ? $this->expression->minute
+            : null;
+
+        return $this->lang('hours.once_at_time', [
+            'time' => $this->format($minute)
         ]);
     }
 
@@ -74,7 +75,7 @@ class HoursField extends Field
         $hour = $this->value === 0 ? 12 : $this->value;
         $hour = $hour > 12 ? $hour - 12 : $hour;
 
-        if ($this->clock24Hour()) {
+        if ($this->expression->timeFormat24hours) {
             return $minute
                 ? date("H:i", strtotime("{$hour}:{$minute->format()} {$amOrPm}"))
                 : date("H:i", strtotime("{$hour} {$amOrPm}"));
