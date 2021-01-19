@@ -34,7 +34,7 @@ class DaysOfMonthField extends Field
     public function translateMultiple()
     {
         return $this->lang('days_of_month.multiple_per_month', [
-            'count' => $this->count
+            'count' => $this->getCount(),
         ]);
     }
 
