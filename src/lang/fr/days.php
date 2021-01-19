@@ -1,7 +1,7 @@
 <?php
 
 return [
-    0 => 'Lundi',
+    0 => 'Dimanche',
     1 => 'Lundi',
     2 => 'Mardi',
     3 => 'Mercredi',
