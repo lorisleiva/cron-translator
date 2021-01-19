@@ -13,14 +13,14 @@ class CronTranslator
         '@hourly' => '0 * * * *'
     ];
 
-    public static function translate($cron)
+    public static function translate($cron, $locale = 'en', $clock = '12hour')
     {
         if (isset(self::$extendedMap[$cron])) {
             $cron = self::$extendedMap[$cron];
         }
 
         try {
-            $fields = static::parseFields($cron);
+            $fields = static::parseFields($cron, $locale, $clock);
             $orderedFields = static::orderFields($fields);
             $fieldsAsObject = static::getFieldsAsObject($fields);
 
@@ -34,16 +34,16 @@ class CronTranslator
         }
     }
 
-    protected static function parseFields($cron)
+    protected static function parseFields($cron, $locale, $clock)
     {
         $fields = explode(' ', $cron);
 
         return [
-            new MinutesField($fields[0]),
-            new HoursField($fields[1]),
-            new DaysOfMonthField($fields[2]),
-            new MonthsField($fields[3]),
-            new DaysOfWeekField($fields[4]),
+            new MinutesField($fields[0], $locale, $clock),
+            new HoursField($fields[1], $locale, $clock),
+            new DaysOfMonthField($fields[2], $locale, $clock),
+            new MonthsField($fields[3], $locale, $clock),
+            new DaysOfWeekField($fields[4], $locale, $clock),
         ];
     }
 

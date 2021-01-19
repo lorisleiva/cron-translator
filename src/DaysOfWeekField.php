@@ -8,30 +8,39 @@ class DaysOfWeekField extends Field
 
     public function translateEvery()
     {
-        return 'every year';
+        return $this->lang('days_of_week.every_year');
     }
 
     public function translateIncrement()
     {
         if ($this->count > 1) {
-            return "{$this->count} days of the week out of {$this->increment}";
+            return $this->lang('days_of_week.multiple_days_out_of_few', [
+                'count' => $this->count,
+                'increment' => $this->increment
+            ]);
         }
 
-        return "every {$this->increment} days of the week";
+        return $this->lang('days_of_week.every_few_days_of_the_week', [
+            'increment' => $this->increment
+        ]);
     }
-    
+
     public function translateMultiple()
     {
-        return "{$this->count} days a week";
+        return $this->lang('days_of_week.multiple_days_a_week', [
+            'count' => $this->count
+        ]);
     }
-    
+
     public function translateOnce($fields)
     {
         if ($fields->day->hasType('Every') && ! $fields->day->dropped) {
             return; // DaysOfMonthField adapts to "Every Sunday".
         }
 
-        return "on {$this->format()}s";
+        return $this->lang('days_of_week.once_on_day', [
+            'day' => $this->format()
+        ]);
     }
 
     public function format()
@@ -40,15 +49,6 @@ class DaysOfWeekField extends Field
             throw new \Exception();
         }
 
-        return [
-            0 => 'Sunday',
-            1 => 'Monday',
-            2 => 'Tuesday',
-            3 => 'Wednesday',
-            4 => 'Thursday',
-            5 => 'Friday',
-            6 => 'Saturday',
-            7 => 'Sunday',
-        ][$this->value];
+        return $this->days[$this->value];
     }
 }

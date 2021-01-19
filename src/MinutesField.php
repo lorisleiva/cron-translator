@@ -8,25 +8,32 @@ class MinutesField extends Field
 
     public function translateEvery()
     {
-        return 'every minute';
+        return $this->lang('minutes.every_minute');
     }
 
     public function translateIncrement()
     {
         if ($this->count > 1) {
-            return $this->times($this->count) . " every {$this->increment} minutes";
+            return $this->lang('minutes.multiple_times_every_few_minutes', [
+                'times' => $this->times($this->count),
+                'increment' => $this->increment,
+            ]);
         }
 
-        return "every {$this->increment} minutes";
+        return $this->lang('minutes.every_few_minutes', [
+            'increment' => $this->increment
+        ]);
     }
 
     public function translateMultiple()
     {
-        return $this->times($this->count) . " an hour";
+        return $this->lang('minutes.multiple_times_an_hour', [
+            'times' => $this->times($this->count)
+        ]);
     }
 
     public function format()
-    {   
+    {
         return ($this->value < 10 ? '0' : '') . $this->value;
     }
 }
