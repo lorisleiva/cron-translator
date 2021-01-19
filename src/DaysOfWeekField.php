@@ -32,9 +32,9 @@ class DaysOfWeekField extends Field
         ]);
     }
 
-    public function translateOnce($fields)
+    public function translateOnce()
     {
-        if ($fields->day->hasType('Every') && ! $fields->day->dropped) {
+        if ($this->expression->day->hasType('Every') && ! $this->expression->day->dropped) {
             return; // DaysOfMonthField adapts to "Every Sunday".
         }
 
