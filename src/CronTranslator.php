@@ -23,8 +23,8 @@ class CronTranslator
             $expression = new CronExpression($cron, $locale, $timeFormat24hours);
             $orderedFields = static::orderFields($expression->getFields());
 
-            $translations = array_map(function ($field) use ($fieldsAsObject) {
-                return $field->translate($fieldsAsObject);
+            $translations = array_map(function (Field $field) {
+                return $field->translate();
             }, $orderedFields);
 
             return ucfirst(implode(' ', array_filter($translations)));

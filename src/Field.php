@@ -23,7 +23,7 @@ abstract class Field
     {
         $this->expression = $expression;
         $this->rawField = $rawField;
-        $this->type = CronType::parse($expression);
+        $this->type = CronType::parse($rawField);
     }
 
     public function translate()
@@ -37,7 +37,7 @@ abstract class Field
 
     public function hasType()
     {
-        return in_array($this->type, func_get_args());
+        return in_array($this->type->type, func_get_args());
     }
 
     public function getValue()
