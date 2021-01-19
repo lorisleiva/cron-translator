@@ -10,12 +10,12 @@ return [
     'hours' => [
         'every' => 'katru stundu',
         'once_an_hour' => 'vienreiz stundā',
-        'every_few_hours' => 'katras :increment stundas',
-        'multiple_hours_out_of_few' => ':count no :increment stundām',
+        'increment' => 'katras :increment stundas',
+        'multiple_per_increment' => ':count no :increment stundām',
         'times_per_increment' => ':times katras :increment stundas',
-        'multiple_every_few_hours' => 'ik pēc :increment stundām',
-        'multiple_hours_a_day' => ':count stundas dienā',
-        'multiple_times_a_day' => ':times dienā',
+        'increment_chained' => 'ik pēc :increment stundām',
+        'multiple_per_day' => ':count stundas dienā',
+        'times_per_day' => ':times dienā',
         'once_at_time' => 'plkst. :time',
     ],
     'days_of_month' => [

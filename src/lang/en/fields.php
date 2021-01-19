@@ -10,12 +10,12 @@ return [
     'hours' => [
         'every' => 'every hour',
         'once_an_hour' => 'once an hour',
-        'every_few_hours' => 'every :increment hours',
-        'multiple_hours_out_of_few' => ':count hours out of :increment',
+        'increment' => 'every :increment hours',
+        'multiple_per_increment' => ':count hours out of :increment',
         'times_per_increment' => ':times every :increment hours',
-        'multiple_every_few_hours' => 'of every :increment hours',
-        'multiple_hours_a_day' => ':count hours a day',
-        'multiple_times_a_day' => ':times a day',
+        'increment_chained' => 'of every :increment hours',
+        'multiple_per_day' => ':count hours a day',
+        'times_per_day' => ':times a day',
         'once_at_time' => 'at :time',
     ],
     'days_of_month' => [

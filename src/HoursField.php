@@ -25,19 +25,19 @@ class HoursField extends Field
         }
 
         if ($this->count > 1) {
-            return $this->lang('hours.multiple_hours_out_of_few', [
+            return $this->lang('hours.multiple_per_increment', [
                 'count' => $this->count,
                 'increment' => $this->increment,
             ]);
         }
 
         if ($this->expression->minute->hasType('Every')) {
-            return $this->lang('hours.multiple_every_few_hours', [
+            return $this->lang('hours.increment_chained', [
                 'increment' => $this->increment
             ]);
         }
 
-        return $this->lang('hours.every_few_hours', [
+        return $this->lang('hours.increment', [
             'increment' => $this->increment
         ]);
     }
@@ -45,12 +45,12 @@ class HoursField extends Field
     public function translateMultiple()
     {
         if ($this->expression->minute->hasType('Once')) {
-            return $this->lang('hours.multiple_times_a_day', [
+            return $this->lang('hours.times_per_day', [
                 'times' => $this->times($this->count)
             ]);
         }
 
-        return $this->lang('hours.multiple_hours_a_day', [
+        return $this->lang('hours.multiple_per_day', [
             'count' => $this->count
         ]);
     }
