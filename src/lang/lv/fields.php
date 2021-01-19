@@ -2,10 +2,10 @@
 
 return [
     'minutes' => [
-        'every_minute' => 'katru minūti',
-        'every_few_minutes' => 'ik pēc :increment minūtēm',
-        'multiple_times_every_few_minutes' => ':times ik pēc :increment minūtēm',
-        'multiple_times_an_hour' => ':times stundā',
+        'every' => 'katru minūti',
+        'increment' => 'ik pēc :increment minūtēm',
+        'times_per_increment' => ':times ik pēc :increment minūtēm',
+        'multiple' => ':times stundā',
     ],
     'hours' => [
         'every_hour' => 'katru stundu',

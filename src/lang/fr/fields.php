@@ -2,10 +2,10 @@
 
 return [
     'minutes' => [
-        'every_minute' => 'chaque minute',
-        'every_few_minutes' => 'toutes les :increment minutes',
-        'multiple_times_every_few_minutes' => ':times toutes les :increment minutes',
-        'multiple_times_an_hour' => ':times par heure',
+        'every' => 'chaque minute',
+        'increment' => 'toutes les :increment minutes',
+        'times_per_increment' => ':times toutes les :increment minutes',
+        'multiple' => ':times par heure',
     ],
     'hours' => [
         'every_hour' => 'chaque heure',
