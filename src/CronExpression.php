@@ -76,9 +76,25 @@ class CronExpression
         return __DIR__ . '/lang/' . $this->locale;
     }
 
-    public function lang(string $key, array $replacements = [])
+    public function langCountable(string $type, int $value)
     {
-        $translation = $this->getLangValue($key);
+        $array = $this->translations[$type];
+
+        if (isset($array[$value])) {
+            return $array[$value];
+        }
+
+        return $array['default'] ?: '';
+    }
+
+    public function lang(string $key, $value)
+    {
+        if ($key !== 'fields') {
+            return $this->langCountable($key, $value);
+        }
+
+        $translation = $this->getArrayDot($this->translations, $key);
+        $replacements = is_array($value) ? $value : [];
 
         foreach ($replacements as $key => $value) {
             $translation = str_replace(':' . $key, $value, $translation);
@@ -87,15 +103,14 @@ class CronExpression
         return $translation;
     }
 
-    protected function getLangValue($key)
+    protected function getArrayDot(array $array, string $key)
     {
         $keys = explode('.', $key);
-        $translation = $this->translations;
 
         foreach ($keys as $key) {
-            $translation = $translation[$key];
+            $array = $array[$key];
         }
 
-        return $translation;
+        return $array;
     }
 }

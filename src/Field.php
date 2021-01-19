@@ -40,12 +40,8 @@ abstract class Field
         return in_array($this->type, func_get_args());
     }
 
-    public function times($count)
+    protected function lang(string $key, $value)
     {
-        switch ($count) {
-            case 1: return $this->lang('times.once');
-            case 2: return $this->lang('times.twice');
-            default: return $this->lang('times.count', ['count' => $count]);
-        }
+        return $this->expression->lang($key, $value);
     }
 }
