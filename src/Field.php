@@ -37,7 +37,7 @@ abstract class Field
 
     public function hasType()
     {
-        return in_array($this->type->type, func_get_args());
+        return $this->type->hasType(...func_get_args());
     }
 
     public function getValue()
