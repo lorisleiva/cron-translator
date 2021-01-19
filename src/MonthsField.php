@@ -20,7 +20,7 @@ class MonthsField extends Field
     public function translateIncrement()
     {
         if ($this->getCount() > 1) {
-            return $this->lang('months.multiple_months_out_of_few', [
+            return $this->lang('months.multiple_per_increment', [
                 'count' => $this->getCount(),
                 'increment' => $this->getCount(),
             ]);
@@ -33,7 +33,7 @@ class MonthsField extends Field
 
     public function translateMultiple()
     {
-        return $this->lang('months.multiple_months_a_year', [
+        return $this->lang('months.multiple_per_year', [
             'count' => $this->getCount(),
         ]);
     }

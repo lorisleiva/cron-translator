@@ -14,13 +14,13 @@ class DaysOfWeekField extends Field
     public function translateIncrement()
     {
         if ($this->getCount() > 1) {
-            return $this->lang('days_of_week.multiple_days_out_of_few', [
+            return $this->lang('days_of_week.multiple_per_increment', [
                 'count' => $this->getCount(),
                 'increment' => $this->getIncrement(),
             ]);
         }
 
-        return $this->lang('days_of_week.every_few_days_of_the_week', [
+        return $this->lang('days_of_week.increment', [
             'increment' => $this->getIncrement(),
         ]);
     }

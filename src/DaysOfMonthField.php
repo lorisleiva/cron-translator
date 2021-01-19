@@ -20,20 +20,20 @@ class DaysOfMonthField extends Field
     public function translateIncrement()
     {
         if ($this->getCount() > 1) {
-            return $this->lang('days_of_month.multiple_days_ot_of_few', [
+            return $this->lang('days_of_month.multiple_per_increment', [
                 'count' => $this->getCount(),
                 'increment' => $this->getIncrement(),
             ]);
         }
 
-        return $this->lang('days_of_month.every_few_days', [
+        return $this->lang('days_of_month.increment', [
             'increment' => $this->getIncrement(),
         ]);
     }
 
     public function translateMultiple()
     {
-        return $this->lang('days_of_month.multiple_days_a_month', [
+        return $this->lang('days_of_month.multiple_per_month', [
             'count' => $this->count
         ]);
     }
