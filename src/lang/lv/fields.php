@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'times' => [
-        'once' => 'vienreiz',
-        'twice' => 'divreiz',
-        'count' => ':count reizes'
-    ],
     'minutes' => [
         'every_minute' => 'katru minūti',
         'every_few_minutes' => 'ik pēc :increment minūtēm',

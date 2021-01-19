@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'times' => [
-        'once' => 'une fois',
-        'twice' => 'deux fois',
-        'count' => ':count fois'
-    ],
     'minutes' => [
         'every_minute' => 'chaque minute',
         'every_few_minutes' => 'toutes les :increment minutes',
