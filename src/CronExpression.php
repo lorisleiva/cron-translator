@@ -57,15 +57,15 @@ class CronExpression
         ];
     }
 
-    public function langCountable(string $type, int $value)
+    public function langCountable(string $type, int $number)
     {
         $array = $this->translations[$type];
 
-        if (isset($array[$value])) {
-            return $array[$value];
-        }
+        $value = isset($array[$number])
+            ? $array[$number]
+            : ($array['default'] ?: '');
 
-        return $array['default'] ?: '';
+        return str_replace(':number', $number, $value);
     }
 
     public function lang(string $key, array $replacements = [])
