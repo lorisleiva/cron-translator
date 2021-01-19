@@ -20,7 +20,6 @@ return [
     ],
     'days_of_month' => [
         'every' => 'katru dienu',
-        'every_once_on_day' => 'katru :weekdayu',
         'every_few_days' => 'ik pēc :increment dienām',
         'multiple_days_out_of_few' => ':count dienas no :increment',
         'multiple_days_a_month' => ':count dienas mēnesī',
@@ -37,7 +36,7 @@ return [
         'once_on_day' => ':day. :month',
     ],
     'days_of_week' => [
-        'every' => 'katru gadu',
+        'every' => 'katru :weekdayu',
         'every_few_days_of_the_week' => 'ik pēc :increment nedēļas dienām',
         'multiple_days_out_of_few' => ':count nedēļas dienas no :increment',
         'multiple_days_a_week' => ':count dienas nedēļā',

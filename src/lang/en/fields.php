@@ -20,7 +20,6 @@ return [
     ],
     'days_of_month' => [
         'every' => 'every day',
-        'every_once_on_day' => 'every :weekday',
         'every_few_days' => 'every :increment days',
         'multiple_days_out_of_few' => ':count days out of :increment',
         'multiple_days_a_month' => ':count days a month',
@@ -37,7 +36,7 @@ return [
         'once_on_day' => 'on :month the :day',
     ],
     'days_of_week' => [
-        'every' => 'every year',
+        'every' => 'every :weekday',
         'every_few_days_of_the_week' => 'every :increment days of the week',
         'multiple_days_out_of_few' => ':count days of the week out of :increment',
         'multiple_days_a_week' => ':count days a week',
