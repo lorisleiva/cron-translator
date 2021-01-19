@@ -31,7 +31,7 @@ class CronExpression
     /** @var array */
     public $translations;
 
-    public function __construct(string $cron, string $locale, bool $timeFormat24hours = false)
+    public function __construct(string $cron, string $locale = 'en', bool $timeFormat24hours = false)
     {
         $this->raw = $cron;
         $fields = explode(' ', $cron);
@@ -44,6 +44,39 @@ class CronExpression
         $this->timeFormat24hours = $timeFormat24hours;
         $this->ensureLocaleExists();
         $this->loadTranslations();
+    }
+
+    public function getFields()
+    {
+        return [
+            $this->minute,
+            $this->hour,
+            $this->day,
+            $this->month,
+            $this->weekday,
+        ];
+    }
+
+    public function langCountable(string $type, int $value)
+    {
+        $array = $this->translations[$type];
+
+        if (isset($array[$value])) {
+            return $array[$value];
+        }
+
+        return $array['default'] ?: '';
+    }
+
+    public function lang(string $key, array $replacements = [])
+    {
+        $translation = $this->getArrayDot($this->translations['fields'], $key);
+
+        foreach ($replacements as $key => $value) {
+            $translation = str_replace(':' . $key, $value, $translation);
+        }
+
+        return $translation;
     }
 
     protected function ensureLocaleExists(string $fallbackLocale = 'en')
@@ -78,28 +111,6 @@ class CronExpression
     protected function getTranslationDirectory()
     {
         return __DIR__ . '/lang/' . $this->locale;
-    }
-
-    public function langCountable(string $type, int $value)
-    {
-        $array = $this->translations[$type];
-
-        if (isset($array[$value])) {
-            return $array[$value];
-        }
-
-        return $array['default'] ?: '';
-    }
-
-    public function lang(string $key, array $replacements = [])
-    {
-        $translation = $this->getArrayDot($this->translations['fields'], $key);
-
-        foreach ($replacements as $key => $value) {
-            $translation = str_replace(':' . $key, $value, $translation);
-        }
-
-        return $translation;
     }
 
     protected function getArrayDot(array $array, string $key)

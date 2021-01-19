@@ -13,7 +13,7 @@ class CronTranslator
         '@hourly' => '0 * * * *'
     ];
 
-    public static function translate(string $cron, string $locale, bool $timeFormat24hours = false)
+    public static function translate(string $cron, string $locale = 'en', bool $timeFormat24hours = false)
     {
         if (isset(self::$extendedMap[$cron])) {
             $cron = self::$extendedMap[$cron];
@@ -21,7 +21,7 @@ class CronTranslator
 
         try {
             $expression = new CronExpression($cron, $locale, $timeFormat24hours);
-            $orderedFields = static::orderFields($fields);
+            $orderedFields = static::orderFields($expression->getFields());
 
             $translations = array_map(function ($field) use ($fieldsAsObject) {
                 return $field->translate($fieldsAsObject);
@@ -33,7 +33,7 @@ class CronTranslator
         }
     }
 
-    protected static function orderFields($fields)
+    protected static function orderFields(array $fields)
     {
         // Group fields by CRON types.
         $onces = static::filterType($fields, 'Once');
@@ -48,6 +48,7 @@ class CronTranslator
         // Mark fields that will not be displayed as dropped.
         // This allows other fields to check whether some
         // information is missing and adapt their translation.
+        /** @var Field $field */
         foreach (array_slice($everys, $numberOfEverysKept) as $field) {
             $field->dropped = true;
         }
@@ -64,9 +65,9 @@ class CronTranslator
         );
     }
 
-    protected static function filterType($fields, ...$types)
+    protected static function filterType(array $fields, ...$types)
     {
-        return array_filter($fields, function ($field) use ($types) {
+        return array_filter($fields, function (Field $field) use ($types) {
             return $field->hasType(...$types);
         });
     }
