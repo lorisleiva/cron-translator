@@ -2,6 +2,8 @@
 
 namespace Lorisleiva\CronTranslator;
 
+use Throwable;
+
 class CronTranslator
 {
     private static $extendedMap = [
@@ -28,7 +30,7 @@ class CronTranslator
             }, $orderedFields);
 
             return ucfirst(implode(' ', array_filter($translations)));
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             throw new CronParsingException($cron);
         }
     }

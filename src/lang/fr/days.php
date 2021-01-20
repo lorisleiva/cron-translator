@@ -1,7 +1,6 @@
 <?php
 
 return [
-    0 => 'dimanche',
     1 => 'lundi',
     2 => 'mardi',
     3 => 'mercredi',

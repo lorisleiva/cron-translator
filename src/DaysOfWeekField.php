@@ -49,6 +49,6 @@ class DaysOfWeekField extends Field
             throw new CronParsingException($this->expression->raw);
         }
 
-        return $this->langCountable('days', $this->getValue());
+        return $this->langCountable('days', ($this->getValue() % 7) + 1);
     }
 }
