@@ -45,10 +45,12 @@ class DaysOfWeekField extends Field
 
     public function format()
     {
-        if ($this->getValue() < 0 || $this->getValue() > 7) {
+        $weekday = $this->getValue() === 0 ? 7 : $this->getValue();
+
+        if ($weekday < 1 || $weekday > 7) {
             throw new CronParsingException($this->expression->raw);
         }
 
-        return $this->langCountable('days', ($this->getValue() % 7) + 1);
+        return $this->langCountable('days', $weekday);
     }
 }
