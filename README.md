@@ -29,3 +29,16 @@ CronTranslator::translate('* 1/3 2 * *');     // => Every minute of every 3 hour
 CronTranslator::translate('1-3/5 * * * *');   // => 3 times every 5 minutes
 CronTranslator::translate('1,2 0 */2 1,2 *'); // => Twice an hour every 2 days 2 months a year at 12am
 ```
+
+You may also provide a locale as a second argument and whether to format the time using the 24-hour format as a third argument.
+
+
+```php
+CronTranslator::translate('30 18 * * *', 'fr');       // => Tous les jours à 6:30pm
+CronTranslator::translate('30 18 * * *', 'fr', true); // => Tous les jours à 18:30
+```
+
+The following locales are currently supported. Feel free to PR more locales if you need them. 🙂
+- `en` — English
+- `fr` — French
+- `lv` — Latvian
