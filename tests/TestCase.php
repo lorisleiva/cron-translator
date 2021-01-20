@@ -24,7 +24,7 @@ class TestCase extends BaseTestCase
         $this->fail("Expected CronParsingError exception for [$cron]");
     }
 
-    public function generateCombinationsFromMatrix($matrix)
+    public function generateCombinationsFromMatrix($matrix, $locale = 'en', $timeFormat24hours = false)
     {
         function combinations($matrix, $acc = []) {
             if (empty($matrix)) {
@@ -42,7 +42,7 @@ class TestCase extends BaseTestCase
         }
 
         foreach (combinations($matrix) as $cron) {
-            echo "\n" . $cron . "\t=> " . CronTranslator::translate($cron);
+            echo "\n" . $cron . "\t=> " . CronTranslator::translate($cron, $locale, $timeFormat24hours);
         }
     }
 }
