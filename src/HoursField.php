@@ -68,18 +68,15 @@ class HoursField extends Field
 
     public function format(?MinutesField $minute = null)
     {
-        $amOrPm = '';
-        if (! $this->expression->timeFormat24hours) {
-            $amOrPm = $this->getValue() < 12 ? 'am' : 'pm';
-        }
-        $hour = $this->getValue() === 0 ? 12 : $this->getValue();
-        $hour = $hour > 12 ? $hour - 12 : $hour;
-
         if ($this->expression->timeFormat24hours) {
-            return $minute
-                ? date("H:i", strtotime("{$hour}:{$minute->format()} {$amOrPm}"))
-                : date("H:i", strtotime("{$hour} {$amOrPm}"));
+            $hour = $this->getValue();
+
+            return $minute ? "{$hour}:{$minute->format()}" : "{$hour}:00";
         }
+
+        $amOrPm = $this->getValue() < 12 ? 'am' : 'pm';
+        $hour = $this->getValue() % 12;
+        $hour = $hour === 0 ? 12 : $hour;
 
         return $minute
             ? "{$hour}:{$minute->format()}{$amOrPm}"
