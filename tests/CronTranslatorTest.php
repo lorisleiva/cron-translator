@@ -129,9 +129,12 @@ class CronTranslatorTest extends TestCase
     public function it_can_translate_in_different_languages()
     {
         $this->assertCronTranslateTo('Chaque minute', '* * * * *', 'fr');
-        $this->assertCronTranslateTo('Chaque minute les Dimanches', '* * * * 0', 'fr');
+        $this->assertCronTranslateTo('Chaque minute les dimanches', '* * * * 0', 'fr');
         $this->assertCronTranslateTo('Chaque minute toutes les 2 heures', '* */2 * * *', 'fr');
         $this->assertCronTranslateTo('Chaque minute toutes les 3 heures le 2 de chaque mois', '* 1/3 2 * *', 'fr');
+        $this->assertCronTranslateTo('Chaque année en janvier le 1 à 1:01am', '1 1 1 1 *', 'fr');
+        $this->assertCronTranslateTo('Chaque mercredi à 10:00am', '0 10 * * 3', 'fr');
+        $this->assertCronTranslateTo('Les mardis en février le 2 à 2:02am', '2 2 2 2 2', 'fr');
     }
 
     /** @test */
