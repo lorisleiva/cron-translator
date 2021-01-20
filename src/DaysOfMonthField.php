@@ -6,50 +6,52 @@ class DaysOfMonthField extends Field
 {
     public $position = 2;
 
-    public function translateEvery($fields)
+    public function translateEvery()
     {
-        if ($fields->weekday->hasType('Once')) {
-            return $this->lang('days_of_month.every_once_on_day', [
-                'weekday' => $fields->weekday->format()
+        if ($this->expression->weekday->hasType('Once')) {
+            return $this->lang('days_of_week.every', [
+                'weekday' => $this->expression->weekday->format(),
             ]);
         }
 
-        return $this->lang('days_of_month.every_day');
+        return $this->lang('days_of_month.every');
     }
 
     public function translateIncrement()
     {
-        if ($this->count > 1) {
-            return $this->lang('days_of_month.multiple_days_ot_of_few', [
-                'count' => $this->count,
-                'increment' => $this->increment
+        if ($this->getCount() > 1) {
+            return $this->lang('days_of_month.multiple_per_increment', [
+                'count' => $this->getCount(),
+                'increment' => $this->getIncrement(),
             ]);
         }
 
-        return $this->lang('days_of_month.every_few_days', [
-            'increment' => $this->increment
+        return $this->lang('days_of_month.increment', [
+            'increment' => $this->getIncrement(),
         ]);
     }
 
     public function translateMultiple()
     {
-        return $this->lang('days_of_month.multiple_days_a_month', [
-            'count' => $this->count
+        return $this->lang('days_of_month.multiple_per_month', [
+            'count' => $this->getCount(),
         ]);
     }
 
-    public function translateOnce($fields)
+    public function translateOnce()
     {
-        if ($fields->month->hasType('Once')) {
+        $month = $this->expression->month;
+
+        if ($month->hasType('Once')) {
             return; // MonthsField adapts to "On January the 1st".
         }
 
-        if ($fields->month->hasType('Every') && ! $fields->month->dropped) {
+        if ($month->hasType('Every') && ! $month->dropped) {
             return; // MonthsField adapts to "The 1st of every month".
         }
 
-        if ($fields->month->hasType('Every') && $fields->month->dropped) {
-            return $this->lang('days_of_month.once_on_day_of_every_month', [
+        if ($month->hasType('Every') && $month->dropped) {
+            return $this->lang('days_of_month.every_on_day', [
                 'day' => $this->format()
             ]);
         }
@@ -61,22 +63,6 @@ class DaysOfMonthField extends Field
 
     public function format()
     {
-        if (! $this->isEnglishLocale()) {
-            return $this->value;
-        }
-
-        if (in_array($this->value, [1, 21, 31])) {
-            return $this->value . 'st';
-        }
-
-        if (in_array($this->value, [2, 22])) {
-            return $this->value . 'nd';
-        }
-
-        if (in_array($this->value, [3, 23])) {
-            return $this->value . 'rd';
-        }
-
-        return $this->value . 'th';
+        return $this->langCountable('ordinals', $this->getValue());
     }
 }

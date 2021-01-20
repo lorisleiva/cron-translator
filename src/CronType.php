@@ -8,12 +8,19 @@ class CronType
         'Every', 'Increment', 'Multiple', 'Once',
     ];
 
+    /** @var string */
     public $type;
+
+    /** @var ?int */
     public $value;
+
+    /** @var ?int */
     public $count;
+
+    /** @var ?int */
     public $increment;
 
-    private function __construct($type, $value = null, $count = null, $increment = null)
+    private function __construct(string $type, ?int $value = null, ?int $count = null, ?int $increment = null)
     {
         $this->type = $type;
         $this->value = $value;
@@ -26,22 +33,22 @@ class CronType
         return new static('Every');
     }
 
-    public static function increment($increment, $count = 1)
+    public static function increment(int $increment, int $count = 1)
     {
         return new static('Increment', null, $count, $increment);
     }
 
-    public static function multiple($count)
+    public static function multiple(int $count)
     {
         return new static('Multiple', null, $count);
     }
 
-    public static function once($value)
+    public static function once(int $value)
     {
         return new static('Once', $value);
     }
 
-    public static function parse($expression)
+    public static function parse(string $expression)
     {
         // Parse "*".
         if ($expression === '*') {
@@ -61,8 +68,8 @@ class CronType
         // Parse ranges of selected values like "1-5".
         if (preg_match("/^([0-9]+)\-([0-9]+)$/", $expression, $matches)) {
             $count = $matches[2] - $matches[1] + 1;
-            return $count > 1 
-                ? static::multiple($count) 
+            return $count > 1
+                ? static::multiple($count)
                 : static::once((int) $matches[1]);
         }
 

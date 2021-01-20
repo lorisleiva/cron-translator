@@ -1,7 +1,6 @@
 <?php
 
 return [
-    0 => 'svētdien',
     1 => 'pirmdien',
     2 => 'otrdien',
     3 => 'trešdien',

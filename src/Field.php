@@ -4,108 +4,69 @@ namespace Lorisleiva\CronTranslator;
 
 abstract class Field
 {
+    /** @var CronExpression */
     public $expression;
-    public $type;
-    public $value;
-    public $count;
-    public $increment;
-    public $dropped = false;
-    public $position;
-    public $locale;
-    public $clock;
-    public $translations;
-    public $months;
-    public $days;
 
-    public function __construct($expression, $locale, $clock)
+    /** @var string */
+    public $rawField;
+
+    /** @var CronType */
+    public $type;
+
+    /** @var bool */
+    public $dropped = false;
+
+    /** @var int */
+    public $position;
+
+    public function __construct(CronExpression $expression, string $rawField)
     {
         $this->expression = $expression;
-        $cronType = CronType::parse($expression);
-        $this->type = $cronType->type;
-        $this->value = $cronType->value;
-        $this->count = $cronType->count;
-        $this->increment = $cronType->increment;
-        $this->locale = $locale;
-        $this->clock = $clock;
-        $this->translations = $this->loadTranslations();
-        $this->months = $this->loadMonths();
-        $this->days = $this->loadDays();
+        $this->rawField = $rawField;
+        $this->type = CronType::parse($rawField);
     }
 
-    public function translate($fields)
+    public function translate()
     {
-        foreach (CronType::TYPES as $type) {
-            if ($this->hasType($type) && method_exists($this, "translate{$type}")) {
-                return $this->{"translate{$type}"}($fields);
-            }
+        $method = 'translate' . $this->type->type;
+
+        if (method_exists($this, $method)) {
+            return $this->{$method}();
         }
     }
 
     public function hasType()
     {
-        return in_array($this->type, func_get_args());
+        return $this->type->hasType(...func_get_args());
     }
 
-    public function times($count)
+    public function getValue()
     {
-        switch ($count) {
-            case 1: return $this->lang('times.once');
-            case 2: return $this->lang('times.twice');
-            default: return $this->lang('times.count', ['count' => $count]);
-        }
+        return $this->type->value;
     }
 
-    public function lang($key, $replace = [])
+    public function getCount()
     {
-        // Get translation value by key. Dot notation is supported.
-        $translation = $this->getLangValue($key);
-
-        // Replace placeholders with associated values. Multiple placeholders are supported.
-        foreach ($replace as $key => $value) {
-            $translation = str_replace(':' . $key, $value, $translation);
-        }
-
-        return $translation;
+        return $this->type->count;
     }
 
-    public function isEnglishLocale()
+    public function getIncrement()
     {
-        return $this->locale === 'en';
+        return $this->type->increment;
     }
 
-    public function clock24Hour()
+    public function getTimes()
     {
-        return $this->clock === '24hour';
+        return $this->langCountable('times', $this->getCount());
     }
 
-    private function getLangValue($key)
+    protected function langCountable(string $key, int $value)
     {
-        // Key can be a simple string or it can contain dot notation.
-        $keys = explode('.', $key);
-
-        // Create temporary variable. At this point $translation contains an array.
-        $translation = $this->translations;
-
-        // Find value for deepest $key level. As a result, $translation will contain a string.
-        foreach ($keys as $key) {
-            $translation = $translation[$key];
-        }
-
-        return $translation;
+        return $this->expression->langCountable($key, $value);
     }
 
-    private function loadTranslations()
+    protected function lang(string $key, array $replacements = [])
     {
-        return include "lang/{$this->locale}/translations.php";
-    }
-
-    private function loadMonths()
-    {
-        return include "lang/{$this->locale}/months.php";
-    }
-
-    private function loadDays()
-    {
-        return include "lang/{$this->locale}/days.php";
+        return $this->expression->lang($key, $replacements);
     }
 }
