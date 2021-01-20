@@ -33,7 +33,7 @@ return [
         'multiple_per_increment' => ':count mois sur :increment',
         'multiple_per_year' => ':count mois par an',
         'once_on_month' => 'en :month',
-        'once_on_day' => 'en :month le :day',
+        'once_on_day' => 'le :day :month',
     ],
     'days_of_week' => [
         'every' => 'chaque :weekday',
