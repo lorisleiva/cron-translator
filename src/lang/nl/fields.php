@@ -4,7 +4,7 @@ return [
     'minutes' => [
         'every' => 'iedere minuut',
         'increment' => 'iedere :increment minuten',
-        'times_per_increment' => ':times keer :increment minuten',
+        'times_per_increment' => ':times keer per :increment minuten',
         'multiple' => ':times per uur',
     ],
     'hours' => [
@@ -12,7 +12,7 @@ return [
         'once_an_hour' => 'een keer per uur',
         'increment' => 'iedere :increment uur',
         'multiple_per_increment' => ':count uur van de :increment',
-        'times_per_increment' => ':times keer :increment uur',
+        'times_per_increment' => ':times keer per :increment uur',
         'increment_chained' => 'van iedere :increment uur',
         'multiple_per_day' => ':count uur per dag',
         'times_per_day' => ':times keer per dag',

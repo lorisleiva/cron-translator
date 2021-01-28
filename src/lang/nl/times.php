@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => ':number keer',
-    1 => 'een keer',
-    2 => 'twee keer',
+    'default' => ':number keer per',
+    1 => 'een',
+    2 => 'twee',
 ];
