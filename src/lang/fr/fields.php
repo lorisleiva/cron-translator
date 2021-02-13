@@ -19,7 +19,7 @@ return [
         'once_at_time' => 'à :time',
     ],
     'days_of_month' => [
-        'every' => 'tous les jours',
+        'every' => 'chaque jour',
         'increment' => 'tous les :increment jours',
         'multiple_per_increment' => ':count jours sur :increment',
         'multiple_per_month' => ':count jours par mois',
