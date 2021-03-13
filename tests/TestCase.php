@@ -18,7 +18,7 @@ class TestCase extends BaseTestCase
         try {
             CronTranslator::translate($cron);
         } catch (CronParsingException $expression) {
-            return $this->addToAssertionCount(1);
+            $this->addToAssertionCount(1);
         }
 
         $this->fail("Expected CronParsingError exception for [$cron]");
