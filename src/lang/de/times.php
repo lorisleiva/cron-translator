@@ -2,6 +2,6 @@
 
 return [
     'default' => ':number',
-    1 => 'Einmal',
-    2 => 'Zweimal',
+    1 => 'Ein',
+    2 => 'Zwei',
 ];
