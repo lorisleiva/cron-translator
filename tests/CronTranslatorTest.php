@@ -138,6 +138,18 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
+    public function it_can_translate_in_portuguese()
+    {
+        $this->assertCronTranslateTo('Todos os minutos', '* * * * *', 'pt');
+        $this->assertCronTranslateTo('Todos os minutos nas/nos Domingos', '* * * * 0', 'pt');
+        $this->assertCronTranslateTo('Todos os minutos de cada 2 horas', '* */2 * * *', 'pt');
+        $this->assertCronTranslateTo('Todos os minutos de cada 3 horas no 2º dia de cada mês', '* 1/3 2 * *', 'pt');
+        $this->assertCronTranslateTo('Todos os anos no 1º de Janeiro às 1:01am', '1 1 1 1 *', 'pt');
+        $this->assertCronTranslateTo('Em cada Quarta-feira às 10:00am', '0 10 * * 3', 'pt');
+        $this->assertCronTranslateTo('Nas/nos Terça-feiras no 2º de Fevereiro às 2:02am', '2 2 2 2 2', 'pt');
+    }
+
+    /** @test */
     public function it_can_format_the_time_in_12_and_24_hours()
     {
         $this->assertCronTranslateTo('Every day at 10:30pm', '30 22 * * *', 'en', false);
