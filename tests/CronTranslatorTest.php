@@ -145,7 +145,7 @@ class CronTranslatorTest extends TestCase
         $this->assertCronTranslateTo('Todos os minutos de cada 2 horas', '* */2 * * *', 'pt');
         $this->assertCronTranslateTo('Todos os minutos de cada 3 horas no 2º dia de cada mês', '* 1/3 2 * *', 'pt');
         $this->assertCronTranslateTo('Todos os anos no 1º de Janeiro às 1:01am', '1 1 1 1 *', 'pt');
-        $this->assertCronTranslateTo('Em cada Quarta-feira às 10:00am', '0 10 * * 3', 'pt');
+        $this->assertCronTranslateTo('Cada Quarta-feira às 10:00am', '0 10 * * 3', 'pt');
         $this->assertCronTranslateTo('Nas/nos Terça-feiras no 2º de Fevereiro às 2:02am', '2 2 2 2 2', 'pt');
     }
 
