@@ -42,3 +42,4 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `en` — English
 - `fr` — French
 - `lv` — Latvian
+- `nl` — Dutch
