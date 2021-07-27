@@ -34,12 +34,13 @@ You may also provide a locale as a second argument and whether to format the tim
 
 
 ```php
-CronTranslator::translate('30 18 * * *', 'fr');       // => Tous les jours à 6:30pm
-CronTranslator::translate('30 18 * * *', 'fr', true); // => Tous les jours à 18:30
+CronTranslator::translate('30 18 * * *', 'fr');       // => Chaque jour à 6:30pm
+CronTranslator::translate('30 18 * * *', 'fr', true); // => Chaque jour à 18:30
 ```
 
 The following locales are currently supported. Feel free to PR more locales if you need them. 🙂
+- `ar` — Arabic
+- `nl` — Dutch
 - `en` — English
 - `fr` — French
 - `lv` — Latvian
-- `nl` — Dutch
