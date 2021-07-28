@@ -40,7 +40,10 @@ CronTranslator::translate('30 18 * * *', 'fr', true); // => Chaque jour à 18:30
 
 The following locales are currently supported. Feel free to PR more locales if you need them. 🙂
 - `ar` — Arabic
-- `nl` — Dutch
+- `de` — German
 - `en` — English
+- `es` — Spanish
 - `fr` — French
 - `lv` — Latvian
+- `nl` — Dutch
+- `pt` — Portugese
