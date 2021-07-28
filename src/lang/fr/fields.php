@@ -15,7 +15,7 @@ return [
         'times_per_increment' => ':times toutes les :increment heures',
         'increment_chained' => 'toutes les :increment heures',
         'multiple_per_day' => ':count heures par jour',
-        'times_per_day' => ':times fois par jour',
+        'times_per_day' => ':times par jour',
         'once_at_time' => 'à :time',
     ],
     'days_of_month' => [
