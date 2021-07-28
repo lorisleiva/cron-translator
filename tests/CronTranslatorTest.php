@@ -129,24 +129,7 @@ class CronTranslatorTest extends TestCase
     public function it_can_translate_in_different_languages()
     {
         $this->assertCronTranslateTo('Chaque minute', '* * * * *', 'fr');
-        $this->assertCronTranslateTo('Chaque minute les dimanches', '* * * * 0', 'fr');
-        $this->assertCronTranslateTo('Chaque minute toutes les 2 heures', '* */2 * * *', 'fr');
-        $this->assertCronTranslateTo('Chaque minute toutes les 3 heures le 2 de chaque mois', '* 1/3 2 * *', 'fr');
-        $this->assertCronTranslateTo('Chaque année le 1er janvier à 1:01am', '1 1 1 1 *', 'fr');
-        $this->assertCronTranslateTo('Chaque mercredi à 10:00am', '0 10 * * 3', 'fr');
-        $this->assertCronTranslateTo('Les mardis le 2 février à 2:02am', '2 2 2 2 2', 'fr');
-    }
-
-    /** @test */
-    public function it_can_translate_in_portuguese()
-    {
         $this->assertCronTranslateTo('Todos os minutos', '* * * * *', 'pt');
-        $this->assertCronTranslateTo('Todos os minutos nas/nos Domingos', '* * * * 0', 'pt');
-        $this->assertCronTranslateTo('Todos os minutos de cada 2 horas', '* */2 * * *', 'pt');
-        $this->assertCronTranslateTo('Todos os minutos de cada 3 horas no 2º dia de cada mês', '* 1/3 2 * *', 'pt');
-        $this->assertCronTranslateTo('Todos os anos no 1º de Janeiro às 1:01am', '1 1 1 1 *', 'pt');
-        $this->assertCronTranslateTo('Cada Quarta-feira às 10:00am', '0 10 * * 3', 'pt');
-        $this->assertCronTranslateTo('Nas/nos Terça-feiras no 2º de Fevereiro às 2:02am', '2 2 2 2 2', 'pt');
     }
 
     /** @test */
