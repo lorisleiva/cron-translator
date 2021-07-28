@@ -8,13 +8,6 @@ use Lorisleiva\CronTranslator\CronParsingException;
 
 class TestCase extends BaseTestCase
 {
-    # makes it easier to test different languages
-    public function assertCronTranslateToDE($expected, $actual, $locale = 'de', $timeFormat24hours = true)
-    {
-        #$this->assertEquals($expected, CronTranslator::translate($actual, $locale, $timeFormat24hours));
-        $this->assertCronTranslateTo($expected, $actual, $locale, $timeFormat24hours);
-    }
-
     public function assertCronTranslateTo($expected, $actual, $locale = 'en', $timeFormat24hours = false)
     {
         $this->assertEquals($expected, CronTranslator::translate($actual, $locale, $timeFormat24hours));
@@ -26,6 +19,7 @@ class TestCase extends BaseTestCase
             CronTranslator::translate($cron);
         } catch (CronParsingException $expression) {
             $this->addToAssertionCount(1);
+            return;
         }
 
         $this->fail("Expected CronParsingError exception for [$cron]");

@@ -39,7 +39,7 @@ class CronTranslatorTestDE extends TestCase
         $this->assertCronTranslateToDE('Jeden 1. eines jeden Monats um 0:00', '0 0 1 * *');
         $this->assertCronTranslateToDE('Jeden 1. eines jeden Monats des Sonntags um 0:00', '0 0 1 * 0');
         $this->assertCronTranslateToDE('Jedes Jahr im Januar den 1. um 0:00', '0 0 1 1 *');
-        # TODO 'Des Sonntags'
+        // TODO 'Des Sonntags'
         $this->assertCronTranslateToDE('Des Sonntags im Januar den 1. um 0:00', '0 0 1 1 0');
 
         // More realistic examples.
@@ -47,10 +47,8 @@ class CronTranslatorTestDE extends TestCase
         $this->assertCronTranslateToDE('Jede Minute des Montags um 15:00', '* 15 * * 1');
         $this->assertCronTranslateToDE('Jede Minute im Januar den 3.', '* * 3 1 *');
         $this->assertCronTranslateToDE('Jede Minute des Montags im April', '* * * 4 1');
-        # TODO "Des Montags"
+        // TODO "Des Montags"
         $this->assertCronTranslateToDE('Des Montags im April den 22. um 15:10', '10 15 22 4 1');
-
-        // Paparazzi examples.
         $this->assertCronTranslateToDE('Jeden Tag um 22:00', '0 22 * * *');
         $this->assertCronTranslateToDE('Jeden Tag um 9:00', '0 9 * * *');
         $this->assertCronTranslateToDE('Jeden Montag um 16:00', '0 16 * * 1');
@@ -115,5 +113,10 @@ class CronTranslatorTestDE extends TestCase
         $this->assertCronTranslateToDE('Jedes Jahr im Januar den 1. um 0:00', '@annually');
     }
 
-    # TODO missing test  'days_of_week' => 'multiple_per_increment'
+    // TODO: missing test 'days_of_week' => 'multiple_per_increment'.
+
+    public function assertCronTranslateToDE($expected, $actual, $timeFormat24hours = true)
+    {
+        $this->assertCronTranslateTo($expected, $actual, 'de', $timeFormat24hours);
+    }
 }
