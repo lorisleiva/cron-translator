@@ -46,4 +46,4 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `fr` — French
 - `lv` — Latvian
 - `nl` — Dutch
-- `pt` — Portugese
+- `pt` — Portuguese
