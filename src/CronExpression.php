@@ -46,7 +46,7 @@ class CronExpression
         $this->loadTranslations();
     }
 
-    public function getFields()
+    public function getFields(): array
     {
         return [
             $this->minute,
@@ -108,7 +108,7 @@ class CronExpression
         return include $filename;
     }
 
-    protected function getTranslationDirectory()
+    protected function getTranslationDirectory(): string
     {
         return __DIR__ . '/lang/' . $this->locale;
     }

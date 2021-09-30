@@ -32,7 +32,7 @@ class MinutesField extends Field
         ]);
     }
 
-    public function format()
+    public function format(): string
     {
         return ($this->getValue() < 10 ? '0' : '') . $this->getValue();
     }

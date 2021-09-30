@@ -66,7 +66,7 @@ class HoursField extends Field
         ]);
     }
 
-    public function format(?MinutesField $minute = null)
+    public function format(?MinutesField $minute = null): string
     {
         if ($this->expression->timeFormat24hours) {
             $hour = $this->getValue();

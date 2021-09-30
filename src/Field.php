@@ -35,22 +35,22 @@ abstract class Field
         }
     }
 
-    public function hasType()
+    public function hasType(): bool
     {
         return $this->type->hasType(...func_get_args());
     }
 
-    public function getValue()
+    public function getValue(): ?int
     {
         return $this->type->value;
     }
 
-    public function getCount()
+    public function getCount(): ?int
     {
         return $this->type->count;
     }
 
-    public function getIncrement()
+    public function getIncrement(): ?int
     {
         return $this->type->increment;
     }

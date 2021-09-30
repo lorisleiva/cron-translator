@@ -15,7 +15,7 @@ class CronTranslator
         '@hourly' => '0 * * * *'
     ];
 
-    public static function translate(string $cron, string $locale = 'en', bool $timeFormat24hours = false)
+    public static function translate(string $cron, string $locale = 'en', bool $timeFormat24hours = false): string
     {
         if (isset(self::$extendedMap[$cron])) {
             $cron = self::$extendedMap[$cron];
