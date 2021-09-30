@@ -4,7 +4,7 @@ namespace Lorisleiva\CronTranslator;
 
 class MinutesField extends Field
 {
-    public $position = 0;
+    public int $position = 0;
 
     public function translateEvery()
     {

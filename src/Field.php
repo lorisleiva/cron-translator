@@ -4,20 +4,11 @@ namespace Lorisleiva\CronTranslator;
 
 abstract class Field
 {
-    /** @var CronExpression */
-    public $expression;
-
-    /** @var string */
-    public $rawField;
-
-    /** @var CronType */
-    public $type;
-
-    /** @var bool */
-    public $dropped = false;
-
-    /** @var int */
-    public $position;
+    public CronExpression $expression;
+    public string $rawField;
+    public CronType $type;
+    public bool $dropped = false;
+    public int $position;
 
     public function __construct(CronExpression $expression, string $rawField)
     {

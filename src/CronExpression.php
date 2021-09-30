@@ -4,32 +4,15 @@ namespace Lorisleiva\CronTranslator;
 
 class CronExpression
 {
-    /** @var string */
-    public $raw;
-
-    /** @var MinutesField */
-    public $minute;
-
-    /** @var HoursField */
-    public $hour;
-
-    /** @var DaysOfMonthField */
-    public $day;
-
-    /** @var MonthsField */
-    public $month;
-
-    /** @var DaysOfWeekField */
-    public $weekday;
-
-    /** @var string */
-    public $locale;
-
-    /** @var bool */
-    public $timeFormat24hours;
-
-    /** @var array */
-    public $translations;
+    public string $raw;
+    public MinutesField $minute;
+    public HoursField $hour;
+    public DaysOfMonthField $day;
+    public MonthsField $month;
+    public DaysOfWeekField $weekday;
+    public string $locale;
+    public bool $timeFormat24hours;
+    public array $translations;
 
     public function __construct(string $cron, string $locale = 'en', bool $timeFormat24hours = false)
     {
@@ -61,9 +44,7 @@ class CronExpression
     {
         $array = $this->translations[$type];
 
-        $value = isset($array[$number])
-            ? $array[$number]
-            : ($array['default'] ?: '');
+        $value = $array[$number] ?? ($array['default'] ?: '');
 
         return str_replace(':number', $number, $value);
     }
@@ -86,6 +67,9 @@ class CronExpression
         }
     }
 
+    /**
+     * @throws TranslationFileMissingException
+     */
     protected function loadTranslations()
     {
         $this->translations = [

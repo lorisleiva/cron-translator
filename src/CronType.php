@@ -8,17 +8,10 @@ class CronType
         'Every', 'Increment', 'Multiple', 'Once',
     ];
 
-    /** @var string */
-    public $type;
-
-    /** @var ?int */
-    public $value;
-
-    /** @var ?int */
-    public $count;
-
-    /** @var ?int */
-    public $increment;
+    public string $type;
+    public ?int $value;
+    public ?int $count;
+    public ?int $increment;
 
     private function __construct(string $type, ?int $value = null, ?int $count = null, ?int $increment = null)
     {
@@ -48,6 +41,9 @@ class CronType
         return new static('Once', $value);
     }
 
+    /**
+     * @throws CronParsingException
+     */
     public static function parse(string $expression): CronType
     {
         // Parse "*".

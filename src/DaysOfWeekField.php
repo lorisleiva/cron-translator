@@ -4,7 +4,7 @@ namespace Lorisleiva\CronTranslator;
 
 class DaysOfWeekField extends Field
 {
-    public $position = 4;
+    public int $position = 4;
 
     public function translateEvery()
     {
@@ -43,7 +43,7 @@ class DaysOfWeekField extends Field
         ]);
     }
 
-    public function format()
+    public function format(): string
     {
         $weekday = $this->getValue() === 0 ? 7 : $this->getValue();
 

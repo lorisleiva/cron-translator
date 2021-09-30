@@ -4,7 +4,7 @@ namespace Lorisleiva\CronTranslator;
 
 class MonthsField extends Field
 {
-    public $position = 3;
+    public int $position = 3;
 
     public function translateEvery()
     {
@@ -52,6 +52,9 @@ class MonthsField extends Field
         ]);
     }
 
+    /**
+     * @throws CronParsingException
+     */
     public function format()
     {
         if ($this->getValue() < 1 || $this->getValue() > 12) {
