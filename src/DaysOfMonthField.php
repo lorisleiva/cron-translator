@@ -4,7 +4,7 @@ namespace Lorisleiva\CronTranslator;
 
 class DaysOfMonthField extends Field
 {
-    public $position = 2;
+    public int $position = 2;
 
     public function translateEvery()
     {
@@ -38,16 +38,16 @@ class DaysOfMonthField extends Field
         ]);
     }
 
-    public function translateOnce()
+    public function translateOnce(): ?string
     {
         $month = $this->expression->month;
 
         if ($month->hasType('Once')) {
-            return; // MonthsField adapts to "On January the 1st".
+            return null; // MonthsField adapts to "On January the 1st".
         }
 
         if ($month->hasType('Every') && ! $month->dropped) {
-            return; // MonthsField adapts to "The 1st of every month".
+            return null; // MonthsField adapts to "The 1st of every month".
         }
 
         if ($month->hasType('Every') && $month->dropped) {

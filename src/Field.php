@@ -4,20 +4,11 @@ namespace Lorisleiva\CronTranslator;
 
 abstract class Field
 {
-    /** @var CronExpression */
-    public $expression;
-
-    /** @var string */
-    public $rawField;
-
-    /** @var CronType */
-    public $type;
-
-    /** @var bool */
-    public $dropped = false;
-
-    /** @var int */
-    public $position;
+    public CronExpression $expression;
+    public string $rawField;
+    public CronType $type;
+    public bool $dropped = false;
+    public int $position;
 
     public function __construct(CronExpression $expression, string $rawField)
     {
@@ -35,22 +26,22 @@ abstract class Field
         }
     }
 
-    public function hasType()
+    public function hasType(): bool
     {
         return $this->type->hasType(...func_get_args());
     }
 
-    public function getValue()
+    public function getValue(): ?int
     {
         return $this->type->value;
     }
 
-    public function getCount()
+    public function getCount(): ?int
     {
         return $this->type->count;
     }
 
-    public function getIncrement()
+    public function getIncrement(): ?int
     {
         return $this->type->increment;
     }

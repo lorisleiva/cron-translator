@@ -16,10 +16,10 @@
         }
     ],
     "require": {
-        "php" : "^7.3 || ^8.0"
+        "php" : "^7.4 || ^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit" : "^8.0"
+        "phpunit/phpunit" : "^8.5.21 || ^9.5"
     },
     "autoload": {
         "psr-4": {
@@ -30,7 +30,5 @@
         "psr-4": {
             "Lorisleiva\\CronTranslator\\Tests\\": "tests"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

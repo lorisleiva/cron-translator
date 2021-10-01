@@ -8,12 +8,12 @@ use Lorisleiva\CronTranslator\CronParsingException;
 
 class TestCase extends BaseTestCase
 {
-    public function assertCronTranslateTo($expected, $actual, $locale = 'en', $timeFormat24hours = false)
+    public function assertCronTranslateTo(string $expected, string $actual, string $locale = 'en', bool $timeFormat24hours = false)
     {
         $this->assertEquals($expected, CronTranslator::translate($actual, $locale, $timeFormat24hours));
     }
 
-    public function assertCronThrowsParsingError($cron)
+    public function assertCronThrowsParsingError(string $cron)
     {
         try {
             CronTranslator::translate($cron);
@@ -25,9 +25,10 @@ class TestCase extends BaseTestCase
         $this->fail("Expected CronParsingError exception for [$cron]");
     }
 
-    public function generateCombinationsFromMatrix($matrix, $locale = 'en', $timeFormat24hours = false)
+    public function generateCombinationsFromMatrix(array $matrix, string $locale = 'en', bool $timeFormat24hours = false)
     {
-        function combinations($matrix, $acc = []) {
+        function combinations($matrix, $acc = []): array
+        {
             if (empty($matrix)) {
                 return [implode(' ', $acc)];
             }

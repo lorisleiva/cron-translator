@@ -8,17 +8,10 @@ class CronType
         'Every', 'Increment', 'Multiple', 'Once',
     ];
 
-    /** @var string */
-    public $type;
-
-    /** @var ?int */
-    public $value;
-
-    /** @var ?int */
-    public $count;
-
-    /** @var ?int */
-    public $increment;
+    public string $type;
+    public ?int $value;
+    public ?int $count;
+    public ?int $increment;
 
     private function __construct(string $type, ?int $value = null, ?int $count = null, ?int $increment = null)
     {
@@ -28,27 +21,30 @@ class CronType
         $this->increment = $increment;
     }
 
-    public static function every()
+    public static function every(): CronType
     {
         return new static('Every');
     }
 
-    public static function increment(int $increment, int $count = 1)
+    public static function increment(int $increment, int $count = 1): CronType
     {
         return new static('Increment', null, $count, $increment);
     }
 
-    public static function multiple(int $count)
+    public static function multiple(int $count): CronType
     {
         return new static('Multiple', null, $count);
     }
 
-    public static function once(int $value)
+    public static function once(int $value): CronType
     {
         return new static('Once', $value);
     }
 
-    public static function parse(string $expression)
+    /**
+     * @throws CronParsingException
+     */
+    public static function parse(string $expression): CronType
     {
         // Parse "*".
         if ($expression === '*') {
@@ -88,7 +84,7 @@ class CronType
         throw new CronParsingException($expression);
     }
 
-    public function hasType()
+    public function hasType(): bool
     {
         return in_array($this->type, func_get_args());
     }

@@ -4,7 +4,7 @@ namespace Lorisleiva\CronTranslator;
 
 class HoursField extends Field
 {
-    public $position = 1;
+    public int $position = 1;
 
     public function translateEvery()
     {
@@ -66,7 +66,7 @@ class HoursField extends Field
         ]);
     }
 
-    public function format(?MinutesField $minute = null)
+    public function format(?MinutesField $minute = null): string
     {
         if ($this->expression->timeFormat24hours) {
             $hour = $this->getValue();

@@ -1,42 +1,37 @@
+# .github/workflows/tests.yaml
 name: Tests
 
-on: [push]
+on: ["push", "pull_request"]
 
 jobs:
-  phpunit73:
-    name: "Tests on PHP 7.3"
+  tests:
     runs-on: ubuntu-latest
-    container: 
-      image: lorisleiva/laravel-docker:7.3
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1']
+        stability: [ prefer-lowest, prefer-stable ]
+
+    name: PHP ${{ matrix.php }} - ${{ matrix.stability }} tests
     steps:
-    - uses: actions/checkout@v2
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: /composer/cache/files
-        key: dependencies-composer-${{ hashFiles('composer.json') }}
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
-    - name: Run tests
-      run: phpunit
-      
-  phpunit74:
-    name: "Tests on PHP 7.4"
-    runs-on: ubuntu-latest
-    container: 
-      image: lorisleiva/laravel-docker:7.4
-    steps:
-    - uses: actions/checkout@v2
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: /composer/cache/files
-        key: dependencies-composer-${{ hashFiles('composer.json') }}
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
-    - name: Run tests
-      run: phpunit
+      # basically git clone
+      - uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      # use PHP of specific version
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pcov
+          coverage: pcov
+
+      - name: Install dependencies
+        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --no-suggest
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose

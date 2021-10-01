@@ -6,7 +6,7 @@ use Throwable;
 
 class CronTranslator
 {
-    private static $extendedMap = [
+    private static array $extendedMap = [
         '@yearly' => '0 0 1 1 *',
         '@annually' => '0 0 1 1 *',
         '@monthly' => '0 0 1 * *',
@@ -15,7 +15,7 @@ class CronTranslator
         '@hourly' => '0 * * * *'
     ];
 
-    public static function translate(string $cron, string $locale = 'en', bool $timeFormat24hours = false)
+    public static function translate(string $cron, string $locale = 'en', bool $timeFormat24hours = false): string
     {
         if (isset(self::$extendedMap[$cron])) {
             $cron = self::$extendedMap[$cron];
@@ -67,7 +67,7 @@ class CronTranslator
         );
     }
 
-    protected static function filterType(array $fields, ...$types)
+    protected static function filterType(array $fields, ...$types): array
     {
         return array_filter($fields, function (Field $field) use ($types) {
             return $field->hasType(...$types);
