@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'default' => ':number 次',
+    'default' => ':number次',
 ];
