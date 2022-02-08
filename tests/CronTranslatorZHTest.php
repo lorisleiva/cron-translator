@@ -33,9 +33,9 @@ class CronTranslatorZHTest extends TestCase
         $this->assertCronTranslateTo('每整点 在一月1号', '0 * 1 1 *');
         $this->assertCronTranslateTo('每整点 在周日 在一月1号', '0 * 1 1 0');
         $this->assertCronTranslateTo('每天 在12:00am', '0 0 * * *');
-        $this->assertCronTranslateTo('每周 周日 在12:00am', '0 0 * * 0');
+        $this->assertCronTranslateTo('每周周日 在12:00am', '0 0 * * 0');
         $this->assertCronTranslateTo('每天 在一月 在12:00am', '0 0 * 1 *');
-        $this->assertCronTranslateTo('每周 周日 在一月 在12:00am', '0 0 * 1 0');
+        $this->assertCronTranslateTo('每周周日 在一月 在12:00am', '0 0 * 1 0');
         $this->assertCronTranslateTo('每月1号 在12:00am', '0 0 1 * *');
         $this->assertCronTranslateTo('每月1号 在周日 在12:00am', '0 0 1 * 0');
         $this->assertCronTranslateTo('每年 在一月1号 在12:00am', '0 0 1 1 *');
@@ -51,7 +51,7 @@ class CronTranslatorZHTest extends TestCase
         // Paparazzi examples.
         $this->assertCronTranslateTo('每天 在10:00pm', '0 22 * * *');
         $this->assertCronTranslateTo('每天 在9:00am', '0 9 * * *');
-        $this->assertCronTranslateTo('每周 周一 在4:00pm', '0 16 * * 1');
+        $this->assertCronTranslateTo('每周周一 在4:00pm', '0 16 * * 1');
         $this->assertCronTranslateTo('每年 在一月1号 在12:00am', '0 0 1 1 *');
         $this->assertCronTranslateTo('每月1号 在12:00am', '0 0 1 * *');
     }
@@ -66,51 +66,51 @@ class CronTranslatorZHTest extends TestCase
         $this->assertCronTranslateTo('一小时2次 每天有5小时', '0,30 1-5 * * *');
         $this->assertCronTranslateTo('每天5次', '0 1-5 * * *');
         $this->assertCronTranslateTo('每分钟 每天有5小时', '* 1-5 * * *');
-        $this->assertCronTranslateTo('每月 5 天 在1:00am', '0 1 1-5 * *');
-        $this->assertCronTranslateTo('5 days a month 2 months a year at 1:00am', '0 1 1-5 5,6 *');
-        $this->assertCronTranslateTo('2 months a year on the 5th at 1:00am', '0 1 5 5,6 *');
-        $this->assertCronTranslateTo('The 5th of every month 4 days a week at 1:00am', '0 1 5 * 1-4');
+        $this->assertCronTranslateTo('每月5天 在1:00am', '0 1 1-5 * *');
+        $this->assertCronTranslateTo('每月5天 每年2个月 在1:00am', '0 1 1-5 5,6 *');
+        $this->assertCronTranslateTo('每年2个月 在5号 在1:00am', '0 1 5 5,6 *');
+        $this->assertCronTranslateTo('每月5号 一周4天 在1:00am', '0 1 5 * 1-4');
     }
 
     /** @test */
     public function it_translate_expressions_with_increment()
     {
-        $this->assertCronTranslateTo('Every 2 minutes', '*/2 * * * *');
-        $this->assertCronTranslateTo('Every 2 minutes', '1/2 * * * *');
-        $this->assertCronTranslateTo('Twice every 4 minutes', '1,3/4 * * * *');
-        $this->assertCronTranslateTo('3 times every 5 minutes', '1-3/5 * * * *');
-        $this->assertCronTranslateTo('Every 2 minutes at 2pm', '*/2 14 * * *');
-        $this->assertCronTranslateTo('Once an hour every 2 days', '0 * */2 * *');
-        $this->assertCronTranslateTo('Every minute every 2 days', '* * */2 * *');
-        $this->assertCronTranslateTo('Once every 2 hours', '0 */2 * * *');
-        $this->assertCronTranslateTo('Twice every 5 hours', '0 1,2/5 * * *');
-        $this->assertCronTranslateTo('Every minute 2 hours out of 5', '* 1,2/5 * * *');
-        $this->assertCronTranslateTo('Every day every 4 months at 12:00am', '0 0 * */4 *');
+        $this->assertCronTranslateTo('每2分钟', '*/2 * * * *');
+        $this->assertCronTranslateTo('每2分钟', '1/2 * * * *');
+        $this->assertCronTranslateTo('每4分钟2次', '1,3/4 * * * *');
+        $this->assertCronTranslateTo('每5分钟3次', '1-3/5 * * * *');
+        $this->assertCronTranslateTo('每2分钟 在2pm', '*/2 14 * * *');
+        $this->assertCronTranslateTo('每整点 每2天', '0 * */2 * *');
+        $this->assertCronTranslateTo('每分钟 每2天', '* * */2 * *');
+        $this->assertCronTranslateTo('每2小时1次', '0 */2 * * *');
+        $this->assertCronTranslateTo('每5小时2次', '0 1,2/5 * * *');
+        $this->assertCronTranslateTo('每分钟 每5小时中有2小时', '* 1,2/5 * * *');
+        $this->assertCronTranslateTo('每天 每4个月 在12:00am', '0 0 * */4 *');
     }
 
     /** @test */
     public function it_adds_junctions_to_certain_combinations_of_cron_types()
     {
-        $this->assertCronTranslateTo('Every minute of every 2 hours', '* */2 * * *');
-        $this->assertCronTranslateTo('Every minute of every 3 hours on the 2nd of every month', '* 1/3 2 * *');
+        $this->assertCronTranslateTo('每分钟 每2小时', '* */2 * * *');
+        $this->assertCronTranslateTo('每分钟 每3小时 在每月2号', '* 1/3 2 * *');
     }
 
     /** @test */
     public function it_converts_ranges_of_one_into_once_cron_types()
     {
-        $this->assertCronTranslateTo('Every minute at 8am', '* 8-8 * * *');
-        $this->assertCronTranslateTo('Every minute on January', '* * * 1-1 *');
+        $this->assertCronTranslateTo('每分钟 在8am', '* 8-8 * * *');
+        $this->assertCronTranslateTo('每分钟 在一月', '* * * 1-1 *');
     }
 
     /** @test */
     public function it_handles_extended_cron_syntax()
     {
-        $this->assertCronTranslateTo('Once an hour', '@hourly');
-        $this->assertCronTranslateTo('Every day at 12:00am', '@daily');
-        $this->assertCronTranslateTo('Every Sunday at 12:00am', '@weekly');
-        $this->assertCronTranslateTo('The 1st of every month at 12:00am', '@monthly');
-        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '@yearly');
-        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '@annually');
+        $this->assertCronTranslateTo('每整点', '@hourly');
+        $this->assertCronTranslateTo('每天 在12:00am', '@daily');
+        $this->assertCronTranslateTo('每周周日 在12:00am', '@weekly');
+        $this->assertCronTranslateTo('每月1号 在12:00am', '@monthly');
+        $this->assertCronTranslateTo('每年 在一月1号 在12:00am', '@yearly');
+        $this->assertCronTranslateTo('每年 在一月1号 在12:00am', '@annually');
     }
 
     /** @test */
