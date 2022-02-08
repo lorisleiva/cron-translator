@@ -113,58 +113,6 @@ class CronTranslatorZHTest extends TestCase
         $this->assertCronTranslateTo('每年 在一月1号 在12:00am', '@annually');
     }
 
-    /** @test */
-    public function it_returns_parsing_errors_when_something_goes_wrong()
-    {
-        $this->assertCronThrowsParsingError('I_AM_NOT_A_CRON_EXPRESSION');
-        $this->assertCronThrowsParsingError('A * * * *');
-        $this->assertCronThrowsParsingError('1,2-3 * * * *');
-        $this->assertCronThrowsParsingError('1/2/3 * * * *');
-        $this->assertCronThrowsParsingError('* * * 0 *');
-        $this->assertCronThrowsParsingError('* * * 13 *');
-        $this->assertCronThrowsParsingError('* * * * 8');
-    }
-
-    /** @test */
-    public function it_can_translate_in_different_languages()
-    {
-        $this->assertCronTranslateTo('Chaque minute', '* * * * *', 'fr');
-        $this->assertCronTranslateTo('Todos os minutos', '* * * * *', 'pt');
-    }
-
-    /** @test */
-    public function it_can_format_the_time_in_12_and_24_hours()
-    {
-        $this->assertCronTranslateTo('Every day at 10:30pm', '30 22 * * *', 'en', false);
-        $this->assertCronTranslateTo('Every day at 22:30', '30 22 * * *', 'en', true);
-        $this->assertCronTranslateTo('Every minute at 6am', '* 6 * * *', 'en', false);
-        $this->assertCronTranslateTo('Every minute at 6:00', '* 6 * * *', 'en', true);
-    }
-
-    /** @test */
-    public function it_can_translate_in_different_languages_and_different_time_format()
-    {
-        $this->assertCronTranslateTo('Chaque jour à 10:30pm', '30 22 * * *', 'fr', false);
-        $this->assertCronTranslateTo('Chaque jour à 22:30', '30 22 * * *', 'fr', true);
-        $this->assertCronTranslateTo('Chaque minute à 6am', '* 6 * * *', 'fr', false);
-        $this->assertCronTranslateTo('Chaque minute à 6:00', '* 6 * * *', 'fr', true);
-    }
-
-    /**
-     * @skip
-     * @doesNotPerformAssertions
-     */
-    public function result_generator()
-    {
-        $this->generateCombinationsFromMatrix([
-            ['*', '0', '1,2', '*/2'],
-            ['*', '0', '1,2', '*/2'],
-            ['*', '1', '1,2', '*/2'],
-            ['*', '1', '1,2', '*/2'],
-            ['*', '0', '1,2', '*/2'],
-        ]);
-    }
-
     public function assertCronTranslateTo(string $expected, string $actual, string $locale = 'zh', bool $timeFormat24hours = false)
     {
         parent::assertCronTranslateTo($expected, $actual, $locale, $timeFormat24hours);
