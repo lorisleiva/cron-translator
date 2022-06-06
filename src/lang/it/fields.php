@@ -16,7 +16,7 @@ return [
         'increment_chained' => 'di ogni :increment ore',
         'multiple_per_day' => ':count ore al giorno',
         'times_per_day' => ':times al giorno',
-        'once_at_time' => 'a :time',
+        'once_at_time' => 'alle :time',
     ],
     'days_of_month' => [
         'every' => 'ogni giorno',
@@ -40,7 +40,7 @@ return [
         'increment' => 'ogni :increment giorni della settimana',
         'multiple_per_increment' => ':count giorni della settimana fuori di :increment',
         'multiple_days_a_week' => ':count giorni a settimana',
-        'once_on_day' => 'a :days',
+        'once_on_day' => 'il :days',
     ],
     'years' => [
         'every' => 'ogni anno',
