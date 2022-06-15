@@ -48,3 +48,4 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `nl` — Dutch
 - `pt` — Portuguese
 - `zh` — Chinese
+- `sk` - Slovak
