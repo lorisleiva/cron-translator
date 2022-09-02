@@ -5,7 +5,7 @@ namespace Lorisleiva\CronTranslator\Tests;
 class CronTranslatorDETest extends TestCase
 {
     /** @test */
-    public function it_translates_expressions_to_german_with_alle_and_once()
+    public function it_translates_expressions_to_german_with_alle_and_once(): void
     {
         // All 32 (2^5) combinations of alle/Once.
         $this->assertCronTranslateToDE('Jede Minute', '* * * * *');
@@ -57,7 +57,7 @@ class CronTranslatorDETest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_to_german_with_multiple()
+    public function it_translate_expressions_to_german_with_multiple(): void
     {
         $this->assertCronTranslateToDE('Jede Minute 2 Stunden pro Tag', '* 8,18 * * *');
         $this->assertCronTranslateToDE('Jede Minute 3 Stunden pro Tag', '* 8,18,20 * * *');
@@ -73,7 +73,7 @@ class CronTranslatorDETest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_to_german_with_increment()
+    public function it_translate_expressions_to_german_with_increment(): void
     {
         $this->assertCronTranslateToDE('Jede 2 Minute', '*/2 * * * *');
         $this->assertCronTranslateToDE('Jede 2 Minute', '1/2 * * * *');
@@ -89,21 +89,21 @@ class CronTranslatorDETest extends TestCase
     }
 
     /** @test */
-    public function it_adds_junctions_to_certain_combinations_of_cron_types_in_german()
+    public function it_adds_junctions_to_certain_combinations_of_cron_types_in_german(): void
     {
         $this->assertCronTranslateToDE('Jede Minute alle 2 Stunden', '* */2 * * *');
         $this->assertCronTranslateToDE('Jede Minute alle 3 Stunden am 2. eines jeden Monats', '* 1/3 2 * *');
     }
 
     /** @test */
-    public function it_converts_ranges_of_one_into_once_cron_types_in_german()
+    public function it_converts_ranges_of_one_into_once_cron_types_in_german(): void
     {
         $this->assertCronTranslateToDE('Jede Minute um 8:00', '* 8-8 * * *');
         $this->assertCronTranslateToDE('Jede Minute im Januar', '* * * 1-1 *');
     }
 
     /** @test */
-    public function it_handles_extended_cron_syntax_in_german()
+    public function it_handles_extended_cron_syntax_in_german(): void
     {
         $this->assertCronTranslateToDE('Ein mal pro Stunde', '@hourly');
         $this->assertCronTranslateToDE('Jeden Tag um 0:00', '@daily');
@@ -115,7 +115,7 @@ class CronTranslatorDETest extends TestCase
 
     // TODO: missing test 'days_of_week' => 'multiple_per_increment'.
 
-    public function assertCronTranslateToDE($expected, $actual, $timeFormat24hours = true)
+    public function assertCronTranslateToDE(string $expected, string $actual, bool $timeFormat24hours = true): void
     {
         $this->assertCronTranslateTo($expected, $actual, 'de', $timeFormat24hours);
     }

@@ -10,11 +10,13 @@ class CronExpression
     public DaysOfMonthField $day;
     public MonthsField $month;
     public DaysOfWeekField $weekday;
-    public string $locale;
-    public bool $timeFormat24hours;
     public array $translations;
 
-    public function __construct(string $cron, string $locale = 'en', bool $timeFormat24hours = false)
+    /**
+     * @throws CronParsingException
+     * @throws TranslationFileMissingException
+     */
+    public function __construct(string $cron, public string $locale = 'en', public bool $timeFormat24hours = false)
     {
         $this->raw = $cron;
         $fields = explode(' ', $cron);
@@ -23,8 +25,6 @@ class CronExpression
         $this->day = new DaysOfMonthField($this, $fields[2]);
         $this->month = new MonthsField($this, $fields[3]);
         $this->weekday = new DaysOfWeekField($this, $fields[4]);
-        $this->locale = $locale;
-        $this->timeFormat24hours = $timeFormat24hours;
         $this->ensureLocaleExists();
         $this->loadTranslations();
     }
@@ -40,7 +40,7 @@ class CronExpression
         ];
     }
 
-    public function langCountable(string $type, int $number)
+    public function langCountable(string $type, int $number): array|string
     {
         $array = $this->translations[$type];
 
@@ -53,14 +53,14 @@ class CronExpression
     {
         $translation = $this->getArrayDot($this->translations['fields'], $key);
 
-        foreach ($replacements as $key => $value) {
-            $translation = str_replace(':' . $key, $value, $translation);
+        foreach ($replacements as $transKey => $value) {
+            $translation = str_replace(':' . $transKey, $value, $translation);
         }
 
         return $translation;
     }
 
-    protected function ensureLocaleExists(string $fallbackLocale = 'en')
+    protected function ensureLocaleExists(string $fallbackLocale = 'en'): void
     {
         if (! is_dir($this->getTranslationDirectory())) {
             $this->locale = $fallbackLocale;
@@ -70,7 +70,7 @@ class CronExpression
     /**
      * @throws TranslationFileMissingException
      */
-    protected function loadTranslations()
+    protected function loadTranslations(): void
     {
         $this->translations = [
             'days' => $this->loadTranslationFile('days'),
@@ -81,6 +81,9 @@ class CronExpression
         ];
     }
 
+    /**
+     * @throws TranslationFileMissingException
+     */
     protected function loadTranslationFile(string $file)
     {
         $filename = sprintf('%s/%s.php', $this->getTranslationDirectory(), $file);
@@ -101,8 +104,8 @@ class CronExpression
     {
         $keys = explode('.', $key);
 
-        foreach ($keys as $key) {
-            $array = $array[$key];
+        foreach ($keys as $item) {
+            $array = $array[$item];
         }
 
         return $array;

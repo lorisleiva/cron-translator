@@ -15,6 +15,9 @@ class CronTranslator
         '@hourly' => '0 * * * *'
     ];
 
+    /**
+     * @throws CronParsingException
+     */
     public static function translate(string $cron, string $locale = 'en', bool $timeFormat24hours = false): string
     {
         if (isset(self::$extendedMap[$cron])) {
@@ -25,7 +28,7 @@ class CronTranslator
             $expression = new CronExpression($cron, $locale, $timeFormat24hours);
             $orderedFields = static::orderFields($expression->getFields());
 
-            $translations = array_map(function (Field $field) {
+            $translations = array_map(static function (Field $field) {
                 return $field->translate();
             }, $orderedFields);
 
@@ -35,7 +38,7 @@ class CronTranslator
         }
     }
 
-    protected static function orderFields(array $fields)
+    protected static function orderFields(array $fields): array
     {
         // Group fields by CRON types.
         $onces = static::filterType($fields, 'Once');
@@ -69,7 +72,7 @@ class CronTranslator
 
     protected static function filterType(array $fields, ...$types): array
     {
-        return array_filter($fields, function (Field $field) use ($types) {
+        return array_filter($fields, static function (Field $field) use ($types) {
             return $field->hasType(...$types);
         });
     }

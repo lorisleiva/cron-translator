@@ -5,7 +5,7 @@ namespace Lorisleiva\CronTranslator\Tests;
 class CronTranslatorZHTest extends TestCase
 {
     /** @test */
-    public function it_translates_expressions_with_every_and_once()
+    public function it_translates_expressions_with_every_and_once(): void
     {
         // All 32 (2^5) combinations of Every/Once.
         $this->assertCronTranslateTo('每分钟', '* * * * *');
@@ -57,7 +57,7 @@ class CronTranslatorZHTest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_with_multiple()
+    public function it_translate_expressions_with_multiple(): void
     {
         $this->assertCronTranslateTo('每分钟 每天有2小时', '* 8,18 * * *');
         $this->assertCronTranslateTo('每分钟 每天有3小时', '* 8,18,20 * * *');
@@ -73,7 +73,7 @@ class CronTranslatorZHTest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_with_increment()
+    public function it_translate_expressions_with_increment(): void
     {
         $this->assertCronTranslateTo('每2分钟', '*/2 * * * *');
         $this->assertCronTranslateTo('每2分钟', '1/2 * * * *');
@@ -89,21 +89,21 @@ class CronTranslatorZHTest extends TestCase
     }
 
     /** @test */
-    public function it_adds_junctions_to_certain_combinations_of_cron_types()
+    public function it_adds_junctions_to_certain_combinations_of_cron_types(): void
     {
         $this->assertCronTranslateTo('每分钟 每2小时', '* */2 * * *');
         $this->assertCronTranslateTo('每分钟 每3小时 在每月2号', '* 1/3 2 * *');
     }
 
     /** @test */
-    public function it_converts_ranges_of_one_into_once_cron_types()
+    public function it_converts_ranges_of_one_into_once_cron_types(): void
     {
         $this->assertCronTranslateTo('每分钟 在8am', '* 8-8 * * *');
         $this->assertCronTranslateTo('每分钟 在一月', '* * * 1-1 *');
     }
 
     /** @test */
-    public function it_handles_extended_cron_syntax()
+    public function it_handles_extended_cron_syntax(): void
     {
         $this->assertCronTranslateTo('每整点', '@hourly');
         $this->assertCronTranslateTo('每天 在12:00am', '@daily');
@@ -113,7 +113,7 @@ class CronTranslatorZHTest extends TestCase
         $this->assertCronTranslateTo('每年 在一月1号 在12:00am', '@annually');
     }
 
-    public function assertCronTranslateTo(string $expected, string $actual, string $locale = 'zh', bool $timeFormat24hours = false)
+    public function assertCronTranslateTo(string $expected, string $actual, string $locale = 'zh', bool $timeFormat24hours = false): void
     {
         parent::assertCronTranslateTo($expected, $actual, $locale, $timeFormat24hours);
     }
