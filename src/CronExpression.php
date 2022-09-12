@@ -4,7 +4,6 @@ namespace Lorisleiva\CronTranslator;
 
 class CronExpression
 {
-    public string $raw;
     public MinutesField $minute;
     public HoursField $hour;
     public DaysOfMonthField $day;
@@ -16,9 +15,8 @@ class CronExpression
      * @throws CronParsingException
      * @throws TranslationFileMissingException
      */
-    public function __construct(string $cron, public string $locale = 'en', public bool $timeFormat24hours = false)
+    public function __construct(public string $cron, public string $locale = 'en', public bool $timeFormat24hours = false)
     {
-        $this->raw = $cron;
         $fields = explode(' ', $cron);
         $this->minute = new MinutesField($this, $fields[0]);
         $this->hour = new HoursField($this, $fields[1]);

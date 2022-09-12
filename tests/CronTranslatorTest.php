@@ -1,8 +1,4 @@
 <?php /** @noinspection PhpRedundantOptionalArgumentInspection */
-/** @noinspection PhpRedundantOptionalArgumentInspection */
-/** @noinspection PhpRedundantOptionalArgumentInspection */
-
-/** @noinspection PhpRedundantOptionalArgumentInspection */
 
 namespace Lorisleiva\CronTranslator\Tests;
 
