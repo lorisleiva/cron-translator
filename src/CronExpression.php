@@ -4,25 +4,31 @@ namespace Lorisleiva\CronTranslator;
 
 class CronExpression
 {
+    public string $raw;
     public MinutesField $minute;
     public HoursField $hour;
     public DaysOfMonthField $day;
     public MonthsField $month;
     public DaysOfWeekField $weekday;
+    public string $locale;
+    public bool $timeFormat24hours;
     public array $translations;
 
     /**
      * @throws CronParsingException
      * @throws TranslationFileMissingException
      */
-    public function __construct(public string $cron, public string $locale = 'en', public bool $timeFormat24hours = false)
+    public function __construct(string $cron, string $locale = 'en', bool $timeFormat24hours = false)
     {
+        $this->raw = $cron;
         $fields = explode(' ', $cron);
         $this->minute = new MinutesField($this, $fields[0]);
         $this->hour = new HoursField($this, $fields[1]);
         $this->day = new DaysOfMonthField($this, $fields[2]);
         $this->month = new MonthsField($this, $fields[3]);
         $this->weekday = new DaysOfWeekField($this, $fields[4]);
+        $this->locale = $locale;
+        $this->timeFormat24hours = $timeFormat24hours;
         $this->ensureLocaleExists();
         $this->loadTranslations();
     }
