@@ -5,7 +5,7 @@ namespace Lorisleiva\CronTranslator\Tests;
 class CronTranslatorSKTest extends TestCase
 {
     /** @test */
-    public function it_translates_expressions_with_every_and_once()
+    public function it_translates_expressions_with_every_and_once(): void
     {
         // All 32 (2^5) combinations of Every/Once.
         $this->assertCronTranslateTo('Každú minútu', '* * * * *', 'sk');
@@ -57,7 +57,7 @@ class CronTranslatorSKTest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_with_multiple()
+    public function it_translate_expressions_with_multiple(): void
     {
         $this->assertCronTranslateTo('Každú minútu 2 hodín za deň', '* 8,18 * * *', 'sk');
         $this->assertCronTranslateTo('Každú minútu 3 hodín za deň', '* 8,18,20 * * *', 'sk');
@@ -73,7 +73,7 @@ class CronTranslatorSKTest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_with_increment()
+    public function it_translate_expressions_with_increment(): void
     {
         $this->assertCronTranslateTo('Každých 2 minút', '*/2 * * * *', 'sk');
         $this->assertCronTranslateTo('Každých 2 minút', '1/2 * * * *', 'sk');
@@ -89,21 +89,21 @@ class CronTranslatorSKTest extends TestCase
     }
 
     /** @test */
-    public function it_adds_junctions_to_certain_combinations_of_cron_types()
+    public function it_adds_junctions_to_certain_combinations_of_cron_types(): void
     {
         $this->assertCronTranslateTo('Každú minútu každých 2 hodín', '* */2 * * *', 'sk');
         $this->assertCronTranslateTo('Každú minútu každých 3 hodín na každý 2. deň v mesiaci', '* 1/3 2 * *', 'sk');
     }
 
     /** @test */
-    public function it_converts_ranges_of_one_into_once_cron_types()
+    public function it_converts_ranges_of_one_into_once_cron_types(): void
     {
         $this->assertCronTranslateTo('Každú minútu o 8am', '* 8-8 * * *', 'sk');
         $this->assertCronTranslateTo('Každú minútu v mesiaci január', '* * * 1-1 *', 'sk');
     }
 
     /** @test */
-    public function it_handles_extended_cron_syntax()
+    public function it_handles_extended_cron_syntax(): void
     {
         $this->assertCronTranslateTo('Raz za hodinu', '@hourly', 'sk');
         $this->assertCronTranslateTo('Každý deň o 12:00am', '@daily', 'sk');

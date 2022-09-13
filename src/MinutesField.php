@@ -6,12 +6,12 @@ class MinutesField extends Field
 {
     public int $position = 0;
 
-    public function translateEvery()
+    public function translateEvery(): string
     {
         return $this->lang('minutes.every');
     }
 
-    public function translateIncrement()
+    public function translateIncrement(): string
     {
         if ($this->getCount() > 1) {
             return $this->lang('minutes.times_per_increment', [
@@ -25,7 +25,7 @@ class MinutesField extends Field
         ]);
     }
 
-    public function translateMultiple()
+    public function translateMultiple(): string
     {
         return $this->lang('minutes.multiple', [
             'times' => $this->getTimes(),

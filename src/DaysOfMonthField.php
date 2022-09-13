@@ -6,7 +6,10 @@ class DaysOfMonthField extends Field
 {
     public int $position = 2;
 
-    public function translateEvery()
+    /**
+     * @throws CronParsingException
+     */
+    public function translateEvery(): string
     {
         if ($this->expression->weekday->hasType('Once')) {
             return $this->lang('days_of_week.every', [
@@ -17,7 +20,7 @@ class DaysOfMonthField extends Field
         return $this->lang('days_of_month.every');
     }
 
-    public function translateIncrement()
+    public function translateIncrement(): string
     {
         if ($this->getCount() > 1) {
             return $this->lang('days_of_month.multiple_per_increment', [
@@ -31,7 +34,7 @@ class DaysOfMonthField extends Field
         ]);
     }
 
-    public function translateMultiple()
+    public function translateMultiple(): string
     {
         return $this->lang('days_of_month.multiple_per_month', [
             'count' => $this->getCount(),
@@ -61,7 +64,7 @@ class DaysOfMonthField extends Field
         ]);
     }
 
-    public function format()
+    public function format(): string
     {
         return $this->langCountable('ordinals', $this->getValue());
     }

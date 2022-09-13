@@ -1,11 +1,11 @@
-<?php
+<?php /** @noinspection PhpRedundantOptionalArgumentInspection */
 
 namespace Lorisleiva\CronTranslator\Tests;
 
 class CronTranslatorTest extends TestCase
 {
     /** @test */
-    public function it_translates_expressions_with_every_and_once()
+    public function it_translates_expressions_with_every_and_once(): void
     {
         // All 32 (2^5) combinations of Every/Once.
         $this->assertCronTranslateTo('Every minute', '* * * * *');
@@ -57,7 +57,7 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_with_multiple()
+    public function it_translate_expressions_with_multiple(): void
     {
         $this->assertCronTranslateTo('Every minute 2 hours a day', '* 8,18 * * *');
         $this->assertCronTranslateTo('Every minute 3 hours a day', '* 8,18,20 * * *');
@@ -73,7 +73,7 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
-    public function it_translate_expressions_with_increment()
+    public function it_translate_expressions_with_increment(): void
     {
         $this->assertCronTranslateTo('Every 2 minutes', '*/2 * * * *');
         $this->assertCronTranslateTo('Every 2 minutes', '1/2 * * * *');
@@ -89,21 +89,21 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
-    public function it_adds_junctions_to_certain_combinations_of_cron_types()
+    public function it_adds_junctions_to_certain_combinations_of_cron_types(): void
     {
         $this->assertCronTranslateTo('Every minute of every 2 hours', '* */2 * * *');
         $this->assertCronTranslateTo('Every minute of every 3 hours on the 2nd of every month', '* 1/3 2 * *');
     }
 
     /** @test */
-    public function it_converts_ranges_of_one_into_once_cron_types()
+    public function it_converts_ranges_of_one_into_once_cron_types(): void
     {
         $this->assertCronTranslateTo('Every minute at 8am', '* 8-8 * * *');
         $this->assertCronTranslateTo('Every minute on January', '* * * 1-1 *');
     }
 
     /** @test */
-    public function it_handles_extended_cron_syntax()
+    public function it_handles_extended_cron_syntax(): void
     {
         $this->assertCronTranslateTo('Once an hour', '@hourly');
         $this->assertCronTranslateTo('Every day at 12:00am', '@daily');
@@ -114,7 +114,7 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_parsing_errors_when_something_goes_wrong()
+    public function it_returns_parsing_errors_when_something_goes_wrong(): void
     {
         $this->assertCronThrowsParsingError('I_AM_NOT_A_CRON_EXPRESSION');
         $this->assertCronThrowsParsingError('A * * * *');
@@ -126,14 +126,14 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
-    public function it_can_translate_in_different_languages()
+    public function it_can_translate_in_different_languages(): void
     {
         $this->assertCronTranslateTo('Chaque minute', '* * * * *', 'fr');
         $this->assertCronTranslateTo('Todos os minutos', '* * * * *', 'pt');
     }
 
     /** @test */
-    public function it_can_format_the_time_in_12_and_24_hours()
+    public function it_can_format_the_time_in_12_and_24_hours(): void
     {
         $this->assertCronTranslateTo('Every day at 10:30pm', '30 22 * * *', 'en', false);
         $this->assertCronTranslateTo('Every day at 22:30', '30 22 * * *', 'en', true);
@@ -142,7 +142,7 @@ class CronTranslatorTest extends TestCase
     }
 
     /** @test */
-    public function it_can_translate_in_different_languages_and_different_time_format()
+    public function it_can_translate_in_different_languages_and_different_time_format(): void
     {
         $this->assertCronTranslateTo('Chaque jour à 10:30pm', '30 22 * * *', 'fr', false);
         $this->assertCronTranslateTo('Chaque jour à 22:30', '30 22 * * *', 'fr', true);
@@ -154,7 +154,7 @@ class CronTranslatorTest extends TestCase
      * @skip
      * @doesNotPerformAssertions
      */
-    public function result_generator()
+    public function result_generator(): void
     {
         $this->generateCombinationsFromMatrix([
             ['*', '0', '1,2', '*/2'],

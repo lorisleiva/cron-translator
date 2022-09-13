@@ -5,7 +5,7 @@ namespace Lorisleiva\CronTranslator\Tests;
 class CronTranslatorFRTest extends TestCase
 {
     /** @test */
-    public function it_translates_expressions_to_french()
+    public function it_translates_expressions_to_french(): void
     {
         $this->assertCronTranslateToFR('Chaque minute', '* * * * *');
         $this->assertCronTranslateToFR('Chaque minute les dimanches', '* * * * 0');
@@ -17,7 +17,7 @@ class CronTranslatorFRTest extends TestCase
         $this->assertCronTranslateToFR('4 fois par jour', '0 2,8,14,20 * * *');
     }
 
-    public function assertCronTranslateToFR($expected, $actual, $timeFormat24hours = false)
+    public function assertCronTranslateToFR(string $expected, string $actual, bool $timeFormat24hours = false): void
     {
         $this->assertCronTranslateTo($expected, $actual, 'fr', $timeFormat24hours);
     }

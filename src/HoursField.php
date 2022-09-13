@@ -6,7 +6,7 @@ class HoursField extends Field
 {
     public int $position = 1;
 
-    public function translateEvery()
+    public function translateEvery(): string
     {
         if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.once_an_hour');
@@ -15,7 +15,7 @@ class HoursField extends Field
         return $this->lang('hours.every');
     }
 
-    public function translateIncrement()
+    public function translateIncrement(): string
     {
         if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.times_per_increment', [
@@ -42,7 +42,7 @@ class HoursField extends Field
         ]);
     }
 
-    public function translateMultiple()
+    public function translateMultiple(): string
     {
         if ($this->expression->minute->hasType('Once')) {
             return $this->lang('hours.times_per_day', [
@@ -55,7 +55,7 @@ class HoursField extends Field
         ]);
     }
 
-    public function translateOnce()
+    public function translateOnce(): string
     {
         $minute = $this->expression->minute->hasType('Once')
             ? $this->expression->minute

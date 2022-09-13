@@ -4,7 +4,7 @@ namespace Lorisleiva\CronTranslator;
 
 class CronType
 {
-    const TYPES = [
+    public const TYPES = [
         'Every', 'Increment', 'Multiple', 'Once',
     ];
 
@@ -86,6 +86,6 @@ class CronType
 
     public function hasType(): bool
     {
-        return in_array($this->type, func_get_args());
+        return in_array($this->type, func_get_args(), true);
     }
 }

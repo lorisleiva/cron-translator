@@ -6,7 +6,7 @@ class MonthsField extends Field
 {
     public int $position = 3;
 
-    public function translateEvery()
+    public function translateEvery(): string
     {
         if ($this->expression->day->hasType('Once')) {
             return $this->lang('months.every_on_day', [
@@ -17,7 +17,7 @@ class MonthsField extends Field
         return $this->lang('months.every');
     }
 
-    public function translateIncrement()
+    public function translateIncrement(): string
     {
         if ($this->getCount() > 1) {
             return $this->lang('months.multiple_per_increment', [
@@ -31,14 +31,17 @@ class MonthsField extends Field
         ]);
     }
 
-    public function translateMultiple()
+    public function translateMultiple(): string
     {
         return $this->lang('months.multiple_per_year', [
             'count' => $this->getCount(),
         ]);
     }
 
-    public function translateOnce()
+    /**
+     * @throws CronParsingException
+     */
+    public function translateOnce(): string
     {
         if ($this->expression->day->hasType('Once')) {
             return $this->lang('months.once_on_day', [
@@ -55,7 +58,7 @@ class MonthsField extends Field
     /**
      * @throws CronParsingException
      */
-    public function format()
+    public function format(): string
     {
         if ($this->getValue() < 1 || $this->getValue() > 12) {
             throw new CronParsingException($this->expression->raw);
