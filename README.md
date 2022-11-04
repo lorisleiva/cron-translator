@@ -47,5 +47,6 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `lv` — Latvian
 - `nl` — Dutch
 - `pt` — Portuguese
+- `ro` — Romanian
 - `zh` — Chinese
-- `sk` - Slovak
+- `sk` — Slovak
