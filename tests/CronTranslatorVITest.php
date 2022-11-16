@@ -7,147 +7,110 @@ class CronTranslatorVITest extends TestCase
     /** @test */
     public function it_translates_expressions_with_every_and_once(): void
     {
-        // All 32 (2^5) combinations of Every/Once.
+        // All 32 (2^5) combinations trong mỗi/Once.
         $this->assertCronTranslateTo('Mỗi phút', '* * * * *', 'vi');
         $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật', '* * * * 0', 'vi');
-        $this->assertCronTranslateTo('Every minute on January', '* * * 1 *');
-        $this->assertCronTranslateTo('Every minute on Sundays on January', '* * * 1 0');
-        $this->assertCronTranslateTo('Every minute on the 1st of every month', '* * 1 * *');
-        $this->assertCronTranslateTo('Every minute on Sundays on the 1st of every month', '* * 1 * 0');
-        $this->assertCronTranslateTo('Every minute on January the 1st', '* * 1 1 *');
-        $this->assertCronTranslateTo('Every minute on Sundays on January the 1st', '* * 1 1 0');
-        $this->assertCronTranslateTo('Every minute at 12am', '* 0 * * *');
-        $this->assertCronTranslateTo('Every minute on Sundays at 12am', '* 0 * * 0');
-        $this->assertCronTranslateTo('Every minute on January at 12am', '* 0 * 1 *');
-        $this->assertCronTranslateTo('Every minute on Sundays on January at 12am', '* 0 * 1 0');
-        $this->assertCronTranslateTo('Every minute on the 1st of every month at 12am', '* 0 1 * *');
-        $this->assertCronTranslateTo('Every minute on Sundays on the 1st of every month at 12am', '* 0 1 * 0');
-        $this->assertCronTranslateTo('Every minute on January the 1st at 12am', '* 0 1 1 *');
-        $this->assertCronTranslateTo('Every minute on Sundays on January the 1st at 12am', '* 0 1 1 0');
-        $this->assertCronTranslateTo('Once an hour', '0 * * * *');
-        $this->assertCronTranslateTo('Once an hour on Sundays', '0 * * * 0');
-        $this->assertCronTranslateTo('Once an hour on January', '0 * * 1 *');
-        $this->assertCronTranslateTo('Once an hour on Sundays on January', '0 * * 1 0');
-        $this->assertCronTranslateTo('Once an hour on the 1st of every month', '0 * 1 * *');
-        $this->assertCronTranslateTo('Once an hour on Sundays on the 1st of every month', '0 * 1 * 0');
-        $this->assertCronTranslateTo('Once an hour on January the 1st', '0 * 1 1 *');
-        $this->assertCronTranslateTo('Once an hour on Sundays on January the 1st', '0 * 1 1 0');
-        $this->assertCronTranslateTo('Every day at 12:00am', '0 0 * * *');
-        $this->assertCronTranslateTo('Every Sunday at 12:00am', '0 0 * * 0');
-        $this->assertCronTranslateTo('Every day on January at 12:00am', '0 0 * 1 *');
-        $this->assertCronTranslateTo('Every Sunday on January at 12:00am', '0 0 * 1 0');
-        $this->assertCronTranslateTo('The 1st of every month at 12:00am', '0 0 1 * *');
-        $this->assertCronTranslateTo('The 1st of every month on Sundays at 12:00am', '0 0 1 * 0');
-        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '0 0 1 1 *');
-        $this->assertCronTranslateTo('On Sundays on January the 1st at 12:00am', '0 0 1 1 0');
+        $this->assertCronTranslateTo('Mỗi phút vào Tháng Một', '* * * 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật vào Tháng Một', '* * * 1 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào ngày 1 hàng tháng', '* * 1 * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật vào ngày 1 hàng tháng', '* * 1 * 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Tháng Một ngày 1', '* * 1 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật vào Tháng Một ngày 1', '* * 1 1 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào lúc 12am', '* 0 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật vào lúc 12am', '* 0 * * 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Tháng Một vào lúc 12am', '* 0 * 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật vào Tháng Một vào lúc 12am', '* 0 * 1 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào ngày 1 hàng tháng vào lúc 12am', '* 0 1 * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật vào ngày 1 hàng tháng vào lúc 12am', '* 0 1 * 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Tháng Một ngày 1 vào lúc 12am', '* 0 1 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Chủ Nhật vào Tháng Một ngày 1 vào lúc 12am', '* 0 1 1 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần', '0 * * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần vào Chủ Nhật', '0 * * * 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần vào Tháng Một', '0 * * 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần vào Chủ Nhật vào Tháng Một', '0 * * 1 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần vào ngày 1 hàng tháng', '0 * 1 * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần vào Chủ Nhật vào ngày 1 hàng tháng', '0 * 1 * 0', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần vào Tháng Một ngày 1', '0 * 1 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần vào Chủ Nhật vào Tháng Một ngày 1', '0 * 1 1 0', 'vi');
+        $this->assertCronTranslateTo('Hằng ngày vào lúc 12:00am', '0 0 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi Chủ Nhật vào lúc 12:00am', '0 0 * * 0', 'vi');
+        $this->assertCronTranslateTo('Hằng ngày vào Tháng Một vào lúc 12:00am', '0 0 * 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi Chủ Nhật vào Tháng Một vào lúc 12:00am', '0 0 * 1 0', 'vi');
+        $this->assertCronTranslateTo('Ngày 1 hàng tháng vào lúc 12:00am', '0 0 1 * *', 'vi');
+        $this->assertCronTranslateTo('Ngày 1 hàng tháng vào Chủ Nhật vào lúc 12:00am', '0 0 1 * 0', 'vi');
+        $this->assertCronTranslateTo('Hằng năm vào Tháng Một ngày 1 vào lúc 12:00am', '0 0 1 1 *', 'vi');
+        $this->assertCronTranslateTo('Vào Chủ Nhật vào Tháng Một ngày 1 vào lúc 12:00am', '0 0 1 1 0', 'vi');
 
         // More realistic examples.
-        $this->assertCronTranslateTo('Every year on January the 1st at 12:00pm', '0 12 1 1 *');
-        $this->assertCronTranslateTo('Every minute on Mondays at 3pm', '* 15 * * 1');
-        $this->assertCronTranslateTo('Every minute on January the 3rd', '* * 3 1 *');
-        $this->assertCronTranslateTo('Every minute on Mondays on April', '* * * 4 1');
-        $this->assertCronTranslateTo('On Mondays on April the 22nd at 3:10pm', '10 15 22 4 1');
+        $this->assertCronTranslateTo('Hằng năm vào Tháng Một ngày 1 vào lúc 12:00pm', '0 12 1 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Thứ Hai vào lúc 3pm', '* 15 * * 1', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Tháng Một ngày 3', '* * 3 1 *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Thứ Hai vào Tháng Tư', '* * * 4 1', 'vi');
+        $this->assertCronTranslateTo('Vào Thứ Hai vào Tháng Tư ngày 22 vào lúc 3:10pm', '10 15 22 4 1', 'vi');
 
         // Paparazzi examples.
-        $this->assertCronTranslateTo('Every day at 10:00pm', '0 22 * * *');
-        $this->assertCronTranslateTo('Every day at 9:00am', '0 9 * * *');
-        $this->assertCronTranslateTo('Every Monday at 4:00pm', '0 16 * * 1');
-        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '0 0 1 1 *');
-        $this->assertCronTranslateTo('The 1st of every month at 12:00am', '0 0 1 * *');
+        $this->assertCronTranslateTo('Hằng ngày vào lúc 10:00pm', '0 22 * * *', 'vi');
+        $this->assertCronTranslateTo('Hằng ngày vào lúc 9:00am', '0 9 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi Thứ Hai vào lúc 4:00pm', '0 16 * * 1', 'vi');
+        $this->assertCronTranslateTo('Hằng năm vào Tháng Một ngày 1 vào lúc 12:00am', '0 0 1 1 *', 'vi');
+        $this->assertCronTranslateTo('Ngày 1 hàng tháng vào lúc 12:00am', '0 0 1 * *', 'vi');
     }
 
     /** @test */
     public function it_translate_expressions_with_multiple(): void
     {
-        $this->assertCronTranslateTo('Every minute 2 hours a day', '* 8,18 * * *');
-        $this->assertCronTranslateTo('Every minute 3 hours a day', '* 8,18,20 * * *');
-        $this->assertCronTranslateTo('Every minute 20 hours a day', '* 1-20 * * *');
-        $this->assertCronTranslateTo('Twice an hour', '0,30 * * * *');
-        $this->assertCronTranslateTo('Twice an hour 5 hours a day', '0,30 1-5 * * *');
-        $this->assertCronTranslateTo('5 times a day', '0 1-5 * * *');
-        $this->assertCronTranslateTo('Every minute 5 hours a day', '* 1-5 * * *');
-        $this->assertCronTranslateTo('5 days a month at 1:00am', '0 1 1-5 * *');
-        $this->assertCronTranslateTo('5 days a month 2 months a year at 1:00am', '0 1 1-5 5,6 *');
-        $this->assertCronTranslateTo('2 months a year on the 5th at 1:00am', '0 1 5 5,6 *');
-        $this->assertCronTranslateTo('The 5th of every month 4 days a week at 1:00am', '0 1 5 * 1-4');
+        $this->assertCronTranslateTo('Mỗi phút 2 giờ một ngày', '* 8,18 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút 3 giờ một ngày', '* 8,18,20 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút 20 giờ một ngày', '* 1-20 * * *', 'vi');
+        $this->assertCronTranslateTo('2 lần một giờ', '0,30 * * * *', 'vi');
+        $this->assertCronTranslateTo('2 lần một giờ 5 giờ một ngày', '0,30 1-5 * * *', 'vi');
+        $this->assertCronTranslateTo('5 lần một ngày', '0 1-5 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút 5 giờ một ngày', '* 1-5 * * *', 'vi');
+        $this->assertCronTranslateTo('5 ngày một tháng vào lúc 1:00am', '0 1 1-5 * *', 'vi');
+        $this->assertCronTranslateTo('5 ngày một tháng 2 tháng một năm vào lúc 1:00am', '0 1 1-5 5,6 *', 'vi');
+        $this->assertCronTranslateTo('2 tháng một năm vào ngày 5 vào lúc 1:00am', '0 1 5 5,6 *', 'vi');
+        $this->assertCronTranslateTo('Ngày 5 hàng tháng 4 ngày một tuần vào lúc 1:00am', '0 1 5 * 1-4', 'vi');
     }
 
     /** @test */
     public function it_translate_expressions_with_increment(): void
     {
-        $this->assertCronTranslateTo('Every 2 minutes', '*/2 * * * *');
-        $this->assertCronTranslateTo('Every 2 minutes', '1/2 * * * *');
-        $this->assertCronTranslateTo('Twice every 4 minutes', '1,3/4 * * * *');
-        $this->assertCronTranslateTo('3 times every 5 minutes', '1-3/5 * * * *');
-        $this->assertCronTranslateTo('Every 2 minutes at 2pm', '*/2 14 * * *');
-        $this->assertCronTranslateTo('Once an hour every 2 days', '0 * */2 * *');
-        $this->assertCronTranslateTo('Every minute every 2 days', '* * */2 * *');
-        $this->assertCronTranslateTo('Once every 2 hours', '0 */2 * * *');
-        $this->assertCronTranslateTo('Twice every 5 hours', '0 1,2/5 * * *');
-        $this->assertCronTranslateTo('Every minute 2 hours out of 5', '* 1,2/5 * * *');
-        $this->assertCronTranslateTo('Every day every 4 months at 12:00am', '0 0 * */4 *');
+        $this->assertCronTranslateTo('Mỗi 2 phút', '*/2 * * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi 2 phút', '1/2 * * * *', 'vi');
+        $this->assertCronTranslateTo('2 lần mỗi 4 phút', '1,3/4 * * * *', 'vi');
+        $this->assertCronTranslateTo('3 lần mỗi 5 phút', '1-3/5 * * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi 2 phút vào lúc 2pm', '*/2 14 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi giờ một lần mỗi 2 ngày', '0 * */2 * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút mỗi 2 ngày', '* * */2 * *', 'vi');
+        $this->assertCronTranslateTo('1 lần mỗi 2 giờ', '0 */2 * * *', 'vi');
+        $this->assertCronTranslateTo('2 lần mỗi 5 giờ', '0 1,2/5 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút 2 giờ trong số 5', '* 1,2/5 * * *', 'vi');
+        $this->assertCronTranslateTo('Hằng ngày mỗi 4 tháng vào lúc 12:00am', '0 0 * */4 *', 'vi');
     }
 
     /** @test */
     public function it_adds_junctions_to_certain_combinations_of_cron_types(): void
     {
-        $this->assertCronTranslateTo('Every minute of every 2 hours', '* */2 * * *');
-        $this->assertCronTranslateTo('Every minute of every 3 hours on the 2nd of every month', '* 1/3 2 * *');
+        $this->assertCronTranslateTo('Mỗi phút vào mỗi 2 giờ', '* */2 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào mỗi 3 giờ vào ngày 2 hàng tháng', '* 1/3 2 * *', 'vi');
     }
 
     /** @test */
     public function it_converts_ranges_of_one_into_once_cron_types(): void
     {
-        $this->assertCronTranslateTo('Every minute at 8am', '* 8-8 * * *');
-        $this->assertCronTranslateTo('Every minute on January', '* * * 1-1 *');
+        $this->assertCronTranslateTo('Mỗi phút vào lúc 8am', '* 8-8 * * *', 'vi');
+        $this->assertCronTranslateTo('Mỗi phút vào Tháng Một', '* * * 1-1 *', 'vi');
     }
 
     /** @test */
     public function it_handles_extended_cron_syntax(): void
     {
-        $this->assertCronTranslateTo('Once an hour', '@hourly');
-        $this->assertCronTranslateTo('Every day at 12:00am', '@daily');
-        $this->assertCronTranslateTo('Every Sunday at 12:00am', '@weekly');
-        $this->assertCronTranslateTo('The 1st of every month at 12:00am', '@monthly');
-        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '@yearly');
-        $this->assertCronTranslateTo('Every year on January the 1st at 12:00am', '@annually');
-    }
-
-    /** @test */
-    public function it_returns_parsing_errors_when_something_goes_wrong(): void
-    {
-        $this->assertCronThrowsParsingError('I_AM_NOT_A_CRON_EXPRESSION');
-        $this->assertCronThrowsParsingError('A * * * *');
-        $this->assertCronThrowsParsingError('1,2-3 * * * *');
-        $this->assertCronThrowsParsingError('1/2/3 * * * *');
-        $this->assertCronThrowsParsingError('* * * 0 *');
-        $this->assertCronThrowsParsingError('* * * 13 *');
-        $this->assertCronThrowsParsingError('* * * * 8');
-    }
-
-    /** @test */
-    public function it_can_translate_in_different_languages(): void
-    {
-        $this->assertCronTranslateTo('Chaque minute', '* * * * *', 'fr');
-        $this->assertCronTranslateTo('Todos os minutos', '* * * * *', 'pt');
-    }
-
-    /** @test */
-    public function it_can_format_the_time_in_12_and_24_hours(): void
-    {
-        $this->assertCronTranslateTo('Every day at 10:30pm', '30 22 * * *', 'en', false);
-        $this->assertCronTranslateTo('Every day at 22:30', '30 22 * * *', 'en', true);
-        $this->assertCronTranslateTo('Every minute at 6am', '* 6 * * *', 'en', false);
-        $this->assertCronTranslateTo('Every minute at 6:00', '* 6 * * *', 'en', true);
-    }
-
-    /** @test */
-    public function it_can_translate_in_different_languages_and_different_time_format(): void
-    {
-        $this->assertCronTranslateTo('Chaque jour à 10:30pm', '30 22 * * *', 'fr', false);
-        $this->assertCronTranslateTo('Chaque jour à 22:30', '30 22 * * *', 'fr', true);
-        $this->assertCronTranslateTo('Chaque minute à 6am', '* 6 * * *', 'fr', false);
-        $this->assertCronTranslateTo('Chaque minute à 6:00', '* 6 * * *', 'fr', true);
+        $this->assertCronTranslateTo('Mỗi giờ một lần', '@hourly', 'vi');
+        $this->assertCronTranslateTo('Hằng ngày vào lúc 12:00am', '@daily', 'vi');
+        $this->assertCronTranslateTo('Mỗi Chủ Nhật vào lúc 12:00am', '@weekly', 'vi');
+        $this->assertCronTranslateTo('Ngày 1 hàng tháng vào lúc 12:00am', '@monthly', 'vi');
+        $this->assertCronTranslateTo('Hằng năm vào Tháng Một ngày 1 vào lúc 12:00am', '@yearly', 'vi');
+        $this->assertCronTranslateTo('Hằng năm vào Tháng Một ngày 1 vào lúc 12:00am', '@annually', 'vi');
     }
 
     /**
