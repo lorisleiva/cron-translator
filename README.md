@@ -50,3 +50,4 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `ro` — Romanian
 - `zh` — Chinese
 - `sk` — Slovak
+- `hi` - Hindi
