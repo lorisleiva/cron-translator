@@ -44,10 +44,11 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `en` — English
 - `es` — Spanish
 - `fr` — French
+- `hi` — Hindi
 - `lv` — Latvian
 - `nl` — Dutch
 - `pt` — Portuguese
 - `ro` — Romanian
-- `zh` — Chinese
 - `sk` — Slovak
-- `hi` - Hindi
+- `vi` — Vietnamese
+- `zh` — Chinese
