@@ -52,3 +52,4 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `sk` — Slovak
 - `vi` — Vietnamese
 - `zh` — Chinese
+- `fa` — Persian/Farsi
