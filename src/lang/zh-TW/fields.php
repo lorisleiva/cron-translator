@@ -29,9 +29,9 @@ return [
     'months' => [
         'every' => '每月',
         'every_on_day' => '每月:day日',
-        'increment' => '每:increment个月',
+        'increment' => '每:increment個月',
         'multiple_per_increment' => '每:increment月中有:count月',
-        'multiple_per_year' => '每年:count个月',
+        'multiple_per_year' => '每年:count個月',
         'once_on_month' => '在:month',
         'once_on_day' => '在:month:day日',
     ],
