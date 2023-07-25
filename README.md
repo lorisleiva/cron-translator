@@ -38,6 +38,17 @@ CronTranslator::translate('30 18 * * *', 'fr');       // => Chaque jour à 6:30p
 CronTranslator::translate('30 18 * * *', 'fr', true); // => Chaque jour à 18:30
 ```
 
+You can change the translating options when everytime you want to translate it.
+
+```php
+$expr = CronTranslator::parse('@weekly');
+
+$expr->translate('fr'); // => Chaque dimanche à 12:00am
+$expr->translate('pt', true); // => Cada Domingo às 0:00
+```
+
+## Locale
+
 The following locales are currently supported. Feel free to PR more locales if you need them. 🙂
 - `ar` — Arabic
 - `de` — German
@@ -52,3 +63,22 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `sk` — Slovak
 - `vi` — Vietnamese
 - `zh` — Chinese
+
+### Custom Locale folder
+
+You can find all languages at `lang/{lang_code}` folder. But if you need a new language which not in 
+this package, you can add your own lang folder.
+
+```php
+CronTranslator::parse('@weekly', 'klingons')
+    ->addLangDir(__DIR__ . '/my/custom/lang')
+    ->translate(); // jIHvaD jatlh: jIHeghpu'bogh qun'a' je
+```
+
+Or choose language when every time translating.
+
+```php
+CronTranslator::parse('@weekly', 'en') // The lang set at constructor will be ignored
+    ->addLangDir(__DIR__ . '/my/custom/lang')
+    ->translate('klingons'); // jIHvaD jatlh: jIHeghpu'bogh qun'a' je
+```

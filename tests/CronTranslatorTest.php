@@ -141,7 +141,7 @@ class CronTranslatorTest extends TestCase
             ->addLangDir(__DIR__ . '/lang');
 
         // Translate first
-        $expr->translate();
+        $expr->translate('fr');
 
         $this->assertEquals(
             'Cada Domingo às 0:00',
