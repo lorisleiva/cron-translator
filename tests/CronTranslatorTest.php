@@ -2,6 +2,8 @@
 
 namespace Lorisleiva\CronTranslator\Tests;
 
+use Lorisleiva\CronTranslator\CronTranslator;
+
 class CronTranslatorTest extends TestCase
 {
     /** @test */
@@ -130,6 +132,40 @@ class CronTranslatorTest extends TestCase
     {
         $this->assertCronTranslateTo('Chaque minute', '* * * * *', 'fr');
         $this->assertCronTranslateTo('Todos os minutos', '* * * * *', 'pt');
+    }
+
+    /** @test */
+    public function it_can_translate_from_expression_object(): void
+    {
+        $this->assertEquals(
+            'Cada Domingo às 0:00',
+            CronTranslator::parse('@weekly')
+                ->addLangDir(__DIR__ . '/lang')
+                ->translate('pt', true)
+        );
+    }
+
+    /** @test */
+    public function it_can_custom_language_dirs(): void
+    {
+        $this->assertEquals(
+            'Chaque minute',
+            CronTranslator::parse('* * * * *')
+                ->addLangDir(__DIR__ . '/lang')
+                ->translate('fr')
+        );
+        $this->assertEquals(
+            'Todos os minutos',
+            CronTranslator::parse('* * * * *')
+                ->addLangDir(__DIR__ . '/lang')
+                ->translate('pt')
+        );
+        $this->assertEquals(
+            'Cada Domingo às 0:00',
+            CronTranslator::parse('@weekly')
+                ->addLangDir(__DIR__ . '/lang')
+                ->translate('pt', true)
+        );
     }
 
     /** @test */
