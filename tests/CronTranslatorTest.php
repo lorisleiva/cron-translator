@@ -137,11 +137,16 @@ class CronTranslatorTest extends TestCase
     /** @test */
     public function it_can_translate_from_expression_object(): void
     {
+        $expr = CronTranslator::parse('@weekly', 'en')
+            ->addLangDir(__DIR__ . '/lang');
+
+        // Translate first
+        $expr->translate();
+
         $this->assertEquals(
             'Cada Domingo às 0:00',
-            CronTranslator::parse('@weekly')
-                ->addLangDir(__DIR__ . '/lang')
-                ->translate('pt', true)
+            // Translate again
+            $expr->translate('pt', true)
         );
     }
 

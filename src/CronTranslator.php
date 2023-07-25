@@ -22,10 +22,13 @@ class CronTranslator
     /**
      * @throws CronParsingException
      */
-    public static function translateExpression(CronExpression $expression): string
-    {
+    public static function translateExpression(
+        CronExpression $expression,
+        ?string $locale = null,
+        ?bool $timeFormat24hours = null
+    ): string {
         try {
-            return $expression->translate();
+            return $expression->translate($locale, $timeFormat24hours);
         } catch (Throwable $th) {
             throw new CronParsingException($expression->raw);
         }

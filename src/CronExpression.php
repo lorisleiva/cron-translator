@@ -56,6 +56,8 @@ class CronExpression
         // Backup translations if we override it.
         if ($locale !== null && $this->locale !== $locale) {
             $this->locale = $locale;
+
+            $this->translations = null;
         }
 
         $this->loadTranslations();
