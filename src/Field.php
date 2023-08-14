@@ -52,9 +52,9 @@ abstract class Field
         return $this->langCountable('times', $this->getCount());
     }
 
-    protected function langCountable(string $key, int $value): array|string
+    protected function langCountable(string $key, int $value, string $case = 'nominative'): array|string
     {
-        return $this->expression->langCountable($key, $value);
+        return $this->expression->langCountable($key, $value, $case);
     }
 
     protected function lang(string $key, array $replacements = []): string

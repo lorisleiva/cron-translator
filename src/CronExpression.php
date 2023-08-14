@@ -44,11 +44,11 @@ class CronExpression
         ];
     }
 
-    public function langCountable(string $type, int $number): array|string
+    public function langCountable(string $type, int $number, string $case = 'nominative'): array|string
     {
         $array = $this->translations[$type];
 
-        $value = $array[$number] ?? ($array['default'] ?: '');
+        $value = $array[$case][$number] ?? $array[$number] ?? $array[$case]['default'] ?? $array['default'] ?? '';
 
         return str_replace(':number', $number, $value);
     }
@@ -66,7 +66,7 @@ class CronExpression
 
     protected function ensureLocaleExists(string $fallbackLocale = 'en'): void
     {
-        if (! is_dir($this->getTranslationDirectory())) {
+        if (!is_dir($this->getTranslationDirectory())) {
             $this->locale = $fallbackLocale;
         }
     }
@@ -92,7 +92,7 @@ class CronExpression
     {
         $filename = sprintf('%s/%s.php', $this->getTranslationDirectory(), $file);
 
-        if (! is_file($filename)) {
+        if (!is_file($filename)) {
             throw new TranslationFileMissingException($this->locale, $file);
         }
 

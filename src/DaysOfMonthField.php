@@ -55,17 +55,17 @@ class DaysOfMonthField extends Field
 
         if ($month->hasType('Every') && $month->dropped) {
             return $this->lang('days_of_month.every_on_day', [
-                'day' => $this->format()
+                'day' => $this->format('dative'),
             ]);
         }
 
         return $this->lang('days_of_month.once_on_day', [
-            'day' => $this->format()
+            'day' => $this->format(),
         ]);
     }
 
-    public function format(): string
+    public function format(string $case = 'nominative'): string
     {
-        return $this->langCountable('ordinals', $this->getValue());
+        return $this->langCountable('ordinals', $this->getValue(), $case);
     }
 }

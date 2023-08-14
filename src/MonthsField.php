@@ -46,24 +46,24 @@ class MonthsField extends Field
         if ($this->expression->day->hasType('Once')) {
             return $this->lang('months.once_on_day', [
                 'month' => $this->format(),
-                'day' => $this->expression->day->format(),
+                'day' => $this->expression->day->format('dative'),
             ]);
         }
 
         return $this->lang('months.once_on_month', [
-            'month' => $this->format()
+            'month' => $this->format(),
         ]);
     }
 
     /**
      * @throws CronParsingException
      */
-    public function format(): string
+    public function format(string $case = 'nominative'): string
     {
         if ($this->getValue() < 1 || $this->getValue() > 12) {
             throw new CronParsingException($this->expression->raw);
         }
 
-        return $this->langCountable('months', $this->getValue());
+        return $this->langCountable('months', $this->getValue(), $case);
     }
 }

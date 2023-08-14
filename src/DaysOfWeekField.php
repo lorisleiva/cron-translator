@@ -37,19 +37,19 @@ class DaysOfWeekField extends Field
      */
     public function translateOnce(): ?string
     {
-        if ($this->expression->day->hasType('Every') && ! $this->expression->day->dropped) {
+        if ($this->expression->day->hasType('Every') && !$this->expression->day->dropped) {
             return null; // DaysOfMonthField adapts to "Every Sunday".
         }
 
         return $this->lang('days_of_week.once_on_day', [
-            'day' => $this->format()
+            'day' => $this->format('dative')
         ]);
     }
 
     /**
      * @throws CronParsingException
      */
-    public function format(): string
+    public function format(string $case = 'nominative'): string
     {
         $weekday = $this->getValue() === 0 ? 7 : $this->getValue();
 
@@ -57,6 +57,6 @@ class DaysOfWeekField extends Field
             throw new CronParsingException($this->expression->raw);
         }
 
-        return $this->langCountable('days', $weekday);
+        return $this->langCountable('days', $weekday, $case);
     }
 }
