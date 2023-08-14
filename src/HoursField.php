@@ -74,7 +74,7 @@ class HoursField extends Field
             return $minute ? "{$hour}:{$minute->format()}" : "{$hour}:00";
         }
 
-        $amOrPm = $this->getValue() < 12 ? 'am' : 'pm';
+        $amOrPm = $this->getValue() < 12 ? $this->lang('times.am') : $this->lang('times.pm');
         $hour = $this->getValue() % 12;
         $hour = $hour === 0 ? 12 : $hour;
 
