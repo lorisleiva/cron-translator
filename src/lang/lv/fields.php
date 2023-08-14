@@ -45,4 +45,8 @@ return [
     'years' => [
         'every' => 'katru gadu',
     ],
+    'times' => [
+        'am' => 'am',
+        'pm' => 'pm',
+    ],
 ];
