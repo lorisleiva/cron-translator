@@ -6,6 +6,12 @@ use Throwable;
 
 class CronTranslator
 {
+
+    /**
+     * Extended cron map
+     * 
+     * @var array
+     */
     private static array $extendedMap = [
         '@yearly' => '0 0 1 1 *',
         '@annually' => '0 0 1 1 *',
@@ -16,64 +22,87 @@ class CronTranslator
     ];
 
     /**
+     * Translate a cron expression
+     * 
+     * @param string $cron The cron expression
+     * @param string $locale The locale 
+     * @param bool $timeFormat24hours Use 24 hour time
+     *
+     * @return string The translated expression
+     *
      * @throws CronParsingException
      */
     public static function translate(string $cron, string $locale = 'en', bool $timeFormat24hours = false): string
     {
+        // Use extended map if available
         if (isset(self::$extendedMap[$cron])) {
             $cron = self::$extendedMap[$cron];
         }
 
         try {
+            // Parse expression
             $expression = new CronExpression($cron, $locale, $timeFormat24hours);
-            $orderedFields = static::orderFields($expression->getFields());
 
-            $translations = array_map(static function (Field $field) {
-                return $field->translate();
-            }, $orderedFields);
+            // Optimize: get fields once
+            $fields = $expression->getFields();
 
+            // Order fields
+            $orderedFields = self::orderFields($fields);
+
+            // Translate fields
+            $translations = array_map(fn (Field $field) => $field->translate(), $orderedFields);
+
+            // Generate translation
             return ucfirst(implode(' ', array_filter($translations)));
         } catch (Throwable $th) {
             throw new CronParsingException($cron);
         }
     }
 
+    /**
+     * Order fields
+     *
+     * @param array $fields The fields
+     *
+     * @return array Ordered fields
+     */
     protected static function orderFields(array $fields): array
     {
-        // Group fields by CRON types.
-        $onces = static::filterType($fields, 'Once');
-        $everys = static::filterType($fields, 'Every');
-        $incrementsAndMultiples = static::filterType($fields, 'Increment', 'Multiple');
+        // Filter by field type
+        $onces = self::filterByType($fields, 'Once');
+        $everys = self::filterByType($fields, 'Every');
+        $incrementsAndMultiples = self::filterByType($fields, 'Increment', 'Multiple');
 
-        // Decide whether to keep one or zero CRON type "Every".
+        // Only keep first every if incrementals exist
         $firstEvery = reset($everys)->position ?? PHP_INT_MIN;
         $firstIncrementOrMultiple = reset($incrementsAndMultiples)->position ?? PHP_INT_MAX;
         $numberOfEverysKept = $firstIncrementOrMultiple < $firstEvery ? 0 : 1;
 
-        // Mark fields that will not be displayed as dropped.
-        // This allows other fields to check whether some
-        // information is missing and adapt their translation.
-        /** @var Field $field */
-        foreach (array_slice($everys, $numberOfEverysKept) as $field) {
-            $field->dropped = true;
-        }
+        // Mark dropped fields
+        array_map(fn (Field $field) => $field->dropped = true, array_slice($everys, $numberOfEverysKept));
 
         return array_merge(
-            // Place one or zero "Every" field at the beginning.
+            // First every
             array_slice($everys, 0, $numberOfEverysKept),
 
-            // Place all "Increment" and "Multiple" fields in the middle.
+            // Incrementals
             $incrementsAndMultiples,
 
-            // Finish with the "Once" fields reversed (i.e. from months to minutes).
+            // Reversed onces
             array_reverse($onces)
         );
     }
 
-    protected static function filterType(array $fields, ...$types): array
+    /**
+     * Filter fields by type
+     * 
+     * @param array $fields The fields
+     * @param string ...$types The types
+     *
+     * @return array The filtered fields
+     */
+    protected static function filterByType(array $fields, string ...$types): array
     {
-        return array_filter($fields, static function (Field $field) use ($types) {
-            return $field->hasType(...$types);
-        });
+        return array_filter($fields, fn (Field $field) => $field->hasType(...$types));
     }
 }

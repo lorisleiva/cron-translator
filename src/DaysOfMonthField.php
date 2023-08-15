@@ -2,11 +2,23 @@
 
 namespace Lorisleiva\CronTranslator;
 
+/**
+ * Days of month field translation class
+ */
 class DaysOfMonthField extends Field
 {
+
+    /**
+     * Field position
+     *
+     * @var int
+     */
     public int $position = 2;
 
     /**
+     * Translate every expression
+     *
+     * @return string
      * @throws CronParsingException
      */
     public function translateEvery(): string
@@ -20,6 +32,11 @@ class DaysOfMonthField extends Field
         return $this->lang('days_of_month.every');
     }
 
+    /**
+     * Translate increment expression
+     *
+     * @return string
+     */
     public function translateIncrement(): string
     {
         if ($this->getCount() > 1) {
@@ -34,6 +51,11 @@ class DaysOfMonthField extends Field
         ]);
     }
 
+    /**
+     * Translate multiple expression
+     *
+     * @return string
+     */
     public function translateMultiple(): string
     {
         return $this->lang('days_of_month.multiple_per_month', [
@@ -41,6 +63,11 @@ class DaysOfMonthField extends Field
         ]);
     }
 
+    /**
+     * Translate once expression
+     *
+     * @return string|null
+     */
     public function translateOnce(): ?string
     {
         $month = $this->expression->month;
@@ -64,6 +91,12 @@ class DaysOfMonthField extends Field
         ]);
     }
 
+    /**
+     * Format day of month
+     *
+     * @param string $case
+     * @return string
+     */
     public function format(string $case = 'nominative'): string
     {
         return $this->langCountable('ordinals', $this->getValue(), $case);

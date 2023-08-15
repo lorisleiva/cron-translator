@@ -2,15 +2,34 @@
 
 namespace Lorisleiva\CronTranslator;
 
+/**
+ * Days of week field translation class
+ */
 class DaysOfWeekField extends Field
 {
+
+    /**
+     * Field position
+     *
+     * @var int
+     */
     public int $position = 4;
 
+    /**
+     * Translate every expression
+     *
+     * @return string
+     */
     public function translateEvery(): string
     {
         return $this->lang('years.every');
     }
 
+    /**
+     * Translate increment expression
+     *  
+     * @return string
+     */
     public function translateIncrement(): string
     {
         if ($this->getCount() > 1) {
@@ -25,6 +44,11 @@ class DaysOfWeekField extends Field
         ]);
     }
 
+    /**
+     * Translate multiple expression
+     *
+     * @return string
+     */
     public function translateMultiple(): string
     {
         return $this->lang('days_of_week.multiple_days_a_week', [
@@ -33,6 +57,9 @@ class DaysOfWeekField extends Field
     }
 
     /**
+     * Translate once expression
+     *
+     * @return string|null
      * @throws CronParsingException
      */
     public function translateOnce(): ?string
@@ -47,6 +74,10 @@ class DaysOfWeekField extends Field
     }
 
     /**
+     * Format day of week
+     * 
+     * @param string $case
+     * @return string
      * @throws CronParsingException
      */
     public function format(string $case = 'nominative'): string
