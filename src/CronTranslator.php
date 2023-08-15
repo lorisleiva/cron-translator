@@ -18,6 +18,7 @@ class CronTranslator
         '@monthly' => '0 0 1 * *',
         '@weekly' => '0 0 * * 0',
         '@daily' => '0 0 * * *',
+        '@midnight' => '0 0 * * *',
         '@hourly' => '0 * * * *'
     ];
 
@@ -53,7 +54,7 @@ class CronTranslator
             $translations = array_map(fn (Field $field) => $field->translate(), $orderedFields);
 
             // Generate translation
-            return ucfirst(implode(' ', array_filter($translations)));
+            return self::mbUcfirst(implode(' ', array_filter($translations)));
         } catch (Throwable $th) {
             throw new CronParsingException($cron);
         }
@@ -104,5 +105,18 @@ class CronTranslator
     protected static function filterByType(array $fields, string ...$types): array
     {
         return array_filter($fields, fn (Field $field) => $field->hasType(...$types));
+    }
+
+
+    /**
+     * Capitalize the first letter
+     *
+     * @param string $string 
+     * @return string 
+     */
+    protected static function mbUcfirst(string $string): string
+    {
+        $fc = mb_strtoupper(mb_substr($string, 0, 1));
+        return $fc . mb_substr($string, 1);
     }
 }
