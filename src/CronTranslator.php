@@ -107,7 +107,6 @@ class CronTranslator
         return array_filter($fields, fn (Field $field) => $field->hasType(...$types));
     }
 
-
     /**
      * Capitalize the first letter
      *
