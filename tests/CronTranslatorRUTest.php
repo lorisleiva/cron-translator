@@ -63,41 +63,41 @@ class CronTranslatorRUTest extends TestCase
     /** @test */
     public function it_translate_expressions_with_multiple(): void
     {
-        $this->assertCronTranslateToRu('каждую минуту 2 ч в день', '* 8,18 * * *');
-        $this->assertCronTranslateToRu('каждую минуту 3 ч в день', '* 8,18,20 * * *');
-        $this->assertCronTranslateToRu('каждую минуту 20 ч в день', '* 1-20 * * *');
+        $this->assertCronTranslateToRu('каждую минуту 2 часа в день', '* 8,18 * * *');
+        $this->assertCronTranslateToRu('каждую минуту 3 часа в день', '* 8,18,20 * * *');
+        $this->assertCronTranslateToRu('каждую минуту 20 часов в день', '* 1-20 * * *');
         $this->assertCronTranslateToRu('два раза в час', '0,30 * * * *');
-        $this->assertCronTranslateToRu('два раза в час 5 ч в день', '0,30 1-5 * * *');
+        $this->assertCronTranslateToRu('два раза в час 5 часов в день', '0,30 1-5 * * *');
         $this->assertCronTranslateToRu('5 раз в день', '0 1-5 * * *');
-        $this->assertCronTranslateToRu('каждую минуту 5 ч в день', '* 1-5 * * *');
-        $this->assertCronTranslateToRu('5 дн. в месяц в 1:00', '0 1 1-5 * *');
-        $this->assertCronTranslateToRu('5 дн. в месяц 2 мес. в год в 1:00', '0 1 1-5 5,6 *');
-        $this->assertCronTranslateToRu('2 мес. в год на 5-ое число в 1:00', '0 1 5 5,6 *');
-        $this->assertCronTranslateToRu('5-ое число каждого месяца 4 дн. в неделю в 1:00', '0 1 5 * 1-4');
+        $this->assertCronTranslateToRu('каждую минуту 5 часов в день', '* 1-5 * * *');
+        $this->assertCronTranslateToRu('5 дней в месяц в 1:00', '0 1 1-5 * *');
+        $this->assertCronTranslateToRu('5 дней в месяц 2 месяца в год в 1:00', '0 1 1-5 5,6 *');
+        $this->assertCronTranslateToRu('2 месяца в год на 5-ое число в 1:00', '0 1 5 5,6 *');
+        $this->assertCronTranslateToRu('5-ое число каждого месяца 4 дня в неделю в 1:00', '0 1 5 * 1-4');
     }
 
     /** @test */
     public function it_translate_expressions_with_increment(): void
     {
-        $this->assertCronTranslateToRu('каждые 2 мин.', '*/2 * * * *');
-        $this->assertCronTranslateToRu('каждые 2 мин.', '1/2 * * * *');
-        $this->assertCronTranslateToRu('два раза каждые 4 мин.', '1,3/4 * * * *');
-        $this->assertCronTranslateToRu('3 раза каждые 5 мин.', '1-3/5 * * * *');
-        $this->assertCronTranslateToRu('каждые 2 мин. в 14:00', '*/2 14 * * *');
-        $this->assertCronTranslateToRu('раз в час каждые 2 дн.', '0 * */2 * *');
-        $this->assertCronTranslateToRu('каждую минуту каждые 2 дн.', '* * */2 * *');
-        $this->assertCronTranslateToRu('один раз каждые 2 ч', '0 */2 * * *');
-        $this->assertCronTranslateToRu('два раза каждые 5 ч', '0 1,2/5 * * *');
-        $this->assertCronTranslateToRu('5 раз каждые 8 ч', '0 1,2,3,4,5/8 * * *');
-        $this->assertCronTranslateToRu('каждую минуту 2 ч из 5', '* 1,2/5 * * *');
-        $this->assertCronTranslateToRu('каждый день каждые 4 мec. в 0:00', '0 0 * */4 *');
+        $this->assertCronTranslateToRu('каждые 2 минуты', '*/2 * * * *');
+        $this->assertCronTranslateToRu('каждые 2 минуты', '1/2 * * * *');
+        $this->assertCronTranslateToRu('два раза каждые 4 минуты', '1,3/4 * * * *');
+        $this->assertCronTranslateToRu('3 раза каждые 5 минут', '1-3/5 * * * *');
+        $this->assertCronTranslateToRu('каждые 2 минуты в 14:00', '*/2 14 * * *');
+        $this->assertCronTranslateToRu('раз в час каждые 2 дня', '0 * */2 * *');
+        $this->assertCronTranslateToRu('каждую минуту каждые 2 дня', '* * */2 * *');
+        $this->assertCronTranslateToRu('один раз каждые 2 часа', '0 */2 * * *');
+        $this->assertCronTranslateToRu('два раза каждые 5 часов', '0 1,2/5 * * *');
+        $this->assertCronTranslateToRu('5 раз каждые 8 часов', '0 1,2,3,4,5/8 * * *');
+        $this->assertCronTranslateToRu('каждую минуту 2 часа из 5', '* 1,2/5 * * *');
+        $this->assertCronTranslateToRu('каждый день каждые 4 месяца в 0:00', '0 0 * */4 *');
     }
 
     /** @test */
     public function it_adds_junctions_to_certain_combinations_of_cron_types(): void
     {
-        $this->assertCronTranslateToRu('каждую минуту каждые 2 ч', '* */2 * * *');
-        $this->assertCronTranslateToRu('каждую минуту каждые 3 ч 2-го числа каждого месяца', '* 1/3 2 * *');
+        $this->assertCronTranslateToRu('каждую минуту каждые 2 часа', '* */2 * * *');
+        $this->assertCronTranslateToRu('каждую минуту каждые 3 часа 2-го числа каждого месяца', '* 1/3 2 * *');
     }
 
     /** @test */

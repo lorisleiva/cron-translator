@@ -61,7 +61,7 @@ class CronExpression
             $translation = str_replace(':' . $transKey, $value, $translation);
         }
 
-        return $translation;
+        return $this->pluralize($translation);
     }
 
     protected function ensureLocaleExists(string $fallbackLocale = 'en'): void
@@ -113,5 +113,55 @@ class CronExpression
         }
 
         return $array;
+    }
+
+
+    /**
+     * Pluralize the input string based on the counts and forms provided.
+     *
+     * @param string $inputString The input string to pluralize.
+     * @return string The pluralized string.
+     */
+    public function pluralize(string $inputString): string
+    {
+        if (!preg_match_all('/(\d+)\s+{(.+?)\}/', $inputString, $matches)) {
+            return $inputString;
+        }
+
+        [$fullMatches, $counts, $forms] = $matches;
+
+        $conversionTable = [];
+
+        foreach ($counts as $key => $count) {
+            $conversionTable['{' . $forms[$key] . '}'] = $this->declineCount((int)$count, $forms[$key]);
+        }
+
+        return strtr($inputString, $conversionTable);
+    }
+
+    /**
+     * Generates the function comment for the declineCount function.
+     *
+     * @param int $count The count parameter represents the count value.
+     * @param string $forms The forms parameter represents the forms string.
+     * @return string The function returns a string value.
+     */
+    protected function declineCount(int $count, string $forms): string
+    {
+        $formsArray = explode('|', $forms);
+
+        if (count($formsArray) < 3) {
+            $formsArray[2] = $formsArray[1];
+        }
+
+        $cases = [2, 0, 1, 1, 1, 2];
+
+        $count = abs((int) strip_tags($count));
+
+        $formIndex = ($count % 100 > 4 && $count % 100 < 20)
+            ? 2
+            : $cases[min($count % 10, 5)];
+
+        return $formsArray[$formIndex];
     }
 }
