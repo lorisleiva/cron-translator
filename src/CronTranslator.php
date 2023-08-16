@@ -13,6 +13,7 @@ class CronTranslator
      * @var array
      */
     private static array $extendedMap = [
+        '@reboot' => '@reboot',
         '@yearly' => '0 0 1 1 *',
         '@annually' => '0 0 1 1 *',
         '@monthly' => '0 0 1 * *',
@@ -41,20 +42,19 @@ class CronTranslator
         }
 
         try {
-            // Parse expression
-            $expression = new CronExpression($cron, $locale, $timeFormat24hours);
+            $translations = (new LanguageLoader($locale))->translations;
 
-            // Optimize: get fields once
+            if (str_starts_with($cron, '@')) {
+                return self::mbUcfirst($translations["fields"]["extended"][$cron]);
+            }
+
+            $expression = new CronExpression($cron, $translations, $timeFormat24hours);
             $fields = $expression->getFields();
-
-            // Order fields
             $orderedFields = self::orderFields($fields);
 
-            // Translate fields
-            $translations = array_map(fn (Field $field) => $field->translate(), $orderedFields);
+            $answer = array_map(fn (Field $field) => $field->translate(), $orderedFields);
 
-            // Generate translation
-            return self::mbUcfirst(implode(' ', array_filter($translations)));
+            return self::mbUcfirst(implode(' ', array_filter($answer)));
         } catch (Throwable $th) {
             throw new CronParsingException($cron);
         }
@@ -83,13 +83,8 @@ class CronTranslator
         array_map(fn (Field $field) => $field->dropped = true, array_slice($everys, $numberOfEverysKept));
 
         return array_merge(
-            // First every
             array_slice($everys, 0, $numberOfEverysKept),
-
-            // Incrementals
             $incrementsAndMultiples,
-
-            // Reversed onces
             array_reverse($onces)
         );
     }

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'extended' => [
+        '@reboot' => 'run once at startup',
+    ],
     'minutes' => [
         'every' => 'every minute',
         'increment' => 'every :increment minutes',

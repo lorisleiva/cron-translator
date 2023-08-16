@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'extended' => [
+        '@reboot' => 'один раз при старте',
+    ],
     'minutes' => [
         'every' => 'каждую минуту',
         'increment' => 'каждые :increment {минута|минуты|минут}',

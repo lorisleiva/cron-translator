@@ -108,6 +108,7 @@ class CronTranslatorRUTest extends TestCase
     /** @test */
     public function it_handles_extended_cron_syntax(): void
     {
+        $this->assertCronTranslateToRu('Один раз при старте', '@reboot');
         $this->assertCronTranslateToRu('Раз в час', '@hourly');
         $this->assertCronTranslateToRu('Каждый день в 0:00', '@daily');
         $this->assertCronTranslateToRu('Каждую неделю в воскресенье в 0:00', '@weekly');
