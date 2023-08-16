@@ -51,6 +51,7 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `ro` — Romanian
 - `ru` — Russian
 - `sk` — Slovak
+- `ua` — Ukrainian
 - `vi` — Vietnamese
 - `zh` — Simplified Chinese
 - `zh-TW` — Traditional Chinese
