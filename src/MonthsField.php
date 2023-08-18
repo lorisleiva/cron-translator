@@ -2,10 +2,24 @@
 
 namespace Lorisleiva\CronTranslator;
 
+/**
+ * Months field translation class
+ */
 class MonthsField extends Field
 {
+
+    /**
+     * Field position
+     *
+     * @var int
+     */
     public int $position = 3;
 
+    /**
+     * Translate every expression
+     *
+     * @return string
+     */
     public function translateEvery(): string
     {
         if ($this->expression->day->hasType('Once')) {
@@ -17,6 +31,11 @@ class MonthsField extends Field
         return $this->lang('months.every');
     }
 
+    /**
+     * Translate increment expression
+     *
+     * @return string
+     */
     public function translateIncrement(): string
     {
         if ($this->getCount() > 1) {
@@ -31,6 +50,11 @@ class MonthsField extends Field
         ]);
     }
 
+    /**
+     * Translate multiple expression
+     *
+     * @return string
+     */
     public function translateMultiple(): string
     {
         return $this->lang('months.multiple_per_year', [
@@ -39,6 +63,9 @@ class MonthsField extends Field
     }
 
     /**
+     * Translate once expression
+     *
+     * @return string
      * @throws CronParsingException
      */
     public function translateOnce(): string
@@ -46,24 +73,28 @@ class MonthsField extends Field
         if ($this->expression->day->hasType('Once')) {
             return $this->lang('months.once_on_day', [
                 'month' => $this->format(),
-                'day' => $this->expression->day->format(),
+                'day' => $this->expression->day->format('dative'),
             ]);
         }
 
         return $this->lang('months.once_on_month', [
-            'month' => $this->format()
+            'month' => $this->format(),
         ]);
     }
 
     /**
+     * Format the month
+     *
+     * @param string $case
+     * @return string
      * @throws CronParsingException
      */
-    public function format(): string
+    public function format(string $case = 'nominative'): string
     {
         if ($this->getValue() < 1 || $this->getValue() > 12) {
             throw new CronParsingException($this->expression->raw);
         }
 
-        return $this->langCountable('months', $this->getValue());
+        return $this->langCountable('months', $this->getValue(), $case);
     }
 }

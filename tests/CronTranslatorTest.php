@@ -105,6 +105,7 @@ class CronTranslatorTest extends TestCase
     /** @test */
     public function it_handles_extended_cron_syntax(): void
     {
+        $this->assertCronTranslateTo('Run once at startup', '@reboot');
         $this->assertCronTranslateTo('Once an hour', '@hourly');
         $this->assertCronTranslateTo('Every day at 12:00am', '@daily');
         $this->assertCronTranslateTo('Every Sunday at 12:00am', '@weekly');

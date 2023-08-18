@@ -45,4 +45,8 @@ return [
     'years' => [
         'every' => '每年',
     ],
+    'times' => [
+        'am' => 'am',
+        'pm' => 'pm',
+    ],
 ];
