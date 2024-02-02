@@ -3,20 +3,20 @@
 return [
     'minutes' => [
         'every' => 'jede Minute',
-        'increment' => 'jede :increment Minute',
+        'increment' => 'alle :increment Minuten',
         'times_per_increment' => ':times mal alle :increment Minuten',
         'multiple' => ':times mal pro Stunde',
     ],
     'hours' => [
         'every' => 'jede Stunde',
-        'once_an_hour' => 'ein mal pro Stunde',
-        'increment' => 'jede :increment Stunde',
+        'once_an_hour' => 'einmal pro Stunde',
+        'increment' => 'alle :increment Stunden',
         'multiple_per_increment' => ':count Stunden aus :increment',
-        'times_per_increment' => ':times mal alle :increment Stunden',
+        'times_per_increment' => ':timesmal alle :increment Stunden',
         'increment_chained' => 'alle :increment Stunden',
         'multiple_per_day' => ':count Stunden pro Tag',
         'times_per_day' => ':times mal am Tag',
-        'once_at_time' => 'um :time',
+        'once_at_time' => 'um :time Uhr',
     ],
     'days_of_month' => [
         'every' => 'jeden Tag',
@@ -33,7 +33,7 @@ return [
         'multiple_per_increment' => ':count Monate von :increment',
         'multiple_per_year' => ':count Monate im Jahr',
         'once_on_month' => 'im :month',
-        'once_on_day' => 'im :month den :day',
+        'once_on_day' => 'am :day :month',
     ],
     'days_of_week' => [
         'every' => 'jeden :weekday',
@@ -42,7 +42,7 @@ return [
         'multiple_days_a_week' => ':count Tage in der Woche',
         #'once_on_day' => 'jeden :days',
         #'once_on_day' => 'am :days',
-        'once_on_day' => 'des :days',
+        'once_on_day' => 'an jedem :day',
     ],
     'years' => [
         'every' => 'jedes Jahr',
