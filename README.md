@@ -45,6 +45,7 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `es` — Spanish
 - `fr` — French
 - `hi` — Hindi
+- `it` — Italian
 - `lv` — Latvian
 - `nl` — Dutch
 - `pt` — Portuguese
