@@ -2,7 +2,7 @@
 
 namespace Lorisleiva\CronTranslator\Tests;
 
-class CronTranslatorDETest extends TestCase
+class CronTranslatorITTest extends TestCase
 {
     /** @test */
     public function it_translates_expressions_with_every_and_once(): void
