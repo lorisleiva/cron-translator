@@ -9,50 +9,50 @@ class CronTranslatorDATest extends TestCase
     {
         // All 32 (2^5) combinations of Every/Once.
         $this->assertCronTranslateTo('Hvert minut', '* * * * *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage', '* * * * 0', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut i Januar', '* * * 1 *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage i Januar', '* * * 1 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage', '* * * * 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut i januar', '* * * 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage i januar', '* * * 1 0', 'da', true);
         $this->assertCronTranslateTo('Hvert minut den 1. hver måned', '* * 1 * *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage den 1. hver måned', '* * 1 * 0', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut den 1. Januar', '* * 1 1 *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage den 1. Januar', '* * 1 1 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage den 1. hver måned', '* * 1 * 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut den 1. januar', '* * 1 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage den 1. januar', '* * 1 1 0', 'da', true);
         $this->assertCronTranslateTo('Hvert minut kl. 0:00', '* 0 * * *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage kl. 0:00', '* 0 * * 0', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut i Januar kl. 0:00', '* 0 * 1 *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage i Januar kl. 0:00', '* 0 * 1 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage kl. 0:00', '* 0 * * 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut i januar kl. 0:00', '* 0 * 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage i januar kl. 0:00', '* 0 * 1 0', 'da', true);
         $this->assertCronTranslateTo('Hvert minut den 1. hver måned kl. 0:00', '* 0 1 * *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage den 1. hver måned kl. 0:00', '* 0 1 * 0', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut den 1. Januar kl. 0:00', '* 0 1 1 *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Søndage den 1. Januar kl. 0:00', '* 0 1 1 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage den 1. hver måned kl. 0:00', '* 0 1 * 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut den 1. januar kl. 0:00', '* 0 1 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på søndage den 1. januar kl. 0:00', '* 0 1 1 0', 'da', true);
         $this->assertCronTranslateTo('En gang i timen', '0 * * * *', 'da', true);
-        $this->assertCronTranslateTo('En gang i timen på Søndage', '0 * * * 0', 'da', true);
-        $this->assertCronTranslateTo('En gang i timen i Januar', '0 * * 1 *', 'da', true);
-        $this->assertCronTranslateTo('En gang i timen på Søndage i Januar', '0 * * 1 0', 'da', true);
+        $this->assertCronTranslateTo('En gang i timen på søndage', '0 * * * 0', 'da', true);
+        $this->assertCronTranslateTo('En gang i timen i januar', '0 * * 1 *', 'da', true);
+        $this->assertCronTranslateTo('En gang i timen på søndage i januar', '0 * * 1 0', 'da', true);
         $this->assertCronTranslateTo('En gang i timen den 1. hver måned', '0 * 1 * *', 'da', true);
-        $this->assertCronTranslateTo('En gang i timen på Søndage den 1. hver måned', '0 * 1 * 0', 'da', true);
-        $this->assertCronTranslateTo('En gang i timen den 1. Januar', '0 * 1 1 *', 'da', true);
-        $this->assertCronTranslateTo('En gang i timen på Søndage den 1. Januar', '0 * 1 1 0', 'da', true);
+        $this->assertCronTranslateTo('En gang i timen på søndage den 1. hver måned', '0 * 1 * 0', 'da', true);
+        $this->assertCronTranslateTo('En gang i timen den 1. januar', '0 * 1 1 *', 'da', true);
+        $this->assertCronTranslateTo('En gang i timen på søndage den 1. januar', '0 * 1 1 0', 'da', true);
         $this->assertCronTranslateTo('Alle dage kl. 0:00', '0 0 * * *', 'da', true);
-        $this->assertCronTranslateTo('Hver Søndag kl. 0:00', '0 0 * * 0', 'da', true);
-        $this->assertCronTranslateTo('Alle dage i Januar kl. 0:00', '0 0 * 1 *', 'da', true);
-        $this->assertCronTranslateTo('Hver Søndag i Januar kl. 0:00', '0 0 * 1 0', 'da', true);
+        $this->assertCronTranslateTo('Hver søndag kl. 0:00', '0 0 * * 0', 'da', true);
+        $this->assertCronTranslateTo('Alle dage i januar kl. 0:00', '0 0 * 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hver søndag i januar kl. 0:00', '0 0 * 1 0', 'da', true);
         $this->assertCronTranslateTo('Den 1. hver måned kl. 0:00', '0 0 1 * *', 'da', true);
-        $this->assertCronTranslateTo('Den 1. hver måned på Søndage kl. 0:00', '0 0 1 * 0', 'da', true);
-        $this->assertCronTranslateTo('Hvert år den 1. Januar kl. 0:00', '0 0 1 1 *', 'da', true);
-        $this->assertCronTranslateTo('På Søndage den 1. Januar kl. 0:00', '0 0 1 1 0', 'da', true);
+        $this->assertCronTranslateTo('Den 1. hver måned på søndage kl. 0:00', '0 0 1 * 0', 'da', true);
+        $this->assertCronTranslateTo('Hvert år den 1. januar kl. 0:00', '0 0 1 1 *', 'da', true);
+        $this->assertCronTranslateTo('På søndage den 1. januar kl. 0:00', '0 0 1 1 0', 'da', true);
 
         // More realistic examples.
-        $this->assertCronTranslateTo('Hvert år den 1. Januar kl. 12:00', '0 12 1 1 *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Mandage kl. 15:00', '* 15 * * 1', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut den 3. Januar', '* * 3 1 *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut på Mandage i April', '* * * 4 1', 'da', true);
-        $this->assertCronTranslateTo('På Mandage den 22. April kl. 15:10', '10 15 22 4 1', 'da', true);
+        $this->assertCronTranslateTo('Hvert år den 1. januar kl. 12:00', '0 12 1 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på mandage kl. 15:00', '* 15 * * 1', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut den 3. januar', '* * 3 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut på mandage i april', '* * * 4 1', 'da', true);
+        $this->assertCronTranslateTo('På mandage den 22. april kl. 15:10', '10 15 22 4 1', 'da', true);
 
         // Paparazzi examples.
         $this->assertCronTranslateTo('Alle dage kl. 22:00', '0 22 * * *', 'da', true);
         $this->assertCronTranslateTo('Alle dage kl. 9:00', '0 9 * * *', 'da', true);
-        $this->assertCronTranslateTo('Hver Mandag kl. 16:00', '0 16 * * 1', 'da', true);
-        $this->assertCronTranslateTo('Hvert år den 1. Januar kl. 0:00', '0 0 1 1 *', 'da', true);
+        $this->assertCronTranslateTo('Hver mandag kl. 16:00', '0 16 * * 1', 'da', true);
+        $this->assertCronTranslateTo('Hvert år den 1. januar kl. 0:00', '0 0 1 1 *', 'da', true);
         $this->assertCronTranslateTo('Den 1. hver måned kl. 0:00', '0 0 1 * *', 'da', true);
     }
 
@@ -99,7 +99,7 @@ class CronTranslatorDATest extends TestCase
     public function it_converts_ranges_of_one_into_once_cron_types(): void
     {
         $this->assertCronTranslateTo('Hvert minut kl. 8:00', '* 8-8 * * *', 'da', true);
-        $this->assertCronTranslateTo('Hvert minut i Januar', '* * * 1-1 *', 'da', true);
+        $this->assertCronTranslateTo('Hvert minut i januar', '* * * 1-1 *', 'da', true);
     }
 
     /** @test */
@@ -108,10 +108,10 @@ class CronTranslatorDATest extends TestCase
         $this->assertCronTranslateTo('Kør ved opstart', '@reboot', 'da', true);
         $this->assertCronTranslateTo('En gang i timen', '@hourly', 'da', true);
         $this->assertCronTranslateTo('Alle dage kl. 0:00', '@daily', 'da', true);
-        $this->assertCronTranslateTo('Hver Søndag kl. 0:00', '@weekly', 'da', true);
+        $this->assertCronTranslateTo('Hver søndag kl. 0:00', '@weekly', 'da', true);
         $this->assertCronTranslateTo('Den 1. hver måned kl. 0:00', '@monthly', 'da', true);
-        $this->assertCronTranslateTo('Hvert år den 1. Januar kl. 0:00', '@yearly', 'da', true);
-        $this->assertCronTranslateTo('Hvert år den 1. Januar kl. 0:00', '@annually', 'da', true);
+        $this->assertCronTranslateTo('Hvert år den 1. januar kl. 0:00', '@yearly', 'da', true);
+        $this->assertCronTranslateTo('Hvert år den 1. januar kl. 0:00', '@annually', 'da', true);
     }
 
     /** @test */
