@@ -5,7 +5,7 @@ namespace Lorisleiva\CronTranslator\Tests;
 class CronTranslatorDATest extends TestCase
 {
     /** @test */
-    public function it_translates_expressions_with_hver_and_once(): void
+    public function it_translates_expressions_with_every_and_once(): void
     {
         // All 32 (2^5) combinations of Every/Once.
         $this->assertCronTranslateTo('Hvert minut', '* * * * *', 'da', true);
