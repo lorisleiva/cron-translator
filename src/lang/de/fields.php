@@ -51,4 +51,7 @@ return [
         'am' => 'am',
         'pm' => 'pm',
     ],
+    'connector' => [
+        'and' => 'und',
+    ],
 ];

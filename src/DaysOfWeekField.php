@@ -51,6 +51,29 @@ class DaysOfWeekField extends Field
      */
     public function translateMultiple(): string
     {
+        // Check if we have specific comma-separated days (like "1,4")
+        if (preg_match('/^\d+(,\d+)+$/', $this->rawField)) {
+            $days = explode(',', $this->rawField);
+            $dayNames = [];
+            
+            foreach ($days as $day) {
+                $dayValue = (int)$day;
+                $weekday = $dayValue === 0 ? 7 : $dayValue;
+                
+                if ($weekday >= 1 && $weekday <= 7) {
+                    $dayNames[] = $this->langCountable('days', $weekday);
+                }
+            }
+            
+            if (count($dayNames) > 1) {
+                $lastDay = array_pop($dayNames);
+                return implode(', ', $dayNames) . ' ' . $this->lang('connector.and') . ' ' . $lastDay;
+            } elseif (count($dayNames) === 1) {
+                return $dayNames[0];
+            }
+        }
+        
+        // Fall back to generic multiple days translation
         return $this->lang('days_of_week.multiple_days_a_week', [
             'count' => $this->getCount(),
         ]);
