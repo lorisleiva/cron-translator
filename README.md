@@ -48,6 +48,7 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `hi` — Hindi
 - `lv` — Latvian
 - `nl` — Dutch
+- `pl` — Polish
 - `pt` — Portuguese
 - `ro` — Romanian
 - `ru` — Russian
