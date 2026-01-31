@@ -36,7 +36,7 @@ class CronTranslatorPLTest extends TestCase
         $this->assertCronTranslateTo('W niedzielę o 12:00am', '0 0 * * 0', 'pl');
         $this->assertCronTranslateTo('Każdego dnia w styczniu o 12:00am', '0 0 * 1 *', 'pl');
         $this->assertCronTranslateTo('W niedzielę w styczniu o 12:00am', '0 0 * 1 0', 'pl');
-        $this->assertCronTranslateTo('W 1. dniu miesiąca o 12:00am', '0 0 1 * *', 'pl');
+        $this->assertCronTranslateTo('W 1. dniu każdego miesiąca o 12:00am', '0 0 1 * *', 'pl');
         $this->assertCronTranslateTo('W 1. dniu każdego miesiąca w niedzielę o 12:00am', '0 0 1 * 0', 'pl');
         $this->assertCronTranslateTo('Co roku w styczniu dnia 1. o 12:00am', '0 0 1 1 *', 'pl');
         $this->assertCronTranslateTo('W niedzielę w styczniu dnia 1. o 12:00am', '0 0 1 1 0', 'pl');
