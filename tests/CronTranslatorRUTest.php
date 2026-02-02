@@ -72,6 +72,9 @@ class CronTranslatorRUTest extends TestCase
         $this->assertCronTranslateToRu('5 дней в месяц 2 месяца в год в 1:00', '0 1 1-5 5,6 *');
         $this->assertCronTranslateToRu('2 месяца в год на 5-ое число в 1:00', '0 1 5 5,6 *');
         $this->assertCronTranslateToRu('5-ое число каждого месяца 4 дня в неделю в 1:00', '0 1 5 * 1-4');
+        $this->assertCronTranslateToRu('Каждую неделю в понедельник и в четверг в 9:00', '0 9 * * 1,4');
+        $this->assertCronTranslateToRu('Каждую неделю в понедельник, в среду и в пятницу в 9:00', '0 9 * * 1,3,5');
+        $this->assertCronTranslateToRu('Каждую неделю в субботу и в воскресенье в 10:00', '0 10 * * 6,0');
     }
 
     /** @test */

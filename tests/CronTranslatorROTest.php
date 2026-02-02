@@ -70,6 +70,9 @@ class CronTranslatorROTest extends TestCase
         $this->assertCronTranslateToRo('5 zile pe lună 2 luni pe an la 1:00', '0 1 1-5 5,6 *');
         $this->assertCronTranslateToRo('2 luni pe an în data de 5 la 1:00', '0 1 5 5,6 *');
         $this->assertCronTranslateToRo('Pe data de 5 a fiecărei luni 4 zile ale săptămânii la 1:00', '0 1 5 * 1-4');
+        $this->assertCronTranslateToRo('În fiecare Luni și Joi la 9:00', '0 9 * * 1,4');
+        $this->assertCronTranslateToRo('În fiecare Luni, Miercuri și Vineri la 9:00', '0 9 * * 1,3,5');
+        $this->assertCronTranslateToRo('În fiecare Sâmbătă și Duminică la 10:00', '0 10 * * 6,0');
     }
 
     /** @test */

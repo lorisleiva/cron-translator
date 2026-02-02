@@ -22,7 +22,7 @@ class CronTranslatorUATest extends TestCase
         $this->assertCronTranslateToUa('Щохвилини в неділю в січні о 0:00', '* 0 * 1 0');
         $this->assertCronTranslateToUa('Щохвилини щомісяця 1 числа о 0:00', '* 0 1 * *');
         $this->assertCronTranslateToUa('Щохвилини в неділю щомісяця 1 числа о 0:00', '* 0 1 * 0');
-        $this->assertCronTranslateToUa('Щохвилини в січні 1 числа о 0:00', '* 0 1 1 *'); 
+        $this->assertCronTranslateToUa('Щохвилини в січні 1 числа о 0:00', '* 0 1 1 *');
         $this->assertCronTranslateToUa('Щохвилини в неділю в січні 1 числа о 0:00', '* 0 1 1 0');
         $this->assertCronTranslateToUa('Раз на годину', '0 * * * *');
         $this->assertCronTranslateToUa('Раз на годину в неділю', '0 * * * 0');
@@ -31,7 +31,7 @@ class CronTranslatorUATest extends TestCase
         $this->assertCronTranslateToUa('Раз на годину щомісяця 1 числа', '0 * 1 * *');
         $this->assertCronTranslateToUa('Раз на годину в неділю щомісяця 1 числа', '0 * 1 * 0');
         $this->assertCronTranslateToUa('Раз на годину в січні 1 числа', '0 * 1 1 *');
-        $this->assertCronTranslateToUa('Раз на годину в неділю в січні 1 числа', '0 * 1 1 0');    
+        $this->assertCronTranslateToUa('Раз на годину в неділю в січні 1 числа', '0 * 1 1 0');
         $this->assertCronTranslateToUa('Щодня о 0:00', '0 0 * * *');
         $this->assertCronTranslateToUa('Щотижня в неділю о 0:00', '0 0 * * 0');
         $this->assertCronTranslateToUa('Щодня в січні о 0:00', '0 0 * 1 *');
@@ -72,6 +72,9 @@ class CronTranslatorUATest extends TestCase
         $this->assertCronTranslateToUa('5 днів в місяць 2 місяці на рік о 1:00', '0 1 1-5 5,6 *');
         $this->assertCronTranslateToUa('2 місяці на рік на 5-е число о 1:00', '0 1 5 5,6 *');
         $this->assertCronTranslateToUa('Щомісяця 5-е числа 4 дні на тиждень о 1:00', '0 1 5 * 1-4');
+        $this->assertCronTranslateToUa('Щотижня у понеділок і у четвер о 9:00', '0 9 * * 1,4');
+        $this->assertCronTranslateToUa('Щотижня у понеділок, у середу і у п\'ятницю о 9:00', '0 9 * * 1,3,5');
+        $this->assertCronTranslateToUa('Щотижня у суботу і в неділю о 10:00', '0 10 * * 6,0');
     }
 
     /** @test */

@@ -70,6 +70,9 @@ class CronTranslatorSKTest extends TestCase
         $this->assertCronTranslateTo('5 dní v mesiaci 2 mesiacov ročne o 1:00am', '0 1 1-5 5,6 *', 'sk');
         $this->assertCronTranslateTo('2 mesiacov ročne 5. dňa v mesiaci o 1:00am', '0 1 5 5,6 *', 'sk');
         $this->assertCronTranslateTo('Každý 5. deň v mesiaci 4 dní v týždni o 1:00am', '0 1 5 * 1-4', 'sk');
+        $this->assertCronTranslateTo('Každá/ý pondelok a štvrtok o 9:00am', '0 9 * * 1,4', 'sk');
+        $this->assertCronTranslateTo('Každá/ý pondelok, streda a piatok o 9:00am', '0 9 * * 1,3,5', 'sk');
+        $this->assertCronTranslateTo('Každá/ý sobota a nedeľa o 10:00am', '0 10 * * 6,0', 'sk');
     }
 
     /** @test */

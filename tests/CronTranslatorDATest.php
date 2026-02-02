@@ -70,6 +70,9 @@ class CronTranslatorDATest extends TestCase
         $this->assertCronTranslateTo('5 dage om måneden 2 måneder om året kl. 1:00', '0 1 1-5 5,6 *', 'da', true);
         $this->assertCronTranslateTo('2 måneder om året på dag 5. kl. 1:00', '0 1 5 5,6 *', 'da', true);
         $this->assertCronTranslateTo('Den 5. hver måned 4 dage om ugen kl. 1:00', '0 1 5 * 1-4', 'da', true);
+        $this->assertCronTranslateTo('Hver mandag og torsdag kl. 9:00', '0 9 * * 1,4', 'da', true);
+        $this->assertCronTranslateTo('Hver mandag, onsdag og fredag kl. 9:00', '0 9 * * 1,3,5', 'da', true);
+        $this->assertCronTranslateTo('Hver lørdag og søndag kl. 10:00', '0 10 * * 6,0', 'da', true);
     }
 
     /** @test */
