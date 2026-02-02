@@ -30,9 +30,9 @@ class DaysOfMonthField extends Field
         }
 
         // Handle specific comma-separated days like "1,4" for "Monday and Thursday"
-        if ($this->expression->weekday->hasType('Multiple') && 
+        if ($this->expression->weekday->hasType('Multiple') &&
             preg_match('/^\d+(,\d+)+$/', $this->expression->weekday->rawField)) {
-            return 'Every';
+            return '';
         }
 
         return $this->lang('days_of_month.every');

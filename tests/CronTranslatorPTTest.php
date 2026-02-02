@@ -14,6 +14,9 @@ class CronTranslatorPTTest extends TestCase
         $this->assertCronTranslateToPT('Todos os anos no 1º de Janeiro às 1:01am', '1 1 1 1 *');
         $this->assertCronTranslateToPT('Cada Quarta-feira às 10:00am', '0 10 * * 3');
         $this->assertCronTranslateToPT('Nas/nos Terça-feiras no 2º de Fevereiro às 2:02am', '2 2 2 2 2');
+        $this->assertCronTranslateToPT('Cada Segunda-feira e Quinta-feira às 9:00am', '0 9 * * 1,4');
+        $this->assertCronTranslateToPT('Cada Segunda-feira, Quarta-feira e Sexta-feira às 9:00am', '0 9 * * 1,3,5');
+        $this->assertCronTranslateToPT('Cada Sábado e Domingo às 10:00am', '0 10 * * 6,0');
     }
 
     public function assertCronTranslateToPT(string $expected, string $actual, bool $timeFormat24hours = false): void
