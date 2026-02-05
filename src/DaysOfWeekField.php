@@ -49,36 +49,12 @@ class DaysOfWeekField extends Field
      *
      * @return string
      */
-    public function translateMultiple(): string
+    public function translateMultiple(): ?string
     {
-        // Check if we have specific comma-separated days (like "1,4")
-        if (preg_match('/^\d+(,\d+)+$/', $this->rawField)) {
-            $days = explode(',', $this->rawField);
-            $dayNames = [];
-
-            foreach ($days as $day) {
-                $dayValue = (int)$day;
-                $weekday = $dayValue === 0 ? 7 : $dayValue;
-
-                if ($weekday >= 1 && $weekday <= 7) {
-                    $dayNames[] = $this->langCountable('days', $weekday);
-                }
-            }
-
-            if (count($dayNames) > 1) {
-                $lastDay = array_pop($dayNames);
-                $weekdayList = implode(', ', $dayNames) . ' ' . $this->lang('connector.and') . ' ' . $lastDay;
-                return $this->lang('days_of_week.every', [
-                    'weekday' => $weekdayList,
-                ]);
-            } elseif (count($dayNames) === 1) {
-                return $this->lang('days_of_week.every', [
-                    'weekday' => $dayNames[0],
-                ]);
-            }
+        if ($this->expression->day->hasType('Every') && !$this->expression->day->dropped && $this->isDiscreteList()) {
+            return null; // DaysOfMonthField adapts to "Every Monday and Friday".
         }
 
-        // Fall back to generic multiple days translation
         return $this->lang('days_of_week.multiple_days_a_week', [
             'count' => $this->getCount(),
         ]);
@@ -99,6 +75,33 @@ class DaysOfWeekField extends Field
         return $this->lang('days_of_week.once_on_day', [
             'day' => $this->format('dative')
         ]);
+    }
+
+    public function isDiscreteList(): bool
+    {
+        return $this->hasType('Multiple') && preg_match('/^\d+(,\d+)+$/', $this->rawField);
+    }
+
+    public function getFormattedDiscreteList(): string
+    {
+        $days = explode(',', $this->rawField);
+        $dayNames = [];
+
+        foreach ($days as $day) {
+            $dayValue = (int)$day;
+            $weekday = $dayValue === 0 ? 7 : $dayValue;
+
+            if ($weekday >= 1 && $weekday <= 7) {
+                $dayNames[] = $this->langCountable('days', $weekday);
+            }
+        }
+
+        if (count($dayNames) > 1) {
+            $lastDay = array_pop($dayNames);
+            return implode(', ', $dayNames) . ' ' . $this->lang('connector.and') . ' ' . $lastDay;
+        }
+
+        return $dayNames[0] ?? '';
     }
 
     /**
