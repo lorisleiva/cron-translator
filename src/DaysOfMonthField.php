@@ -29,6 +29,12 @@ class DaysOfMonthField extends Field
             ]);
         }
 
+        if ($this->expression->weekday->isDiscreteList()) {
+            return $this->lang('days_of_week.every', [
+                'weekday' => $this->expression->weekday->getFormattedDiscreteList(),
+            ]);
+        }
+
         return $this->lang('days_of_month.every');
     }
 

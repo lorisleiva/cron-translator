@@ -70,6 +70,9 @@ class CronTranslatorZhTWTest extends TestCase
         $this->assertCronTranslateTo('每月5天 每年2個月 在1:00am', '0 1 1-5 5,6 *');
         $this->assertCronTranslateTo('每年2個月 在5日 在1:00am', '0 1 5 5,6 *');
         $this->assertCronTranslateTo('每月5日 一週4天 在1:00am', '0 1 5 * 1-4');
+        $this->assertCronTranslateTo('每週週一 和 週四 在9:00am', '0 9 * * 1,4');
+        $this->assertCronTranslateTo('每週週一, 週三 和 週五 在9:00am', '0 9 * * 1,3,5');
+        $this->assertCronTranslateTo('每週週六 和 週日 在10:00am', '0 10 * * 6,0');
     }
 
     /** @test */

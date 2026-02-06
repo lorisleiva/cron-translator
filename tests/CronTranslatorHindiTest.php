@@ -65,6 +65,9 @@ class CronTranslatorHindiTest extends TestCase
         $this->assertCronTranslateToHi('महीने में 5 दिन साल में 2 महीने 1:00 पर','0 1 1-5 5,6 *');
         $this->assertCronTranslateToHi("साल में 2 महीने 5th को 1:00 पर","0 1 5 5,6 *");
         $this->assertCronTranslateToHi('प्रत्येक महीने की 5th सप्ताह में 4 दिन 1:00 पर','0 1 5 * 1-4');
+        $this->assertCronTranslateToHi('प्रत्येक सोमवार और गुरुवार 9:00 पर','0 9 * * 1,4');
+        $this->assertCronTranslateToHi('प्रत्येक सोमवार, बुधवार और शुक्रवार 9:00 पर','0 9 * * 1,3,5');
+        $this->assertCronTranslateToHi('प्रत्येक शनिवार और रविवार 10:00 पर','0 10 * * 6,0');
     }
 
     /** @test */
@@ -108,7 +111,7 @@ class CronTranslatorHindiTest extends TestCase
         $this->assertCronTranslateToHi("प्रत्येक वर्ष पहली जनवरी को 0:00 पर","@annually");
     }
 
-   
+
 
     public function assertCronTranslateToHi(string $expected, string $actual, bool $timeFormat24hours = true): void
     {

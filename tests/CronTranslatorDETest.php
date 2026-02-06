@@ -70,6 +70,9 @@ class CronTranslatorDETest extends TestCase
         $this->assertCronTranslateToDE('5 Tage im Monat 2 Monate im Jahr um 1:00 Uhr', '0 1 1-5 5,6 *');
         $this->assertCronTranslateToDE('2 Monate im Jahr am 5. um 1:00 Uhr', '0 1 5 5,6 *');
         $this->assertCronTranslateToDE('Jeden 5. eines jeden Monats 4 Tage in der Woche um 1:00 Uhr', '0 1 5 * 1-4');
+        $this->assertCronTranslateToDE('Jeden Montag und Donnerstag um 9:00 Uhr', '0 9 * * 1,4');
+        $this->assertCronTranslateToDE('Jeden Montag, Mittwoch und Freitag um 9:00 Uhr', '0 9 * * 1,3,5');
+        $this->assertCronTranslateToDE('Jeden Samstag und Sonntag um 10:00 Uhr', '0 10 * * 6,0');
     }
 
     /** @test */

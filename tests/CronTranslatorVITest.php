@@ -70,6 +70,9 @@ class CronTranslatorVITest extends TestCase
         $this->assertCronTranslateTo('5 ngày một tháng 2 tháng một năm vào lúc 1:00am', '0 1 1-5 5,6 *', 'vi');
         $this->assertCronTranslateTo('2 tháng một năm vào ngày 5 vào lúc 1:00am', '0 1 5 5,6 *', 'vi');
         $this->assertCronTranslateTo('Ngày 5 hàng tháng 4 ngày một tuần vào lúc 1:00am', '0 1 5 * 1-4', 'vi');
+        $this->assertCronTranslateTo('Mỗi Thứ Hai và Thứ Năm vào lúc 9:00am', '0 9 * * 1,4', 'vi');
+        $this->assertCronTranslateTo('Mỗi Thứ Hai, Thứ Tư và Thứ Sáu vào lúc 9:00am', '0 9 * * 1,3,5', 'vi');
+        $this->assertCronTranslateTo('Mỗi Thứ Bảy và Chủ Nhật vào lúc 10:00am', '0 10 * * 6,0', 'vi');
     }
 
     /** @test */

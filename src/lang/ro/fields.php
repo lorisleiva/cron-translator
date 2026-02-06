@@ -48,5 +48,8 @@ return [
     'times' => [
         'am' => 'am',
         'pm' => 'pm',
-    ]
+    ],
+    'connector' => [
+        'and' => 'și',
+    ],
 ];

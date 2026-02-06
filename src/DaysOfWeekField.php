@@ -27,7 +27,7 @@ class DaysOfWeekField extends Field
 
     /**
      * Translate increment expression
-     *  
+     *
      * @return string
      */
     public function translateIncrement(): string
@@ -49,8 +49,12 @@ class DaysOfWeekField extends Field
      *
      * @return string
      */
-    public function translateMultiple(): string
+    public function translateMultiple(): ?string
     {
+        if ($this->expression->day->hasType('Every') && !$this->expression->day->dropped && $this->isDiscreteList()) {
+            return null; // DaysOfMonthField adapts to "Every Monday and Friday".
+        }
+
         return $this->lang('days_of_week.multiple_days_a_week', [
             'count' => $this->getCount(),
         ]);
@@ -73,9 +77,36 @@ class DaysOfWeekField extends Field
         ]);
     }
 
+    public function isDiscreteList(): bool
+    {
+        return $this->hasType('Multiple') && preg_match('/^\d+(,\d+)+$/', $this->rawField);
+    }
+
+    public function getFormattedDiscreteList(): string
+    {
+        $days = explode(',', $this->rawField);
+        $dayNames = [];
+
+        foreach ($days as $day) {
+            $dayValue = (int)$day;
+            $weekday = $dayValue === 0 ? 7 : $dayValue;
+
+            if ($weekday >= 1 && $weekday <= 7) {
+                $dayNames[] = $this->langCountable('days', $weekday);
+            }
+        }
+
+        if (count($dayNames) > 1) {
+            $lastDay = array_pop($dayNames);
+            return implode(', ', $dayNames) . ' ' . $this->lang('connector.and') . ' ' . $lastDay;
+        }
+
+        return $dayNames[0] ?? '';
+    }
+
     /**
      * Format day of week
-     * 
+     *
      * @param string $case
      * @return string
      * @throws CronParsingException
