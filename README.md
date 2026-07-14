@@ -51,6 +51,7 @@ The following locales are currently supported. Feel free to PR more locales if y
 - `nl` — Dutch
 - `pl` — Polish
 - `pt` — Portuguese
+- `tr` — Turkish
 - `ro` — Romanian
 - `ru` — Russian
 - `sk` — Slovak
