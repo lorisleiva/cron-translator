@@ -73,6 +73,10 @@ class CronTranslatorTest extends TestCase
         $this->assertCronTranslateTo('Every Monday and Thursday at 9:00am', '0 9 * * 1,4');
         $this->assertCronTranslateTo('Every Monday, Wednesday and Friday at 9:00am', '0 9 * * 1,3,5');
         $this->assertCronTranslateTo('Every Saturday and Sunday at 10:00am', '0 10 * * 6,0');
+        $this->assertCronTranslateTo('12 times a day', '15 2,7-17 * * *');
+        $this->assertCronTranslateTo('Every minute 7 hours a day', '* 1-3,8,20-22 * * *');
+        $this->assertCronTranslateTo('The 5th of every month 4 days a week at 1:00am', '0 1 5 * 1-2,4-5');
+        $this->assertCronTranslateTo('The 5th of every month 5 days a week at 1:00am', '0 1 5 * 0-3,5');
     }
 
     /** @test */
@@ -82,6 +86,7 @@ class CronTranslatorTest extends TestCase
         $this->assertCronTranslateTo('Every 2 minutes', '1/2 * * * *');
         $this->assertCronTranslateTo('Twice every 4 minutes', '1,3/4 * * * *');
         $this->assertCronTranslateTo('3 times every 5 minutes', '1-3/5 * * * *');
+        $this->assertCronTranslateTo('4 times every 10 minutes', '1,3-5/10 * * * *');
         $this->assertCronTranslateTo('Every 2 minutes at 2pm', '*/2 14 * * *');
         $this->assertCronTranslateTo('Once an hour every 2 days', '0 * */2 * *');
         $this->assertCronTranslateTo('Every minute every 2 days', '* * */2 * *');
@@ -122,7 +127,7 @@ class CronTranslatorTest extends TestCase
     {
         $this->assertCronThrowsParsingError('I_AM_NOT_A_CRON_EXPRESSION');
         $this->assertCronThrowsParsingError('A * * * *');
-        $this->assertCronThrowsParsingError('1,2-3 * * * *');
+        $this->assertCronThrowsParsingError('1,2- * * * *');
         $this->assertCronThrowsParsingError('1/2/3 * * * *');
         $this->assertCronThrowsParsingError('* * * 0 *');
         $this->assertCronThrowsParsingError('* * * 13 *');
