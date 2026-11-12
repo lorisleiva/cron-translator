@@ -122,7 +122,7 @@ class CronTranslatorDATest extends TestCase
     {
         $this->assertCronThrowsParsingError('I_AM_NOT_A_CRON_EXPRESSION');
         $this->assertCronThrowsParsingError('A * * * *');
-        $this->assertCronThrowsParsingError('1,2-3 * * * *');
+        $this->assertCronThrowsParsingError('1,2- * * * *');
         $this->assertCronThrowsParsingError('1/2/3 * * * *');
         $this->assertCronThrowsParsingError('* * * 0 *');
         $this->assertCronThrowsParsingError('* * * 13 *');

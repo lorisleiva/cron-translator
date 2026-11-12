@@ -107,9 +107,14 @@ class CronType
             return static::once((int)$expression);
         }
 
-        // Parse multiple values like "1,2,5".
-        if (preg_match("/^\d+(,\d+)+$/", $expression)) {
-            return static::multiple(count(explode(',', $expression)));
+        // Parse lists of values and ranges like "1,2,5" or "2,7-17".
+        if (preg_match("/^\d+(-\d+)?(,\d+(-\d+)?)+$/", $expression)) {
+            $count = 0;
+            foreach (explode(',', $expression) as $item) {
+                $part = static::parse($item);
+                $count += $part->hasType(self::TYPES[2]) ? $part->count : 1;
+            }
+            return static::multiple($count);
         }
 
         // Parse ranges like "1-5".
